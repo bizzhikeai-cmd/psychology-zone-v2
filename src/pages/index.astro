@@ -16,7 +16,7 @@ import Layout from '../layouts/Layout.astro';
           <span class="phone-icon">📞</span>
           <span class="phone-number">+91 89689 00002</span>
         </a>
-        <a href="#contact" class="btn btn-primary">Book An Appointment</a>
+        <a href="#contact" class="btn btn-primary">Book My Session</a>
       </nav>
     </div>
   </header>
@@ -33,7 +33,7 @@ import Layout from '../layouts/Layout.astro';
           <span class="price-new">Rs. 599/-</span>
           <span class="price-note">(For A Limited Period)</span>
         </div>
-        <a href="#contact" class="btn btn-primary btn-large">Book An Appointment</a>
+        <a href="#contact" class="btn btn-primary btn-large">Book My Session</a>
       </div>
       <div class="hero-image">
         <img src="/images/hero-image.png" alt="Online Therapy" class="hero-img" />
@@ -398,7 +398,7 @@ import Layout from '../layouts/Layout.astro';
   <section class="cta-section">
     <div class="container">
       <h2>Unlock Your Mental Wellness with Expert Guidance</h2>
-      <a href="#contact" class="btn btn-primary btn-large">Book Appointment Now!!</a>
+      <a href="#contact" class="btn btn-primary btn-large">Book Session Now</a>
     </div>
   </section>
 
@@ -553,7 +553,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="footer-cta">
           <h4>Ready to Start Your Journey?</h4>
           <p>Take the first step towards better mental health today.</p>
-          <a href="#contact" class="btn btn-primary">Get Started Now</a>
+          <a href="#contact" class="btn btn-primary">Book My Session</a>
         </div>
         
         <div class="footer-connect">
@@ -667,6 +667,7 @@ import Layout from '../layouts/Layout.astro';
     background: white;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     z-index: 1000;
+    padding: 0;
   }
 
   .nav {
@@ -835,6 +836,22 @@ import Layout from '../layouts/Layout.astro';
     width: 100%;
     max-width: 500px;
     border-radius: 20px;
+  }
+
+  .hero-image {
+    position: relative;
+  }
+
+  .hero-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to bottom, transparent, var(--bg-light));
+    border-radius: 0 0 20px 20px;
+    pointer-events: none;
   }
 
   /* Experts Help Section */
@@ -1374,10 +1391,10 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .price-summary {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    background: #f5f5f5;
     padding: 20px;
-    border-radius: 12px;
-    color: white;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1388,12 +1405,19 @@ import Layout from '../layouts/Layout.astro';
     display: flex;
     justify-content: space-between;
     width: 100%;
+    align-items: center;
+  }
+
+  .price-item span:first-child {
+    color: var(--text-color);
     font-weight: 600;
+    font-size: 0.95rem;
   }
 
   .price-value {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 700;
+    color: var(--primary-color);
   }
 
   .form-error {
@@ -1663,31 +1687,38 @@ import Layout from '../layouts/Layout.astro';
   }
 
   @media (max-width: 768px) {
+    .header {
+      padding: 10px 0;
+    }
+
     .nav {
-      flex-wrap: wrap;
-      gap: 10px;
+      flex-direction: row;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    .logo {
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-size: 1.1rem;
     }
 
     .nav-spacer {
       flex: 1;
-      min-width: 100%;
     }
 
     .phone-link {
-      flex: 1;
-      justify-content: center;
-      font-size: 0.9rem;
-      min-width: 100%;
-      order: -1;
-    }
-
-    .phone-number {
       display: none;
     }
 
     .header .btn {
-      flex: 1;
-      min-width: 100%;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .hero .container {
@@ -1701,6 +1732,11 @@ import Layout from '../layouts/Layout.astro';
 
     .hero-image {
       order: -1;
+    }
+
+    .hero-img {
+      max-width: 350px;
+      margin: 0 auto;
     }
 
     .experts-grid,
