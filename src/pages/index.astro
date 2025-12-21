@@ -2,23 +2,23 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Psychology Zone Chandigarh - Professional Counseling Services">
+<Layout title="Psychology Zone - Confidential Online Therapy with India's Leading Psychologists">
   <!-- Header -->
   <header class="header">
     <div class="container">
       <nav class="nav">
-        <div class="logo">
-          <span class="logo-icon">🧠</span>
-          <span class="logo-text">Psychology<span class="highlight">Zone</span></span>
-        </div>
+        <a href="/" class="logo">
+          <img src="/images/logo.png" alt="Psychology Zone" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <span class="logo-text" style="display: none;">Psychology<span class="highlight">Zone</span></span>
+        </a>
         <ul class="nav-links">
           <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
+          <li><a href="#experts">Our Experts</a></li>
+          <li><a href="#therapies">Therapies</a></li>
           <li><a href="#testimonials">Testimonials</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <a href="#contact" class="btn btn-primary">Book Appointment</a>
+        <a href="#contact" class="btn btn-primary">Book An Appointment</a>
         <button class="mobile-menu-btn" aria-label="Menu">☰</button>
       </nav>
     </div>
@@ -28,78 +28,226 @@ import Layout from '../layouts/Layout.astro';
   <section id="home" class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1>Your Mental Health <span class="highlight">Matters</span></h1>
-        <p>Professional psychological counseling services in Chandigarh. We provide a safe, confidential space for your mental wellness journey.</p>
-        <div class="hero-buttons">
-          <a href="#contact" class="btn btn-primary">Get Started</a>
-          <a href="#services" class="btn btn-outline">Our Services</a>
+        <h1>Confidential Online Therapy with India's Leading Psychologists</h1>
+        <p>Experience clinically validated online therapy that supports you every step of the way. Break the stigma of mental health with our affordable & super confidential sessions — your privacy is our top priority.</p>
+        <div class="price-box">
+          <span class="price-label">Session Price:</span>
+          <span class="price-old">Rs. 1499/-</span>
+          <span class="price-new">Rs. 599/-</span>
+          <span class="price-note">(For A Limited Period)</span>
         </div>
+        <a href="#contact" class="btn btn-primary btn-large">Book An Appointment</a>
       </div>
       <div class="hero-image">
-        <div class="hero-shape"></div>
+        <img src="/images/hero-image.png" alt="Online Therapy" class="hero-img" />
       </div>
     </div>
   </section>
 
-  <!-- About Section -->
-  <section id="about" class="section about">
+  <!-- Experts Help Section -->
+  <section class="experts-help">
     <div class="container">
-      <div class="about-content">
-        <div class="about-image">
-          <div class="about-shape"></div>
+      <h2>Our Experts Are Here To Help You</h2>
+      
+      <div class="help-cards-grid">
+        <div class="help-card" style="background-image: url('/images/help-depression.webp');">
+          <div class="help-card-overlay">
+            <h3>Depression</h3>
+            <p>Depression is a complex mental health condition characterized by persistent sadness, loss of interest, fatigue, and other symptoms.</p>
+            <a href="#contact" class="btn btn-orange">Book An Appointment</a>
+          </div>
         </div>
-        <div class="about-text">
-          <h2>About <span class="highlight">Psychology Zone</span></h2>
-          <p>We are a team of licensed psychologists and counselors dedicated to helping individuals, couples, and families navigate life's challenges.</p>
-          <p>Our approach combines evidence-based therapies with compassionate care to help you achieve lasting positive change.</p>
-          <ul class="about-features">
-            <li>✓ Licensed & Certified Professionals</li>
-            <li>✓ Confidential Sessions</li>
-            <li>✓ Online & In-Person Options</li>
-            <li>✓ Personalized Treatment Plans</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Services Section -->
-  <section id="services" class="section services">
-    <div class="container">
-      <div class="section-title">
-        <h2>Our <span class="highlight">Services</span></h2>
-        <p>Comprehensive mental health services tailored to your needs</p>
+        <div class="help-card" style="background-image: url('/images/help-anxiety.webp');">
+          <div class="help-card-overlay">
+            <h3>Anxiety</h3>
+            <p>Persistent anxiety, racing thoughts, physical tension, and fear, impacting daily life – seeking professional help can provide coping strategies.</p>
+            <a href="#contact" class="btn btn-orange">Book An Appointment</a>
+          </div>
+        </div>
+
+        <div class="help-card" style="background-image: url('/images/help-relationship.jpg');">
+          <div class="help-card-overlay">
+            <h3>Relationship Issues</h3>
+            <p>Communication problems, trust issues, lack of intimacy, jealousy, and unresolved conflicts can lead to relationship problems and disputes</p>
+            <a href="#contact" class="btn btn-orange">Book An Appointment</a>
+          </div>
+        </div>
+
+        <div class="help-card" style="background-image: url('/images/help-stress.jpg');">
+          <div class="help-card-overlay">
+            <h3>Stress Management</h3>
+            <p>Challenges arise from lifestyle, work demands, and lack of coping skills, impacting mental health and overall well-being. Stress Management can Help!!</p>
+            <a href="#contact" class="btn btn-orange">Book An Appointment</a>
+          </div>
+        </div>
       </div>
+
+      <div class="help-content">
+        <h3>Find Support for Your Personal Journey</h3>
+        <p>We Understand, and We're Here to Help. Meet Our Experienced Psychologists and Therapists</p>
+      </div>
+
+      <!-- Service Illustration Cards -->
       <div class="services-grid">
         <div class="service-card">
-          <div class="service-icon">🎯</div>
-          <h3>Individual Therapy</h3>
-          <p>One-on-one sessions to address personal challenges, anxiety, depression, and more.</p>
+          <div class="service-icon">
+            <img src="/images/service-depression.webp" alt="Depression & Low Mood" />
+          </div>
+          <h3>Depression & Low Mood</h3>
+          <p>Free from persistent sadness and regain your sense of joy.</p>
+          <a href="#contact" class="btn btn-orange">Book an Appointment</a>
         </div>
+
         <div class="service-card">
-          <div class="service-icon">💑</div>
-          <h3>Couples Counseling</h3>
-          <p>Strengthen your relationship through improved communication and understanding.</p>
+          <div class="service-icon">
+            <img src="/images/Enhancing-Self-Esteem-Psychologists-and-Therapists.webp" alt="Building Self-Worth" />
+          </div>
+          <h3>Building Self-Worth</h3>
+          <p>Develop a positive self-image and embrace your strengths.</p>
+          <a href="#contact" class="btn btn-orange">Book an Appointment</a>
         </div>
+
         <div class="service-card">
-          <div class="service-icon">👨‍👩‍👧‍👦</div>
-          <h3>Family Therapy</h3>
-          <p>Resolve conflicts and build stronger family bonds through guided sessions.</p>
+          <div class="service-icon">
+            <img src="/images/service-anxiety.webp" alt="Overcoming Anxiety" />
+          </div>
+          <h3>Overcoming Anxiety</h3>
+          <p>Regain control of your thoughts and emotions.</p>
+          <a href="#contact" class="btn btn-orange">Book an Appointment</a>
         </div>
+
         <div class="service-card">
-          <div class="service-icon">🧒</div>
-          <h3>Child Psychology</h3>
-          <p>Specialized care for children dealing with behavioral or emotional issues.</p>
+          <div class="service-icon">
+            <img src="/images/coping-with-grief.webp" alt="ADHD & Focus Challenges" />
+          </div>
+          <h3>ADHD & Focus Challenges</h3>
+          <p>Learn effective ways to manage ADHD and enhance productivity in daily life.</p>
+          <a href="#contact" class="btn btn-orange">Book an Appointment</a>
         </div>
+
         <div class="service-card">
-          <div class="service-icon">💼</div>
-          <h3>Career Counseling</h3>
-          <p>Navigate career decisions and workplace stress with professional guidance.</p>
+          <div class="service-icon">
+            <img src="/images/healing Trauma & PTSD.webp" alt="Healing Trauma & PTSD" />
+          </div>
+          <h3>Healing Trauma & PTSD</h3>
+          <p>Find relief from past trauma, difficult emotions, and reclaim yourself</p>
+          <a href="#contact" class="btn btn-orange">Book an Appointment</a>
         </div>
+
         <div class="service-card">
-          <div class="service-icon">🌙</div>
+          <div class="service-icon">
+            <img src="/images/service-stress.webp" alt="Stress Management" />
+          </div>
           <h3>Stress Management</h3>
-          <p>Learn effective techniques to manage stress and improve quality of life.</p>
+          <p>Handle work pressure, life demands, and emotional exhaustion</p>
+          <a href="#contact" class="btn btn-orange">Book an Appointment</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meet Our Experts Section -->
+  <section id="experts" class="section experts">
+    <div class="container">
+      <h2>Meet our Expert Psychologists</h2>
+      <p class="section-subtitle">50+ Therapists in the Panel</p>
+      
+      <div class="experts-grid">
+        <div class="expert-card">
+          <div class="expert-image-container">
+            <img src="/images/therapist-lekha.webp" alt="Lekha Murali" class="expert-img" />
+            <span class="expert-exp-badge">19+ Yrs of Exp</span>
+          </div>
+          <span class="expert-title">Experienced Therapist | 19+ Years in Psychology & Counseling</span>
+          <h3>Lekha Murali</h3>
+          <p class="expert-desc">PhD in Psychology with 19+ years of expertise in clinical psychology, psychotherapy, and guidance counseling</p>
+          <div class="expert-tags">
+            <span>PhD</span>
+            <span>MSc</span>
+            <span>MS</span>
+            <span>PGDGC</span>
+          </div>
+          <a href="#contact" class="btn btn-outline">Book An Appointment</a>
+        </div>
+
+        <div class="expert-card">
+          <div class="expert-image-container">
+            <img src="/images/therapist-jaismeen.jpg" alt="Dr. Jaismeen Kaur" class="expert-img" />
+            <span class="expert-exp-badge">6+ Yrs of Exp</span>
+          </div>
+          <span class="expert-title">Certified Choice Theory & Reality Therapy Practitioner</span>
+          <h3>Dr. Jaismeen Kaur</h3>
+          <p class="expert-desc">Trained at the William Glasser Institute (USA), serving at RGNUL with 6+ years of therapy and counseling experience.</p>
+          <div class="expert-tags">
+            <span>PhD</span>
+            <span>MSc</span>
+            <span>MS</span>
+            <span>PGDGC</span>
+          </div>
+          <a href="#contact" class="btn btn-outline">Book An Appointment</a>
+        </div>
+
+        <div class="expert-card">
+          <div class="expert-image-container">
+            <img src="/images/therapist-jyotsna.jpg" alt="Jyotsna Mohanta" class="expert-img" />
+            <span class="expert-exp-badge">7+ Yrs of Exp</span>
+          </div>
+          <span class="expert-title">NLP Expert | Life & Mental Wellness Coach</span>
+          <h3>Jyotsna Mohanta</h3>
+          <p class="expert-desc">Certified NLP expert and life coach with 7+ years of experience in mental wellness, personal growth, and transformative coaching.</p>
+          <div class="expert-tags">
+            <span>PhD</span>
+            <span>MSc</span>
+            <span>MS</span>
+            <span>PGDGC</span>
+          </div>
+          <a href="#contact" class="btn btn-outline">Book An Appointment</a>
+        </div>
+
+        <div class="expert-card">
+          <div class="expert-image-container">
+            <img src="/images/therapist-sharmila.jpg" alt="Sharmila Masih" class="expert-img" />
+            <span class="expert-exp-badge">7+ Yrs of Exp</span>
+          </div>
+          <span class="expert-title">Clinical Psychologist | Child Development & Counseling Expert</span>
+          <h3>Sharmila Masih</h3>
+          <p class="expert-desc">M.A. in Clinical Psychology, PGD in Child Development Counseling, with 7+ years of experience in mental health and therapeutic support.</p>
+          <div class="expert-tags">
+            <span>M.A.</span>
+          </div>
+          <a href="#contact" class="btn btn-outline">Book An Appointment</a>
+        </div>
+
+        <div class="expert-card">
+          <div class="expert-image-container">
+            <img src="/images/therapist-pooja.webp" alt="Ms. Pooja" class="expert-img" />
+            <span class="expert-exp-badge">6+ Yrs of Exp</span>
+          </div>
+          <span class="expert-title">Clinical Psychologist & Counseling Expert</span>
+          <h3>Ms. Pooja</h3>
+          <p class="expert-desc">Experienced Clinical Psychologist offering expert online therapy with 6+ years in mental health support.</p>
+          <div class="expert-tags">
+            <span>PhD</span>
+            <span>MSc</span>
+            <span>MS</span>
+            <span>PGDGC</span>
+          </div>
+          <a href="#contact" class="btn btn-outline">Book An Appointment</a>
+        </div>
+
+        <div class="expert-card">
+          <div class="expert-image-container">
+            <img src="/images/therapist-sukriti.webp" alt="Ms. Sukriti" class="expert-img" />
+            <span class="expert-exp-badge">7+ Yrs of Exp</span>
+          </div>
+          <span class="expert-title">Specialized in Clinical, Counseling, and Organizational Psychology</span>
+          <h3>Ms. Sukriti</h3>
+          <p class="expert-desc">M.A. in Psychology | Specializing in Clinical, Counseling, and Organizational Psychology for holistic mental well-being.</p>
+          <div class="expert-tags">
+            <span>M.A.</span>
+          </div>
+          <a href="#contact" class="btn btn-outline">Book An Appointment</a>
         </div>
       </div>
     </div>
@@ -108,22 +256,75 @@ import Layout from '../layouts/Layout.astro';
   <!-- Stats Section -->
   <section class="stats">
     <div class="container">
+      <h2>Every number represents a story of support.</h2>
+      
       <div class="stats-grid">
-        <div class="stat-item">
-          <h3>500+</h3>
-          <p>Happy Clients</p>
+        <div class="stat-card">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Psychologists</div>
         </div>
-        <div class="stat-item">
-          <h3>10+</h3>
-          <p>Years Experience</p>
+        
+        <div class="stat-card">
+          <div class="stat-number">1.5k</div>
+          <div class="stat-label">Lives Impacted</div>
         </div>
-        <div class="stat-item">
-          <h3>15+</h3>
-          <p>Expert Therapists</p>
+        
+        <div class="stat-card">
+          <div class="stat-number">8.1k</div>
+          <div class="stat-label">Hours in counselling</div>
         </div>
-        <div class="stat-item">
-          <h3>98%</h3>
-          <p>Success Rate</p>
+        
+        <div class="stat-card">
+          <div class="stat-number">10k+</div>
+          <div class="stat-label">Community members</div>
+        </div>
+      </div>
+      
+      <p class="stats-subtitle">All sessions are private and secure. Your information stays between you and your therapist.</p>
+    </div>
+  </section>
+
+  <!-- Transform Section -->
+  <section class="section transform">
+    <div class="container">
+      <h2>Transform Your Life with Psychology Zone</h2>
+      <p class="section-subtitle">Feel the change heal, grow, and thrive for a better tomorrow.</p>
+      
+      <div class="transform-grid">
+        <div class="transform-card">
+          <div class="transform-text">
+            <h3>From Overwhelmed to In Control</h3>
+            <h4>Clarity & Peace of Mind</h4>
+            <a href="#contact" class="btn btn-primary">Book an Appointment</a>
+          </div>
+          <img src="/images/transform-individual.webp" alt="Individual Therapy" class="transform-img" />
+        </div>
+
+        <div class="transform-card">
+          <div class="transform-text">
+            <h3>From Misunderstood to Deeply Connected</h3>
+            <h4>Stronger Relationships</h4>
+            <a href="#contact" class="btn btn-primary">Book an Appointment</a>
+          </div>
+          <img src="/images/transform-couple.webp" alt="Couple Therapy" class="transform-img" />
+        </div>
+
+        <div class="transform-card">
+          <div class="transform-text">
+            <h3>From Stagnation to Transformation</h3>
+            <h4>Motivation & Personal Growth</h4>
+            <a href="#contact" class="btn btn-primary">Book an Appointment</a>
+          </div>
+          <img src="/images/transform-teen.webp" alt="Teen Therapy" class="transform-img" />
+        </div>
+
+        <div class="transform-card">
+          <div class="transform-text">
+            <h3>From Struggles to Strength</h3>
+            <h4>Lasting Happiness</h4>
+            <a href="#contact" class="btn btn-primary">Book an Appointment</a>
+          </div>
+          <img src="/images/transform-meditation.webp" alt="Meditation Therapy" class="transform-img" />
         </div>
       </div>
     </div>
@@ -132,99 +333,128 @@ import Layout from '../layouts/Layout.astro';
   <!-- Testimonials Section -->
   <section id="testimonials" class="section testimonials">
     <div class="container">
-      <div class="section-title">
-        <h2>What Our <span class="highlight">Clients Say</span></h2>
-        <p>Real stories from people we've helped</p>
-      </div>
+      <span class="section-label">OUR THERAPIES</span>
+      <h2>Real Stories, Real Transformations</h2>
+      <p class="section-subtitle">See What Our Clients Say About Their Life-Changing Experiences.</p>
+      
       <div class="testimonials-grid">
         <div class="testimonial-card">
-          <p>"Psychology Zone helped me overcome my anxiety. The therapists are compassionate and truly listen."</p>
+          <p>"Highly recommend, excellent resources for understanding and managing depression. one of the best Psychologists and Therapists."</p>
           <div class="testimonial-author">
-            <div class="author-avatar">R</div>
-            <div>
-              <strong>Rahul S.</strong>
-              <span>Individual Therapy</span>
-            </div>
+            <strong>Aarav Patel</strong>
+            <span>Teacher</span>
           </div>
         </div>
+
         <div class="testimonial-card">
-          <p>"The couples counseling saved our marriage. We learned to communicate better and understand each other."</p>
+          <p>"I was hesitant about therapy at first, but my sessions have truly changed my life. My therapist provided a safe, judgment-free space where I could express myself and heal. I feel stronger, happier, and more in control of my emotions."</p>
           <div class="testimonial-author">
-            <div class="author-avatar">P</div>
-            <div>
-              <strong>Priya & Amit</strong>
-              <span>Couples Counseling</span>
-            </div>
+            <strong>Priya Sharma</strong>
+            <span>Marketing Manager</span>
           </div>
         </div>
+
         <div class="testimonial-card">
-          <p>"My child's behavior improved dramatically after sessions here. Highly recommend for parents!"</p>
+          <p>"From the very first session, I felt heard and understood. My therapist helped me navigate my anxiety, and I've seen incredible progress in my confidence and overall well-being. I highly recommend their compassionate approach"</p>
           <div class="testimonial-author">
-            <div class="author-avatar">S</div>
-            <div>
-              <strong>Sunita M.</strong>
-              <span>Child Psychology</span>
-            </div>
+            <strong>Sneha Gupta</strong>
+            <span>Business Owner</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p>"The therapy sessions have been a game-changer for me. The practical strategies and emotional support I received made all the difference. I now feel more in control of my thoughts and emotions"</p>
+          <div class="testimonial-author">
+            <strong>Siddharth Sharma</strong>
+            <span>Lawyer</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p>"I struggled with stress and burnout for years, but my therapist helped me regain balance in my life. Their guidance has been invaluable, and I finally feel like myself again"</p>
+          <div class="testimonial-author">
+            <strong>Harshdeep Singh</strong>
+            <span>Athlete</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p>"Before reaching out, I felt lost and overwhelmed. The guidance and support I received here have completely transformed my outlook on life. I finally feel heard, understood, and empowered to move forward."</p>
+          <div class="testimonial-author">
+            <strong>Anonymous</strong>
+            <span></span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Therapies Section -->
+  <section id="therapies" class="section therapies">
+    <div class="container">
+      <span class="section-label">OUR THERAPIES</span>
+      <h2>Our Comprehensive Therapies for a Healthier Mind</h2>
+      
+      <div class="therapies-grid">
+        <div class="therapy-card">
+          <img src="/images/anxious-man-indoors-front-view_23-2149729600.jpg" alt="Depression Support" class="therapy-img" />
+          <h3>Depression Support</h3>
+          <p>Expert depression therapists offer compassionate support and evidence-based interventions to help you overcome depression and find hope.</p>
+          <a href="#" class="read-more">Read more</a>
+        </div>
+
+        <div class="therapy-card">
+          <img src="/images/domestic-conflicts-young-indian-couple-emotionally-arguing-home_116547-91125.jpg" alt="Couples Therapist" class="therapy-img" />
+          <h3>Couples Therapist Insights</h3>
+          <p>Couples Therapist: Strengthen relationships, improve communication, and resolve conflicts. Achieve harmony and connection in your partnership.</p>
+          <a href="#" class="read-more">Read more</a>
+        </div>
+
+        <div class="therapy-card">
+          <img src="/images/about-image.jpg" alt="Psychiatric Care" class="therapy-img" />
+          <h3>Psychiatric Care Overview</h3>
+          <p>Expert psychiatrists provide medical evaluation and treatment for mental health conditions, prescribing medications when necessary..</p>
+          <a href="#" class="read-more">Read more</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Unlock Your Mental Wellness with Expert Guidance</h2>
+      <a href="#contact" class="btn btn-primary btn-large">Book Appointment Now!!</a>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section class="section resources">
+    <div class="container">
+      <span class="section-label">RESOURCES</span>
+      <h2>Explore Our Resources To Learn More About Mental Wellness</h2>
+    </div>
+  </section>
+
   <!-- Contact Section -->
   <section id="contact" class="section contact">
     <div class="container">
-      <div class="section-title">
-        <h2>Get In <span class="highlight">Touch</span></h2>
-        <p>Ready to start your journey? Contact us today</p>
-      </div>
+      <span class="section-label">CONTACT US</span>
+      <h2>Got Questions? We're Here to Help. Reach Out to Us Today!</h2>
+      
       <div class="contact-content">
-        <div class="contact-info">
-          <div class="contact-item">
-            <span class="contact-icon">📍</span>
-            <div>
-              <h4>Location</h4>
-              <p>Sector 17, Chandigarh, India</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <span class="contact-icon">📞</span>
-            <div>
-              <h4>Phone</h4>
-              <p>+91 98765 43210</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <span class="contact-icon">✉️</span>
-            <div>
-              <h4>Email</h4>
-              <p>contact@psychologyzone.in</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <span class="contact-icon">🕐</span>
-            <div>
-              <h4>Hours</h4>
-              <p>Mon - Sat: 9:00 AM - 7:00 PM</p>
-            </div>
-          </div>
-        </div>
         <form class="contact-form">
-          <input type="text" placeholder="Your Name" required />
-          <input type="email" placeholder="Your Email" required />
-          <input type="tel" placeholder="Your Phone" />
-          <select>
-            <option value="">Select Service</option>
-            <option value="individual">Individual Therapy</option>
-            <option value="couples">Couples Counseling</option>
-            <option value="family">Family Therapy</option>
-            <option value="child">Child Psychology</option>
-            <option value="career">Career Counseling</option>
-            <option value="stress">Stress Management</option>
-          </select>
-          <textarea placeholder="Your Message" rows="4"></textarea>
-          <button type="submit" class="btn btn-primary">Send Message</button>
+          <input type="text" placeholder="FULL NAME" required />
+          <input type="email" placeholder="EMAIL ADDRESS" required />
+          <input type="tel" placeholder="PHONE NUMBER" />
+          <input type="text" placeholder="WHAT ARE YOU LOOKING FOR" />
+          <textarea placeholder="WRITE A MESSAGE" rows="4"></textarea>
+          <button type="submit" class="btn btn-primary">Send Enquiry</button>
         </form>
+        <div class="contact-image">
+          <img src="/images/Online-consulting.webp" alt="Online Consulting" />
+          <p>If you didn't find what you were looking for, please reach out to us at <a href="mailto:info@psychologyzone.in">info@psychologyzone.in</a>. We're here for you – for anything you might need.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -234,39 +464,88 @@ import Layout from '../layouts/Layout.astro';
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <div class="logo">
-            <span class="logo-icon">🧠</span>
-            <span class="logo-text">Psychology<span class="highlight">Zone</span></span>
-          </div>
-          <p>Your trusted partner in mental wellness. Professional, compassionate, and confidential care.</p>
+          <img src="/images/logo.png" alt="Psychology Zone" class="footer-logo" onerror="this.style.display='none'" />
+          <p>Your partner in mental well-being – Providing accessible, comprehensive support for a healthier mind and life.</p>
         </div>
+        
         <div class="footer-links">
           <h4>Quick Links</h4>
           <ul>
             <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
+            <li><a href="#experts">Our Experts</a></li>
+            <li><a href="#therapies">Therapies</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
-        <div class="footer-social">
-          <h4>Follow Us</h4>
+        
+        <div class="footer-links">
+          <h4>Our Activities</h4>
+          <ul>
+            <li><a href="#">Cycling</a></li>
+            <li><a href="#">Trekking</a></li>
+            <li><a href="#">Walking</a></li>
+            <li><a href="#">Jogging</a></li>
+            <li><a href="#">Yoga</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-connect">
+          <h4>Connect</h4>
+          <p>Arjun Singh Bajwa 20 sector 8A Chandigarh</p>
+          <p><a href="tel:+918968900002">+91 89689 00002</a></p>
+          <p><a href="mailto:info@psychologyzone.in">info@psychologyzone.in</a></p>
           <div class="social-links">
-            <a href="#" aria-label="Facebook">📘</a>
-            <a href="#" aria-label="Instagram">📷</a>
-            <a href="#" aria-label="Twitter">🐦</a>
-            <a href="#" aria-label="LinkedIn">💼</a>
+            <a href="https://www.facebook.com/profile.php?id=100091701563827" target="_blank" aria-label="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
+            <a href="https://instagram.com/psychologyzonechd" target="_blank" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
           </div>
         </div>
       </div>
+      
       <div class="footer-bottom">
-        <p>&copy; 2024 Psychology Zone Chandigarh. All rights reserved.</p>
+        <p>© 2024 Psychology Zone CHD. All Rights Reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Terms & conditions</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Refund Policy</a>
+          <a href="#">Contact</a>
+        </div>
       </div>
     </div>
   </footer>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/918968900002" class="whatsapp-btn" target="_blank" aria-label="Chat on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
 </Layout>
 
 <style>
+  :root {
+    --primary-color: #0d9488;
+    --primary-dark: #0f766e;
+    --primary-light: #14b8a6;
+    --secondary-color: #1e293b;
+    --text-color: #334155;
+    --text-light: #64748b;
+    --bg-light: #f0fdfa;
+    --bg-white: #ffffff;
+    --accent-gold: #f59e0b;
+  }
+
+  /* Reset & Base */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   /* Header */
   .header {
     position: fixed;
@@ -288,31 +567,76 @@ import Layout from '../layouts/Layout.astro';
   .logo {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 1.5rem;
-    font-weight: 700;
+    text-decoration: none;
   }
 
-  .logo-icon {
-    font-size: 2rem;
+  .logo-img {
+    height: 50px;
+    width: auto;
+  }
+
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
   }
 
   .highlight {
-    color: #6b5ce7;
+    color: var(--primary-color);
   }
 
   .nav-links {
     display: flex;
     gap: 30px;
+    list-style: none;
   }
 
   .nav-links a {
     font-weight: 500;
+    color: var(--text-color);
+    text-decoration: none;
     transition: color 0.3s;
   }
 
   .nav-links a:hover {
-    color: #6b5ce7;
+    color: var(--primary-color);
+  }
+
+  .btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+  }
+
+  .btn-primary {
+    background: var(--primary-color);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-dark);
+  }
+
+  .btn-outline {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+  }
+
+  .btn-outline:hover {
+    background: var(--primary-color);
+    color: white;
+  }
+
+  .btn-large {
+    padding: 16px 32px;
+    font-size: 1.1rem;
   }
 
   .mobile-menu-btn {
@@ -323,10 +647,10 @@ import Layout from '../layouts/Layout.astro';
     cursor: pointer;
   }
 
-  /* Hero */
+  /* Hero Section */
   .hero {
-    padding: 150px 0 100px;
-    background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+    padding: 120px 0 80px;
+    background: linear-gradient(135deg, var(--bg-light) 0%, #ccfbf1 100%);
   }
 
   .hero .container {
@@ -337,219 +661,554 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .hero h1 {
-    font-size: 3.5rem;
+    font-size: 2.8rem;
     line-height: 1.2;
     margin-bottom: 20px;
-    color: #2d3748;
+    color: var(--secondary-color);
   }
 
-  .hero p {
+  .hero-content > p {
     font-size: 1.1rem;
-    color: #718096;
-    margin-bottom: 30px;
+    color: var(--text-light);
+    margin-bottom: 25px;
+    line-height: 1.7;
   }
 
-  .hero-buttons {
-    display: flex;
-    gap: 15px;
+  .price-box {
+    background: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
   }
 
-  .btn-outline {
-    border: 2px solid #6b5ce7;
-    color: #6b5ce7;
-    background: transparent;
+  .price-label {
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-right: 10px;
   }
 
-  .btn-outline:hover {
-    background: #6b5ce7;
-    color: white;
+  .price-old {
+    text-decoration: line-through;
+    color: var(--text-light);
+    margin-right: 10px;
   }
 
-  .hero-shape {
-    width: 400px;
-    height: 400px;
-    background: linear-gradient(135deg, #6b5ce7 0%, #8b7cf7 100%);
-    border-radius: 50% 50% 50% 70% / 50% 50% 70% 60%;
-    animation: morph 8s ease-in-out infinite;
+  .price-new {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
   }
 
-  @keyframes morph {
-    0%, 100% { border-radius: 50% 50% 50% 70% / 50% 50% 70% 60%; }
-    50% { border-radius: 70% 50% 50% 50% / 60% 70% 50% 50%; }
+  .price-note {
+    font-size: 0.85rem;
+    color: var(--accent-gold);
+    display: block;
+    margin-top: 5px;
   }
 
-  /* About */
-  .about-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-  }
-
-  .about-shape {
+  .hero-img {
     width: 100%;
-    height: 400px;
-    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+    max-width: 500px;
     border-radius: 20px;
   }
 
-  .about-text h2 {
+  /* Experts Help Section */
+  .experts-help {
+    padding: 80px 0;
+    background: white;
+    text-align: center;
+  }
+
+  .experts-help h2 {
     font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 40px;
+    font-style: italic;
+  }
+
+  .help-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-bottom: 50px;
+  }
+
+  .help-card {
+    position: relative;
+    height: 380px;
+    border-radius: 15px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .help-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px;
+    text-align: left;
+    color: white;
+  }
+
+  .help-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: auto;
+  }
+
+  .help-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
     margin-bottom: 20px;
-    color: #2d3748;
   }
 
-  .about-text p {
-    color: #718096;
+  .btn-orange {
+    background: #f97316;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  .btn-orange:hover {
+    background: #ea580c;
+  }
+
+  .help-content {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .help-content h3 {
+    font-size: 2rem;
+    color: var(--secondary-color);
     margin-bottom: 15px;
+    font-weight: 700;
   }
 
-  .about-features {
-    margin-top: 25px;
+  .help-content p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 50px;
   }
 
-  .about-features li {
-    padding: 8px 0;
-    color: #4a5568;
-    font-weight: 500;
-  }
-
-  /* Services */
-  .services {
-    background: #f8f9ff;
-  }
-
+  /* Service Illustration Cards */
   .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
+    margin-top: 40px;
   }
 
   .service-card {
     background: white;
-    padding: 40px 30px;
     border-radius: 15px;
+    padding: 30px;
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(107, 92, 231, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
   }
 
   .service-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    background: #f0f9ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .service-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .service-card h3 {
-    color: #2d3748;
+    font-size: 1.3rem;
+    color: var(--secondary-color);
     margin-bottom: 15px;
+    font-weight: 700;
   }
 
   .service-card p {
-    color: #718096;
+    color: var(--text-light);
     font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
   }
 
-  /* Stats */
+  .service-card .btn-orange {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Section Styles */
+  .section {
+    padding: 80px 0;
+  }
+
+  .section-label {
+    display: block;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+  }
+
+  .section h2 {
+    font-size: 2.2rem;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+  }
+
+  .section-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+  }
+
+  /* Experts Section */
+  .experts {
+    background: white;
+    text-align: center;
+  }
+
+  .experts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .expert-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: transform 0.3s;
+  }
+
+  .expert-card:hover {
+    transform: translateY(-10px);
+  }
+
+  .expert-image-container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .expert-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--bg-light);
+  }
+
+  .expert-exp-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .expert-title {
+    display: block;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .expert-card h3 {
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+  }
+
+  .expert-desc {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  .expert-tags {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .expert-tags span {
+    background: var(--bg-light);
+    color: var(--primary-color);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  /* Stats Section */
   .stats {
-    background: linear-gradient(135deg, #6b5ce7 0%, #8b7cf7 100%);
-    padding: 60px 0;
+    background: #f0f4f8;
+    padding: 80px 0;
+    text-align: center;
+  }
+
+  .stats h2 {
+    color: var(--secondary-color);
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+    font-weight: 700;
   }
 
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
-    text-align: center;
+    margin-bottom: 50px;
   }
 
-  .stat-item h3 {
-    font-size: 3rem;
-    color: white;
+  .stat-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+  }
+
+  .stat-number {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #f97316;
     margin-bottom: 10px;
   }
 
-  .stat-item p {
-    color: rgba(255,255,255,0.9);
-    font-weight: 500;
+  .stat-label {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    font-weight: 600;
   }
 
-  /* Testimonials */
-  .testimonials-grid {
+  .stats-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Transform Section */
+  .transform {
+    background: #f8fafc;
+  }
+
+  .transform h2 {
+    text-align: center;
+  }
+
+  .transform .section-subtitle {
+    text-align: center;
+  }
+
+  .transform-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
   }
 
-  .testimonial-card {
+  .transform-card {
+    display: flex;
     background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   }
 
-  .testimonial-card p {
-    color: #4a5568;
-    font-style: italic;
+  .transform-text {
+    padding: 40px;
+    flex: 1;
+  }
+
+  .transform-text h3 {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+
+  .transform-text h4 {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
     margin-bottom: 20px;
   }
 
-  .testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  .transform-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
   }
 
-  .author-avatar {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, #6b5ce7 0%, #8b7cf7 100%);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 1.2rem;
+  /* Testimonials */
+  .testimonials {
+    background: white;
+    text-align: center;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 40px;
+  }
+
+  .testimonial-card {
+    background: var(--bg-light);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: left;
+  }
+
+  .testimonial-card p {
+    color: var(--text-color);
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 20px;
   }
 
   .testimonial-author strong {
     display: block;
-    color: #2d3748;
+    color: var(--secondary-color);
+    margin-bottom: 3px;
   }
 
   .testimonial-author span {
-    font-size: 0.85rem;
-    color: #718096;
+    color: var(--text-light);
+    font-size: 0.9rem;
   }
 
-  /* Contact */
+  /* Therapies Section */
+  .therapies {
+    background: #f8fafc;
+    text-align: center;
+  }
+
+  .therapies-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .therapy-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: left;
+  }
+
+  .therapy-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .therapy-card h3 {
+    padding: 20px 25px 10px;
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+  }
+
+  .therapy-card p {
+    padding: 0 25px 15px;
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .read-more {
+    display: block;
+    padding: 15px 25px;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .read-more:hover {
+    color: var(--primary-dark);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 25px;
+  }
+
+  .cta-section .btn-primary {
+    background: white;
+    color: var(--primary-color);
+  }
+
+  .cta-section .btn-primary:hover {
+    background: var(--bg-light);
+  }
+
+  /* Resources */
+  .resources {
+    text-align: center;
+  }
+
+  /* Contact Section */
+  .contact {
+    background: white;
+    text-align: center;
+  }
+
   .contact-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 50px;
-  }
-
-  .contact-item {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 25px;
-  }
-
-  .contact-icon {
-    font-size: 1.5rem;
-  }
-
-  .contact-item h4 {
-    color: #2d3748;
-    margin-bottom: 5px;
-  }
-
-  .contact-item p {
-    color: #718096;
+    margin-top: 40px;
+    text-align: left;
   }
 
   .contact-form {
@@ -559,7 +1218,6 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .contact-form input,
-  .contact-form select,
   .contact-form textarea {
     padding: 15px;
     border: 1px solid #e2e8f0;
@@ -570,42 +1228,67 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .contact-form input:focus,
-  .contact-form select:focus,
   .contact-form textarea:focus {
     outline: none;
-    border-color: #6b5ce7;
+    border-color: var(--primary-color);
+  }
+
+  .contact-image img {
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .contact-image p {
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  .contact-image a {
+    color: var(--primary-color);
   }
 
   /* Footer */
   .footer {
-    background: #2d3748;
+    background: var(--secondary-color);
     color: white;
     padding: 60px 0 30px;
   }
 
   .footer-content {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 50px;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
     margin-bottom: 40px;
+  }
+
+  .footer-logo {
+    height: 60px;
+    margin-bottom: 20px;
   }
 
   .footer-brand p {
     color: rgba(255,255,255,0.7);
-    margin-top: 15px;
+    line-height: 1.7;
   }
 
   .footer-links h4,
-  .footer-social h4 {
+  .footer-connect h4 {
     margin-bottom: 20px;
+    font-size: 1.1rem;
   }
 
-  .footer-links ul li {
+  .footer-links ul {
+    list-style: none;
+  }
+
+  .footer-links li {
     margin-bottom: 10px;
   }
 
   .footer-links a {
     color: rgba(255,255,255,0.7);
+    text-decoration: none;
     transition: color 0.3s;
   }
 
@@ -613,29 +1296,116 @@ import Layout from '../layouts/Layout.astro';
     color: white;
   }
 
+  .footer-connect p {
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 10px;
+  }
+
+  .footer-connect a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+  }
+
+  .footer-connect a:hover {
+    color: white;
+  }
+
   .social-links {
     display: flex;
     gap: 15px;
+    margin-top: 20px;
   }
 
   .social-links a {
-    font-size: 1.5rem;
-    transition: transform 0.3s;
+    color: rgba(255,255,255,0.7);
+    transition: color 0.3s;
   }
 
   .social-links a:hover {
-    transform: scale(1.2);
+    color: white;
   }
 
   .footer-bottom {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding-top: 30px;
     border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .footer-bottom p {
     color: rgba(255,255,255,0.6);
   }
 
+  .footer-legal {
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer-legal a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .footer-legal a:hover {
+    color: white;
+  }
+
+  /* WhatsApp Button */
+  .whatsapp-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #25d366;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    transition: transform 0.3s;
+    z-index: 999;
+  }
+
+  .whatsapp-btn:hover {
+    transform: scale(1.1);
+  }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
   /* Responsive */
-  @media (max-width: 968px) {
+  @media (max-width: 1024px) {
+    .experts-grid,
+    .therapies-grid,
+    .testimonials-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .help-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-content {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
     .nav-links, .header .btn {
       display: none;
     }
@@ -644,32 +1414,60 @@ import Layout from '../layouts/Layout.astro';
       display: block;
     }
 
-    .hero .container,
-    .about-content,
-    .contact-content {
+    .hero .container {
       grid-template-columns: 1fr;
+      text-align: center;
     }
 
     .hero h1 {
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
 
     .hero-image {
-      display: none;
+      order: -1;
     }
 
+    .experts-grid,
+    .therapies-grid,
+    .testimonials-grid,
+    .transform-grid,
+    .help-cards-grid,
     .services-grid,
-    .testimonials-grid {
+    .stats-grid {
       grid-template-columns: 1fr;
     }
 
-    .stats-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .transform-card {
+      flex-direction: column;
+    }
+
+    .transform-img {
+      width: 100%;
+      height: 200px;
+    }
+
+    .contact-content {
+      grid-template-columns: 1fr;
     }
 
     .footer-content {
       grid-template-columns: 1fr;
       text-align: center;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .footer-legal {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .help-tags {
+      flex-direction: column;
+      align-items: center;
     }
   }
 </style>
