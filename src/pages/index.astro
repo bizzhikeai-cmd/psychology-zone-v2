@@ -404,24 +404,127 @@ import Layout from '../layouts/Layout.astro';
 
 
 
-  <!-- Contact Section -->
-  <section id="contact" class="section contact">
+  <!-- Booking Section -->
+  <section id="contact" class="section booking">
     <div class="container">
-      <span class="section-label">CONTACT US</span>
-      <h2>Got Questions? We're Here to Help. Reach Out to Us Today!</h2>
+      <span class="section-label">BOOK YOUR SESSION</span>
+      <h2>Start Your Journey to Better Mental Health</h2>
+      <p class="section-subtitle">Complete the form below to book your confidential therapy session</p>
       
-      <div class="contact-content">
-        <form class="contact-form">
-          <input type="text" placeholder="FULL NAME" required />
-          <input type="email" placeholder="EMAIL ADDRESS" required />
-          <input type="tel" placeholder="PHONE NUMBER" />
-          <input type="text" placeholder="WHAT ARE YOU LOOKING FOR" />
-          <textarea placeholder="WRITE A MESSAGE" rows="4"></textarea>
-          <button type="submit" class="btn btn-primary">Send Enquiry</button>
+      <div class="booking-content">
+        <form id="bookingForm" class="booking-form">
+          <!-- Problem Selection -->
+          <div class="form-group">
+            <label for="problem">What challenge are you facing? *</label>
+            <select id="problem" name="problem" required>
+              <option value="">Select a problem area</option>
+              <option value="depression">Depression & Low Mood</option>
+              <option value="anxiety">Anxiety & Panic Attacks</option>
+              <option value="relationship">Relationship Issues</option>
+              <option value="stress">Stress Management</option>
+              <option value="trauma">Healing Trauma & PTSD</option>
+              <option value="adhd">ADHD & Focus Challenges</option>
+              <option value="self-esteem">Building Self-Worth</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <!-- Circumstances -->
+          <div class="form-group">
+            <label for="circumstances">Briefly describe your situation *</label>
+            <textarea id="circumstances" name="circumstances" rows="4" placeholder="Tell us more about what you're experiencing..." required></textarea>
+          </div>
+
+          <!-- Name and Phone -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" placeholder="Your full name" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" name="phone" placeholder="Your phone number" required />
+            </div>
+          </div>
+
+          <!-- Email and City -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="Your email address" required />
+            </div>
+            <div class="form-group">
+              <label for="city">City *</label>
+              <input type="text" id="city" name="city" placeholder="Your city" required />
+            </div>
+          </div>
+
+          <!-- Date and Time -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date">Preferred Date *</label>
+              <input type="date" id="date" name="date" required />
+            </div>
+            <div class="form-group">
+              <label for="time">Preferred Time *</label>
+              <select id="time" name="time" required>
+                <option value="">Select a time slot</option>
+                <option value="09:00">09:00 AM</option>
+                <option value="09:30">09:30 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="10:30">10:30 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="11:30">11:30 AM</option>
+                <option value="12:00">12:00 PM</option>
+                <option value="12:30">12:30 PM</option>
+                <option value="14:00">02:00 PM</option>
+                <option value="14:30">02:30 PM</option>
+                <option value="15:00">03:00 PM</option>
+                <option value="15:30">03:30 PM</option>
+                <option value="16:00">04:00 PM</option>
+                <option value="16:30">04:30 PM</option>
+                <option value="17:00">05:00 PM</option>
+                <option value="17:30">05:30 PM</option>
+                <option value="18:00">06:00 PM</option>
+                <option value="18:30">06:30 PM</option>
+                <option value="19:00">07:00 PM</option>
+                <option value="19:30">07:30 PM</option>
+                <option value="20:00">08:00 PM</option>
+                <option value="20:30">08:30 PM</option>
+                <option value="21:00">09:00 PM</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Price Display -->
+          <div class="price-summary">
+            <div class="price-item">
+              <span>Session Cost</span>
+              <span class="price-value">Rs. 599/-</span>
+            </div>
+          </div>
+
+          <!-- Error Message -->
+          <div id="formError" class="form-error" style="display: none;"></div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">Proceed For Payment</button>
+
+          <p class="form-disclaimer">Your information is secure and confidential. We'll contact you to confirm your booking.</p>
         </form>
-        <div class="contact-image">
+
+        <div class="booking-info">
           <img src="/images/Online-consulting.webp" alt="Online Consulting" />
-          <p>If you didn't find what you were looking for, please reach out to us at <a href="mailto:info@psychologyzone.in">info@psychologyzone.in</a>. We're here for you – for anything you might need.</p>
+          <h3>Why Choose Psychology Zone?</h3>
+          <ul class="benefits-list">
+            <li>✓ 50+ Expert Psychologists</li>
+            <li>✓ Confidential & Secure Sessions</li>
+            <li>✓ Flexible Scheduling</li>
+            <li>✓ Affordable Pricing</li>
+            <li>✓ 24/7 Support Available</li>
+            <li>✓ Money-Back Guarantee</li>
+          </ul>
+          <p style="margin-top: 20px; color: var(--text-light); font-size: 0.9rem;">Questions? Call us at <a href="tel:+918968900002" style="color: var(--primary-color); font-weight: 600;">+91 89689 00002</a></p>
         </div>
       </div>
     </div>
@@ -475,6 +578,53 @@ import Layout from '../layouts/Layout.astro';
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
   </a>
+
+  <script>
+    // Set minimum date to today + 1 day
+    const dateInput = document.getElementById('date');
+    if (dateInput) {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const minDate = tomorrow.toISOString().split('T')[0];
+      dateInput.min = minDate;
+    }
+
+    // Form submission handler
+    const bookingForm = document.getElementById('bookingForm');
+    if (bookingForm) {
+      bookingForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = {
+          problem: document.getElementById('problem').value,
+          circumstances: document.getElementById('circumstances').value,
+          name: document.getElementById('name').value,
+          phone: document.getElementById('phone').value,
+          email: document.getElementById('email').value,
+          city: document.getElementById('city').value,
+          date: document.getElementById('date').value,
+          time: document.getElementById('time').value,
+          amount: 59900, // Rs. 599 in paise for Razorpay
+        };
+
+        // Validate form
+        if (!formData.problem || !formData.circumstances || !formData.name || !formData.phone || !formData.email || !formData.city || !formData.date || !formData.time) {
+          const errorDiv = document.getElementById('formError');
+          errorDiv.textContent = 'Please fill in all required fields';
+          errorDiv.style.display = 'block';
+          return;
+        }
+
+        // TODO: Integrate Razorpay payment
+        // TODO: Send data to Supabase
+        
+        console.log('Form data ready for payment:', formData);
+        
+        // Placeholder: Show success message
+        alert('Booking form validated! Ready for Razorpay integration.\n\nYour data:\n' + JSON.stringify(formData, null, 2));
+      });
+    }
+  </script>
 </Layout>
 
 <style>
@@ -1140,10 +1290,149 @@ import Layout from '../layouts/Layout.astro';
 
 
 
-  /* Contact Section */
+  /* Contact/Booking Section */
   .contact {
     background: #f0f7ff;
     text-align: center;
+  }
+
+  .booking {
+    background: white;
+    text-align: center;
+  }
+
+  .booking-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-top: 40px;
+    align-items: start;
+  }
+
+  .booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #f9fafb;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid #e5e7eb;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+  }
+
+  .form-group label {
+    font-weight: 600;
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 12px 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .price-summary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    padding: 20px;
+    border-radius: 12px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .price-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: 600;
+  }
+
+  .price-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .form-error {
+    background: #fee;
+    border: 1px solid #fcc;
+    color: #c33;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+
+  .form-disclaimer {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    margin-top: 10px;
+  }
+
+  .booking-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+  }
+
+  .booking-info img {
+    width: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    height: 300px;
+  }
+
+  .booking-info h3 {
+    color: var(--secondary-color);
+    font-size: 1.3rem;
+    margin-top: 10px;
+  }
+
+  .benefits-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .benefits-list li {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    font-weight: 500;
   }
 
   .contact-content {
@@ -1423,6 +1712,14 @@ import Layout from '../layouts/Layout.astro';
     }
 
     .contact-content {
+      grid-template-columns: 1fr;
+    }
+
+    .booking-content {
+      grid-template-columns: 1fr;
+    }
+
+    .form-row {
       grid-template-columns: 1fr;
     }
 
