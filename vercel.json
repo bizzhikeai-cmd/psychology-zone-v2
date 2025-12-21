@@ -1,8 +1,5 @@
 {
   "version": 2,
-  "nodejs": {
-    "version": "18.x"
-  },
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "public": false,
