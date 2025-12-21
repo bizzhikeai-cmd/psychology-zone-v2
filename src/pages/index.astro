@@ -36,7 +36,7 @@ import Layout from '../layouts/Layout.astro';
         <a href="#contact" class="btn btn-primary btn-large">Book My Session</a>
       </div>
       <div class="hero-image">
-        <img src="/images/hero-image.png" alt="Online Therapy" class="hero-img" />
+        <img src="/images/hero-image.png" alt="Online Therapy" class="hero-img" width="500" height="500" fetchpriority="high" />
       </div>
     </div>
   </section>
@@ -85,7 +85,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="services-grid">
         <div class="service-card">
           <div class="service-icon">
-            <img src="/images/service-depression.webp" alt="Depression & Low Mood" />
+            <img src="/images/service-depression.webp" alt="Depression & Low Mood" width="200" height="200" loading="lazy" />
           </div>
           <h3>Depression & Low Mood</h3>
           <p>Free from persistent sadness and regain your sense of joy.</p>
@@ -93,7 +93,7 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="service-card">
           <div class="service-icon">
-            <img src="/images/Enhancing-Self-Esteem-Psychologists-and-Therapists.webp" alt="Building Self-Worth" />
+            <img src="/images/Enhancing-Self-Esteem-Psychologists-and-Therapists.webp" alt="Building Self-Worth" width="200" height="200" loading="lazy" />
           </div>
           <h3>Building Self-Worth</h3>
           <p>Develop a positive self-image and embrace your strengths.</p>
@@ -101,7 +101,7 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="service-card">
           <div class="service-icon">
-            <img src="/images/service-anxiety.webp" alt="Overcoming Anxiety" />
+            <img src="/images/service-anxiety.webp" alt="Overcoming Anxiety" width="200" height="200" loading="lazy" />
           </div>
           <h3>Overcoming Anxiety</h3>
           <p>Regain control of your thoughts and emotions.</p>
@@ -109,7 +109,7 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="service-card">
           <div class="service-icon">
-            <img src="/images/coping-with-grief.webp" alt="ADHD & Focus Challenges" />
+            <img src="/images/coping-with-grief.webp" alt="ADHD & Focus Challenges" width="200" height="200" loading="lazy" />
           </div>
           <h3>ADHD & Focus Challenges</h3>
           <p>Learn effective ways to manage ADHD and enhance productivity in daily life.</p>
@@ -117,7 +117,7 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="service-card">
           <div class="service-icon">
-            <img src="/images/healing Trauma & PTSD.webp" alt="Healing Trauma & PTSD" />
+            <img src="/images/healing Trauma & PTSD.webp" alt="Healing Trauma & PTSD" width="200" height="200" loading="lazy" />
           </div>
           <h3>Healing Trauma & PTSD</h3>
           <p>Find relief from past trauma, difficult emotions, and reclaim yourself</p>
@@ -125,7 +125,7 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="service-card">
           <div class="service-icon">
-            <img src="/images/service-stress.webp" alt="Stress Management" />
+            <img src="/images/service-stress.webp" alt="Stress Management" width="200" height="200" loading="lazy" />
           </div>
           <h3>Stress Management</h3>
           <p>Handle work pressure, life demands, and emotional exhaustion</p>
@@ -143,7 +143,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="experts-grid">
         <div class="expert-card">
           <div class="expert-image-container">
-            <img src="/images/therapist-lekha.webp" alt="Lekha Murali" class="expert-img" />
+            <img src="/images/therapist-lekha.webp" alt="Lekha Murali" class="expert-img" width="300" height="300" loading="lazy" />
             <span class="expert-exp-badge">19+ Yrs of Exp</span>
           </div>
           <span class="expert-title">Experienced Therapist | 19+ Years in Psychology & Counseling</span>
@@ -159,7 +159,7 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="expert-card">
           <div class="expert-image-container">
-            <img src="/images/therapist-jaismeen.jpg" alt="Dr. Jaismeen Kaur" class="expert-img" />
+            <img src="/images/therapist-jaismeen.jpg" alt="Dr. Jaismeen Kaur" class="expert-img" width="300" height="300" loading="lazy" />
             <span class="expert-exp-badge">6+ Yrs of Exp</span>
           </div>
           <span class="expert-title">Certified Choice Theory & Reality Therapy Practitioner</span>
@@ -175,7 +175,7 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="expert-card">
           <div class="expert-image-container">
-            <img src="/images/therapist-jyotsna.jpg" alt="Jyotsna Mohanta" class="expert-img" />
+            <img src="/images/therapist-jyotsna.jpg" alt="Jyotsna Mohanta" class="expert-img" width="300" height="300" loading="lazy" />
             <span class="expert-exp-badge">7+ Yrs of Exp</span>
           </div>
           <span class="expert-title">NLP Expert | Life & Mental Wellness Coach</span>
@@ -191,7 +191,7 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="expert-card">
           <div class="expert-image-container">
-            <img src="/images/therapist-sharmila.jpg" alt="Sharmila Masih" class="expert-img" />
+            <img src="/images/therapist-sharmila.jpg" alt="Sharmila Masih" class="expert-img" width="300" height="300" loading="lazy" />
             <span class="expert-exp-badge">7+ Yrs of Exp</span>
           </div>
           <span class="expert-title">Clinical Psychologist | Child Development & Counseling Expert</span>
@@ -204,7 +204,21 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="expert-card">
           <div class="expert-image-container">
-            <img src="/images/therapist-pooja.webp" alt="Ms. Pooja" class="expert-img" />
+            <img src="/images/therapist-pooja.webp" alt="Ms. Pooja" class="expert-img" width="300" height="300" loading="lazy" />
+            <span class="expert-exp-badge">5+ Yrs of Exp</span>
+          </div>
+          <span class="expert-title">Relationship & Mental Health Expert</span>
+          <h3>Ms. Pooja</h3>
+          <p class="expert-desc">Specialized in relationship counseling, family therapy, and mental wellness with 5+ years of professional experience.</p>
+          <div class="expert-tags">
+            <span>M.A.</span>
+            <span>Counseling</span>
+          </div>
+        </div>
+
+        <div class="expert-card">
+          <div class="expert-image-container">
+            <img src="/images/therapist-sukriti.webp" alt="Ms. Sukriti" class="expert-img" width="300" height="300" loading="lazy" />
             <span class="expert-exp-badge">6+ Yrs of Exp</span>
           </div>
           <span class="expert-title">Clinical Psychologist & Counseling Expert</span>
