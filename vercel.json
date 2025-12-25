@@ -4,7 +4,7 @@
   "outputDirectory": "dist",
   "public": false,
   "cleanUrls": true,
-  "trailingSlash": false,
+  "trailingSlash": true,
   "headers": [
     {
       "source": "/api/(.*)",
