@@ -225,6 +225,31 @@ import Layout from '../layouts/Layout.astro';
     transition: all 0.3s;
   }
 
+  .btn {
+    padding: 13px 28px;
+    border-radius: 26px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-primary {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 16px rgba(209, 122, 92, 0.25);
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(209, 122, 92, 0.35);
+  }
+
   /* Footer */
   .footer {
     background: var(--secondary-color);
@@ -304,9 +329,12 @@ import Layout from '../layouts/Layout.astro';
   :root {
     --primary-color: #D17A5C;
     --primary-dark: #B85C3E;
-    --secondary-color: #2C3539;
-    --text-light: #6B7F8A;
+    --primary-light: #E8A68F;
+    --accent-sage: #7A9B7E;
     --accent-cream: #F5F1E8;
+    --secondary-color: #2C3539;
+    --text-color: #3D4E57;
+    --text-light: #6B7F8A;
   }
 
   @media (max-width: 768px) {
