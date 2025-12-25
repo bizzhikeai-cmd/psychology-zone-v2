@@ -23,19 +23,30 @@ import Layout from '../layouts/Layout.astro';
   <main>
   <!-- Hero Section -->
   <section id="home" class="hero">
+    <div class="hero-bg-shape"></div>
+    <div class="hero-bg-shape-2"></div>
     <div class="container">
       <div class="hero-content">
-        <h1>Confidential Online Therapy with India's Leading Psychologists</h1>
-        <p>Experience clinically validated online therapy that supports you every step of the way. Break the stigma of mental health with our affordable & super confidential sessions — your privacy is our top priority.</p>
-        <div class="price-box">
-          <span class="price-label">Session Price:</span>
-          <span class="price-old">Rs. 1499/-</span>
-          <span class="price-new">Rs. 599/-</span>
-          <span class="price-note">(For A Limited Period)</span>
+        <span class="hero-label">Confidential Mental Wellness</span>
+        <h1>
+          <span class="hero-line">Your healing</span>
+          <span class="hero-line">begins with</span>
+          <span class="hero-line hero-emphasis">being heard</span>
+        </h1>
+        <p>Experience transformative therapy with India's leading psychologists. A safe, judgment-free sanctuary where your story matters and your privacy is sacred.</p>
+        <div class="price-display">
+          <div class="price-main">
+            <span class="price-currency">₹</span>
+            <span class="price-amount">599</span>
+            <span class="price-slash">/</span>
+            <span class="price-label">session</span>
+          </div>
+          <div class="price-original">Usually ₹1,499</div>
         </div>
-        <a href="#contact" class="btn btn-primary btn-large">Book My Session</a>
+        <a href="#contact" class="btn btn-primary btn-large">Begin Your Journey</a>
       </div>
       <div class="hero-image">
+        <div class="hero-image-blob"></div>
         <img src="/images/hero-image.png" alt="Online Therapy" class="hero-img" width="350" height="500" fetchpriority="high" decoding="async" />
       </div>
     </div>
@@ -43,92 +54,101 @@ import Layout from '../layouts/Layout.astro';
 
   <!-- Experts Help Section -->
   <section class="experts-help">
+    <div class="section-decorative-shape"></div>
     <div class="container">
-      <h2>Our Experts Are Here To Help You</h2>
+      <div class="section-header-centered">
+        <span class="section-eyebrow">What We Treat</span>
+        <h2>Compassionate Care for Every Challenge</h2>
+        <p class="section-lead">From everyday stress to deeper struggles, our specialists provide personalized support tailored to your unique journey.</p>
+      </div>
       
-      <div class="help-cards-grid">
-        <div class="help-card" style="background-image: url('/images/help-depression.webp');">
-          <div class="help-card-overlay">
+      <div class="help-cards-asymmetric">
+        <div class="help-card-modern" style="background-image: url('/images/help-depression.webp');">
+          <div class="help-card-gradient"></div>
+          <div class="help-card-content">
             <h3>Depression</h3>
-            <p>Depression is a complex mental health condition characterized by persistent sadness, loss of interest, fatigue, and other symptoms.</p>
+            <p>Gentle, evidence-based support to help you rediscover joy and meaning in daily life.</p>
           </div>
         </div>
 
-        <div class="help-card" style="background-image: url('/images/help-anxiety.webp');">
-          <div class="help-card-overlay">
+        <div class="help-card-modern help-card-elevated" style="background-image: url('/images/help-anxiety.webp');">
+          <div class="help-card-gradient"></div>
+          <div class="help-card-content">
             <h3>Anxiety</h3>
-            <p>Persistent anxiety, racing thoughts, physical tension, and fear, impacting daily life – seeking professional help can provide coping strategies.</p>
+            <p>Learn to quiet racing thoughts and regain a sense of calm and control.</p>
           </div>
         </div>
 
-        <div class="help-card" style="background-image: url('/images/help-relationship.jpg');">
-          <div class="help-card-overlay">
+        <div class="help-card-modern" style="background-image: url('/images/help-relationship.jpg');">
+          <div class="help-card-gradient"></div>
+          <div class="help-card-content">
             <h3>Relationship Issues</h3>
-            <p>Communication problems, trust issues, lack of intimacy, jealousy, and unresolved conflicts can lead to relationship problems and disputes</p>
+            <p>Rebuild connection, trust, and intimacy with compassionate couples therapy.</p>
           </div>
         </div>
 
-        <div class="help-card" style="background-image: url('/images/help-stress.jpg');">
-          <div class="help-card-overlay">
+        <div class="help-card-modern help-card-wide" style="background-image: url('/images/help-stress.jpg');">
+          <div class="help-card-gradient"></div>
+          <div class="help-card-content">
             <h3>Stress Management</h3>
-            <p>Challenges arise from lifestyle, work demands, and lack of coping skills, impacting mental health and overall well-being. Stress Management can Help!!</p>
+            <p>Develop practical coping strategies for work, life, and emotional balance.</p>
           </div>
         </div>
       </div>
 
-      <div class="help-content">
-        <h3>Find Support for Your Personal Journey</h3>
-        <p>We Understand, and We're Here to Help. Meet Our Experienced Psychologists and Therapists</p>
+      <div class="services-intro">
+        <h3>Additional Specializations</h3>
+        <p>Comprehensive mental health support across life's challenges</p>
       </div>
 
       <!-- Service Illustration Cards -->
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">
+      <div class="services-grid-modern">
+        <div class="service-card-minimal">
+          <div class="service-icon-modern">
             <img src="/images/service-depression.webp" alt="Depression & Low Mood" width="200" height="200" loading="lazy" />
           </div>
-          <h3>Depression & Low Mood</h3>
-          <p>Free from persistent sadness and regain your sense of joy.</p>
+          <h3>Low Mood Support</h3>
+          <p>Rediscover joy and emotional balance</p>
         </div>
 
-        <div class="service-card">
-          <div class="service-icon">
+        <div class="service-card-minimal">
+          <div class="service-icon-modern">
             <img src="/images/Enhancing-Self-Esteem-Psychologists-and-Therapists.webp" alt="Building Self-Worth" width="200" height="200" loading="lazy" />
           </div>
-          <h3>Building Self-Worth</h3>
-          <p>Develop a positive self-image and embrace your strengths.</p>
+          <h3>Self-Worth</h3>
+          <p>Embrace your strengths with confidence</p>
         </div>
 
-        <div class="service-card">
-          <div class="service-icon">
+        <div class="service-card-minimal">
+          <div class="service-icon-modern">
             <img src="/images/service-anxiety.webp" alt="Overcoming Anxiety" width="200" height="200" loading="lazy" />
           </div>
-          <h3>Overcoming Anxiety</h3>
-          <p>Regain control of your thoughts and emotions.</p>
+          <h3>Anxiety Relief</h3>
+          <p>Calm your mind, regain control</p>
         </div>
 
-        <div class="service-card">
-          <div class="service-icon">
-            <img src="/images/coping-with-grief.webp" alt="ADHD & Focus Challenges" width="200" height="200" loading="lazy" />
+        <div class="service-card-minimal">
+          <div class="service-icon-modern">
+            <img src="/images/coping-with-grief.webp" alt="ADHD & Focus" width="200" height="200" loading="lazy" />
           </div>
-          <h3>ADHD & Focus Challenges</h3>
-          <p>Learn effective ways to manage ADHD and enhance productivity in daily life.</p>
+          <h3>Focus & ADHD</h3>
+          <p>Enhance productivity and clarity</p>
         </div>
 
-        <div class="service-card">
-          <div class="service-icon">
-            <img src="/images/healing Trauma & PTSD.webp" alt="Healing Trauma & PTSD" width="200" height="200" loading="lazy" />
+        <div class="service-card-minimal">
+          <div class="service-icon-modern">
+            <img src="/images/healing Trauma & PTSD.webp" alt="Healing Trauma" width="200" height="200" loading="lazy" />
           </div>
-          <h3>Healing Trauma & PTSD</h3>
-          <p>Find relief from past trauma, difficult emotions, and reclaim yourself</p>
+          <h3>Trauma Healing</h3>
+          <p>Release the past, reclaim yourself</p>
         </div>
 
-        <div class="service-card">
-          <div class="service-icon">
+        <div class="service-card-minimal">
+          <div class="service-icon-modern">
             <img src="/images/service-stress.webp" alt="Stress Management" width="200" height="200" loading="lazy" />
           </div>
-          <h3>Stress Management</h3>
-          <p>Handle work pressure, life demands, and emotional exhaustion</p>
+          <h3>Stress Relief</h3>
+          <p>Balance work, life, and wellbeing</p>
         </div>
       </div>
     </div>
@@ -136,9 +156,15 @@ import Layout from '../layouts/Layout.astro';
 
   <!-- Meet Our Experts Section -->
   <section id="experts" class="section experts">
+    <div class="experts-bg-shape"></div>
     <div class="container">
-      <h2>Meet our Expert Psychologists</h2>
-      <p class="section-subtitle">50+ Therapists in the Panel</p>
+      <div class="section-header-split">
+        <div>
+          <span class="section-eyebrow">Our Team</span>
+          <h2>Meet Your Guides to Healing</h2>
+        </div>
+        <p class="section-lead-side">50+ compassionate professionals, each bringing years of expertise and a deep commitment to your wellbeing.</p>
+      </div>
       
       <div class="experts-grid">
         <div class="expert-card">
@@ -234,32 +260,45 @@ import Layout from '../layouts/Layout.astro';
 
   <!-- Stats Section -->
   <section class="stats">
+    <div class="stats-texture"></div>
     <div class="container">
-      <h2>Every number represents a story of support.</h2>
+      <h2 class="stats-headline">Every number tells a story of transformation</h2>
       
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">50+</div>
-          <div class="stat-label">Psychologists</div>
+      <div class="stats-grid-modern">
+        <div class="stat-item">
+          <div class="stat-visual">
+            <span class="stat-number-large">50</span>
+            <span class="stat-plus">+</span>
+          </div>
+          <div class="stat-label">Expert Psychologists</div>
         </div>
         
-        <div class="stat-card">
-          <div class="stat-number">1.5k</div>
-          <div class="stat-label">Lives Impacted</div>
+        <div class="stat-item">
+          <div class="stat-visual">
+            <span class="stat-number-large">1.5</span>
+            <span class="stat-plus">k</span>
+          </div>
+          <div class="stat-label">Lives Transformed</div>
         </div>
         
-        <div class="stat-card">
-          <div class="stat-number">8.1k</div>
-          <div class="stat-label">Hours in counselling</div>
+        <div class="stat-item">
+          <div class="stat-visual">
+            <span class="stat-number-large">8.1</span>
+            <span class="stat-plus">k</span>
+          </div>
+          <div class="stat-label">Hours of Healing</div>
         </div>
         
-        <div class="stat-card">
-          <div class="stat-number">10k+</div>
-          <div class="stat-label">Community members</div>
+        <div class="stat-item">
+          <div class="stat-visual">
+            <span class="stat-number-large">10</span>
+            <span class="stat-plus">k+</span>
+          </div>
+          <div class="stat-label">Community Strong</div>
         </div>
       </div>
       
-      <p class="stats-subtitle">All sessions are private and secure. Your information stays between you and your therapist.</p>
+      <p class="stats-reassurance">Your privacy is sacred. Every session remains completely confidential between you and your therapist.</p>
     </div>
   </section>
 
@@ -637,16 +676,20 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
   :root {
-    --primary-color: #f97316;
-    --primary-dark: #ea580c;
-    --primary-light: #fb923c;
-    --secondary-color: #1e293b;
-    --text-color: #334155;
-    --text-light: #475569;
-    --bg-light: #fff7ed;
-    --bg-white: #ffffff;
-    --accent-gold: #f59e0b;
+    --primary-color: #D17A5C;
+    --primary-dark: #B85C3E;
+    --primary-light: #E8A68F;
+    --accent-sage: #7A9B7E;
+    --accent-cream: #F5F1E8;
+    --secondary-color: #2C3539;
+    --text-color: #3D4E57;
+    --text-light: #6B7F8A;
+    --bg-warm: #FAF6F1;
+    --bg-white: #FFFFFF;
+    --shadow-soft: 0 8px 32px rgba(209, 122, 92, 0.08);
   }
 
   /* Reset & Base */
@@ -656,23 +699,35 @@ import Layout from '../layouts/Layout.astro';
     box-sizing: border-box;
   }
 
+  body {
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+  }
+
   /* Header */
   .header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 2px 20px rgba(44, 53, 57, 0.04);
     z-index: 1000;
     padding: 0;
+    transition: all 0.3s ease;
   }
 
   .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: 18px 0;
     gap: 20px;
   }
 
@@ -686,15 +741,12 @@ import Layout from '../layouts/Layout.astro';
     text-decoration: none;
   }
 
-  .logo-img {
-    height: 50px;
-    width: auto;
-  }
-
   .logo-text {
-    font-size: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--secondary-color);
+    letter-spacing: -0.5px;
   }
 
   .highlight {
@@ -705,9 +757,9 @@ import Layout from '../layouts/Layout.astro';
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 16px;
-    background: rgba(249, 115, 22, 0.1);
-    border-radius: 8px;
+    padding: 10px 18px;
+    background: var(--accent-cream);
+    border-radius: 24px;
     color: var(--primary-color);
     text-decoration: none;
     font-weight: 600;
@@ -717,303 +769,486 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .phone-link:hover {
-    background: rgba(249, 115, 22, 0.2);
+    background: var(--primary-light);
+    color: white;
+    transform: translateY(-1px);
   }
 
   .phone-icon {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .btn {
-    padding: 12px 24px;
-    border-radius: 8px;
+    padding: 13px 28px;
+    border-radius: 26px;
     font-weight: 600;
     text-decoration: none;
     display: inline-block;
-    transition: all 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     border: none;
     font-size: 1rem;
+    letter-spacing: 0.3px;
   }
 
   .btn-primary {
     background: var(--primary-color);
     color: white;
+    box-shadow: 0 4px 16px rgba(209, 122, 92, 0.25);
   }
 
   .btn-primary:hover {
     background: var(--primary-dark);
-  }
-
-  .btn-outline {
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
-    background: transparent;
-  }
-
-  .btn-outline:hover {
-    background: var(--primary-color);
-    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(209, 122, 92, 0.35);
   }
 
   .btn-large {
-    padding: 16px 32px;
+    padding: 18px 42px;
     font-size: 1.1rem;
-  }
-
-  .mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
   }
 
   /* Hero Section */
   .hero {
-    padding: 120px 0 80px;
-    background: linear-gradient(135deg, var(--bg-light) 0%, #ffedd5 100%);
+    padding: 140px 0 100px;
+    background: var(--bg-warm);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-shape {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(209, 122, 92, 0.12), transparent 70%);
+    border-radius: 47% 53% 61% 39% / 44% 56% 44% 56%;
+    top: -100px;
+    right: -150px;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .hero-bg-shape-2 {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(122, 155, 126, 0.08), transparent 70%);
+    border-radius: 38% 62% 45% 55% / 63% 42% 58% 37%;
+    bottom: -80px;
+    left: -100px;
+    animation: float 15s ease-in-out infinite reverse;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(30px, -30px) rotate(5deg); }
+    66% { transform: translate(-20px, 20px) rotate(-5deg); }
   }
 
   .hero .container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
     align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-label {
+    display: inline-block;
+    color: var(--accent-sage);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 0.75rem;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
   }
 
   .hero h1 {
-    font-size: 2.8rem;
-    line-height: 1.2;
-    margin-bottom: 20px;
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 28px;
     color: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-line {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .hero-line:nth-child(1) { animation-delay: 0.1s; }
+  .hero-line:nth-child(2) { animation-delay: 0.2s; }
+  .hero-line:nth-child(3) { animation-delay: 0.3s; }
+
+  .hero-emphasis {
+    color: var(--primary-color);
+    font-style: italic;
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero-emphasis::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    background: rgba(209, 122, 92, 0.15);
+    border-radius: 4px;
+    z-index: -1;
   }
 
   .hero-content > p {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--text-light);
-    margin-bottom: 25px;
-    line-height: 1.7;
+    margin-bottom: 40px;
+    line-height: 1.8;
+    max-width: 540px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.4s forwards;
   }
 
-  .price-box {
+  .price-display {
     background: white;
-    padding: 15px 25px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    display: inline-block;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    padding: 24px 32px;
+    border-radius: 20px;
+    margin-bottom: 36px;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(209, 122, 92, 0.1);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.5s forwards;
   }
 
-  .price-label {
-    font-weight: 600;
-    color: var(--secondary-color);
-    margin-right: 10px;
-  }
-
-  .price-old {
-    text-decoration: line-through;
-    color: var(--text-light);
-    margin-right: 10px;
-  }
-
-  .price-new {
-    font-size: 1.5rem;
-    font-weight: 700;
+  .price-main {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
     color: var(--primary-color);
   }
 
-  .price-note {
-    font-size: 0.85rem;
-    color: var(--accent-gold);
-    display: block;
-    margin-top: 5px;
+  .price-currency {
+    font-size: 1.4rem;
+    font-weight: 700;
   }
 
-  .hero-img {
-    width: 100%;
-    max-width: 500px;
-    border-radius: 20px;
+  .price-amount {
+    font-size: 3.2rem;
+    font-weight: 700;
+    font-family: 'Cormorant Garamond', serif;
+    line-height: 1;
+  }
+
+  .price-slash {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--text-light);
+    margin: 0 4px;
+  }
+
+  .price-label {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  .price-original {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-decoration: line-through;
+  }
+
+  .hero-content .btn {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.6s forwards;
   }
 
   .hero-image {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.3s forwards;
   }
 
-  .hero-image::after {
-    content: '';
+  .hero-image-blob {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 150px;
-    background: linear-gradient(to bottom, transparent, var(--bg-light));
-    border-radius: 0 0 20px 20px;
-    pointer-events: none;
+    width: 120%;
+    height: 120%;
+    background: linear-gradient(135deg, rgba(122, 155, 126, 0.15), rgba(209, 122, 92, 0.15));
+    border-radius: 44% 56% 58% 42% / 52% 61% 39% 48%;
+    z-index: 0;
+    animation: morph 8s ease-in-out infinite;
+  }
+
+  @keyframes morph {
+    0%, 100% { border-radius: 44% 56% 58% 42% / 52% 61% 39% 48%; }
+    25% { border-radius: 58% 42% 48% 52% / 41% 53% 47% 59%; }
+    50% { border-radius: 46% 54% 52% 48% / 59% 45% 55% 41%; }
+    75% { border-radius: 52% 48% 44% 56% / 48% 57% 43% 52%; }
+  }
+
+  .hero-img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 20px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 20px 60px rgba(44, 53, 57, 0.12);
   }
 
   /* Experts Help Section */
   .experts-help {
-    padding: 80px 0;
+    padding: 120px 0;
     background: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-decorative-shape {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(122, 155, 126, 0.06), transparent 65%);
+    border-radius: 43% 57% 48% 52% / 54% 46% 54% 46%;
+    top: -150px;
+    left: -100px;
+    animation: float 18s ease-in-out infinite;
+  }
+
+  .section-header-centered {
     text-align: center;
+    max-width: 800px;
+    margin: 0 auto 70px;
   }
 
-  .experts-help h2 {
-    font-size: 2.5rem;
+  .section-eyebrow {
+    display: inline-block;
+    color: var(--accent-sage);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 0.75rem;
+    margin-bottom: 16px;
+  }
+
+  .section-header-centered h2 {
+    font-size: 3.2rem;
     color: var(--secondary-color);
-    margin-bottom: 40px;
-    font-style: italic;
+    margin-bottom: 20px;
+    line-height: 1.15;
   }
 
-  .help-cards-grid {
+  .section-lead {
+    font-size: 1.15rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  .help-cards-asymmetric {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-    margin-bottom: 50px;
+    grid-template-rows: repeat(2, 280px);
+    gap: 24px;
+    margin-bottom: 80px;
   }
 
-  .help-card {
+  .help-card-modern {
     position: relative;
-    height: 380px;
-    border-radius: 15px;
+    border-radius: 24px;
     overflow: hidden;
     background-size: cover;
     background-position: center;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .help-card-overlay {
+  .help-card-modern:hover {
+    transform: translateY(-8px);
+  }
+
+  .help-card-modern:nth-child(1) {
+    grid-column: span 2;
+  }
+
+  .help-card-modern:nth-child(2) {
+    grid-column: span 2;
+  }
+
+  .help-card-elevated {
+    transform: translateY(-20px);
+  }
+
+  .help-card-modern:nth-child(3) {
+    grid-column: span 2;
+    grid-row: 2;
+  }
+
+  .help-card-modern:nth-child(4) {
+    grid-column: span 2;
+    grid-row: 2;
+  }
+
+  .help-card-gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 25px;
-    text-align: left;
+    background: linear-gradient(to bottom, rgba(44, 53, 57, 0.2), rgba(44, 53, 57, 0.85));
+  }
+
+  .help-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px;
     color: white;
+    z-index: 1;
   }
 
-  .help-card h3 {
-    font-size: 1.3rem;
+  .help-card-content h3 {
+    font-size: 1.8rem;
     font-weight: 600;
-    margin-bottom: auto;
+    margin-bottom: 12px;
+    font-family: 'Cormorant Garamond', serif;
   }
 
-  .help-card p {
-    font-size: 0.95rem;
+  .help-card-content p {
+    font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: 20px;
+    opacity: 0.95;
   }
 
-  .help-content {
-    margin-top: 40px;
+  /* Services Grid Modern */
+  .services-intro {
     text-align: center;
+    margin-bottom: 60px;
   }
 
-  .help-content h3 {
+  .services-intro h3 {
     font-size: 2rem;
     color: var(--secondary-color);
-    margin-bottom: 15px;
-    font-weight: 700;
+    margin-bottom: 12px;
+    font-family: 'Cormorant Garamond', serif;
   }
 
-  .help-content p {
+  .services-intro p {
     color: var(--text-light);
-    font-size: 1.1rem;
-    margin-bottom: 50px;
+    font-size: 1.05rem;
   }
 
-  /* Service Illustration Cards */
-  .services-grid {
+  .services-grid-modern {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 40px;
+    gap: 40px;
   }
 
-  .service-card {
-    background: white;
-    border-radius: 15px;
-    padding: 30px;
+  .service-card-minimal {
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
   }
 
-  .service-card:hover {
+  .service-card-minimal:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
   }
 
-  .service-icon {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 25px;
+  .service-card-minimal:hover .service-icon-modern {
+    background: var(--accent-cream);
+    box-shadow: 0 12px 32px rgba(209, 122, 92, 0.15);
+  }
+
+  .service-icon-modern {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 24px;
     border-radius: 50%;
-    background: #f0f9ff;
+    background: rgba(122, 155, 126, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
   }
 
-  .service-icon img {
-    width: 100%;
-    height: 100%;
+  .service-icon-modern img {
+    width: 75%;
+    height: 75%;
     object-fit: contain;
-    padding: 10px;
   }
 
-  .service-card h3 {
-    font-size: 1.3rem;
+  .service-card-minimal h3 {
+    font-size: 1.25rem;
     color: var(--secondary-color);
-    margin-bottom: 15px;
-    font-weight: 700;
+    margin-bottom: 8px;
+    font-weight: 600;
   }
 
-  .service-card p {
+  .service-card-minimal p {
     color: var(--text-light);
     font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-
-  .service-card .btn-primary {
-    width: 100%;
-    text-align: center;
+    line-height: 1.5;
   }
 
   /* Section Styles */
   .section {
-    padding: 80px 0;
+    padding: 120px 0;
   }
 
-  .section-label {
-    display: block;
-    color: var(--primary-color);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
+  .section-header-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+    margin-bottom: 60px;
   }
 
-  .section h2 {
-    font-size: 2.2rem;
+  .section-header-split h2 {
+    font-size: 3.2rem;
     color: var(--secondary-color);
-    margin-bottom: 15px;
+    margin-bottom: 0;
+    line-height: 1.15;
   }
 
-  .section-subtitle {
+  .section-lead-side {
     color: var(--text-light);
     font-size: 1.1rem;
-    margin-bottom: 40px;
+    line-height: 1.7;
+    margin: 0;
   }
 
   /* Experts Section */
   .experts {
-    background: white;
-    text-align: center;
+    background: var(--bg-warm);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .experts-bg-shape {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(209, 122, 92, 0.08), transparent 70%);
+    border-radius: 51% 49% 47% 53% / 56% 48% 52% 44%;
+    bottom: -200px;
+    right: -150px;
+    animation: float 22s ease-in-out infinite;
   }
 
   .experts-grid {
@@ -1103,56 +1338,83 @@ import Layout from '../layouts/Layout.astro';
 
   /* Stats Section */
   .stats {
-    background: #f0f4f8;
-    padding: 80px 0;
+    background: var(--secondary-color);
+    padding: 100px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stats-texture {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 30%, rgba(122, 155, 126, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .stats-headline {
+    color: white;
+    font-size: 2.8rem;
+    margin-bottom: 70px;
+    font-weight: 500;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.3;
+  }
+
+  .stats-grid-modern {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stat-item {
     text-align: center;
   }
 
-  .stats h2 {
-    color: var(--secondary-color);
-    font-size: 2.2rem;
-    margin-bottom: 50px;
+  .stat-visual {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .stat-number-large {
+    font-size: 5rem;
     font-weight: 700;
+    color: var(--primary-light);
+    font-family: 'Cormorant Garamond', serif;
+    line-height: 1;
   }
 
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-    margin-bottom: 50px;
-  }
-
-  .stat-card {
-    background: white;
-    padding: 40px 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-  }
-
-  .stat-number {
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 10px;
+  .stat-plus {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--accent-sage);
+    margin-left: 4px;
   }
 
   .stat-label {
-    font-size: 1.1rem;
-    color: var(--secondary-color);
-    font-weight: 600;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    letter-spacing: 0.5px;
   }
 
-  .stats-subtitle {
-    color: var(--text-light);
-    font-size: 1.1rem;
-    max-width: 800px;
+  .stats-reassurance {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.05rem;
+    max-width: 700px;
     margin: 0 auto;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
   }
 
   /* Transform Section */
@@ -1657,22 +1919,50 @@ import Layout from '../layouts/Layout.astro';
 
   /* Responsive */
   @media (max-width: 1024px) {
+    .hero h1 {
+      font-size: 3.2rem;
+    }
+
+    .section-header-centered h2,
+    .section-header-split h2 {
+      font-size: 2.6rem;
+    }
+
+    .help-cards-asymmetric {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto;
+    }
+
+    .help-card-modern:nth-child(1),
+    .help-card-modern:nth-child(2),
+    .help-card-modern:nth-child(3),
+    .help-card-modern:nth-child(4) {
+      grid-column: span 1;
+      grid-row: auto;
+    }
+
+    .help-card-elevated {
+      transform: translateY(0);
+    }
+
+    .services-grid-modern {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .section-header-split {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
     .experts-grid,
     .therapies-grid,
     .testimonials-grid {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    .help-cards-grid {
+    .stats-grid-modern {
       grid-template-columns: repeat(2, 1fr);
-    }
-
-    .services-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .stats-grid {
-      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
     }
 
     .footer-content {
@@ -1701,7 +1991,7 @@ import Layout from '../layouts/Layout.astro';
     }
 
     .logo-text {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
     }
 
     .nav-spacer {
@@ -1713,10 +2003,14 @@ import Layout from '../layouts/Layout.astro';
     }
 
     .header .btn {
-      padding: 10px 16px;
+      padding: 10px 18px;
       font-size: 0.9rem;
       white-space: nowrap;
       flex-shrink: 0;
+    }
+
+    .hero {
+      padding: 120px 0 80px;
     }
 
     .hero .container {
@@ -1725,7 +2019,11 @@ import Layout from '../layouts/Layout.astro';
     }
 
     .hero h1 {
-      font-size: 2rem;
+      font-size: 2.5rem;
+    }
+
+    .hero-content > p {
+      max-width: 100%;
     }
 
     .hero-image {
@@ -1737,14 +2035,26 @@ import Layout from '../layouts/Layout.astro';
       margin: 0 auto;
     }
 
+    .section-header-centered h2 {
+      font-size: 2.2rem;
+    }
+
+    .help-cards-asymmetric,
+    .services-grid-modern,
     .experts-grid,
     .therapies-grid,
     .testimonials-grid,
     .transform-grid,
-    .help-cards-grid,
-    .services-grid,
-    .stats-grid {
+    .stats-grid-modern {
       grid-template-columns: 1fr;
+    }
+
+    .stats-headline {
+      font-size: 2rem;
+    }
+
+    .stat-number-large {
+      font-size: 3.5rem;
     }
 
     .transform-card {
@@ -1781,11 +2091,6 @@ import Layout from '../layouts/Layout.astro';
     .footer-legal {
       flex-wrap: wrap;
       justify-content: center;
-    }
-
-    .help-tags {
-      flex-direction: column;
-      align-items: center;
     }
   }
 </style>
