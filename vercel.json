@@ -5,6 +5,14 @@
   "public": false,
   "cleanUrls": true,
   "trailingSlash": true,
+  "functions": {
+    "api/**/*.ts": {
+      "runtime": "nodejs20.x"
+    },
+    ".vercel/output/functions/**/*.func/*": {
+      "runtime": "nodejs20.x"
+    }
+  },
   "headers": [
     {
       "source": "/api/(.*)",
