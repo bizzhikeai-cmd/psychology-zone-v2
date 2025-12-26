@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Psychology Zone - Confidential Online Therapy with India's Leading Psychologists">
+<Layout title="Psychology Zone - Talk to Licensed Psychologists Online | Confidential Sessions">
   <!-- Header -->
   <header class="header">
     <div class="container">
@@ -21,29 +21,47 @@ import Layout from '../layouts/Layout.astro';
   </header>
 
   <main>
-  <!-- Hero Section -->
+  <!-- Hero Section - UI Optimized -->
   <section id="home" class="hero">
     <div class="hero-bg-shape"></div>
     <div class="hero-bg-shape-2"></div>
     <div class="container">
       <div class="hero-content">
-        <span class="hero-label">Confidential Mental Wellness</span>
+        <span class="hero-label">Confidential Conversations</span>
         <h1>
-          <span class="hero-line">Your healing</span>
+          <span class="hero-line">Your journey</span>
           <span class="hero-line">begins with</span>
           <span class="hero-line hero-emphasis">being heard</span>
         </h1>
-        <p>Experience transformative therapy with India's leading psychologists. A safe, judgment-free sanctuary where your story matters and your privacy is sacred.</p>
+        
+        <p>Talk to India's leading psychologists from home. A safe, private space where your story matters and you're never judged.</p>
+        
+        <!-- Value Props - Quick Scan -->
+        <div class="hero-benefits">
+          <span class="benefit-tag">✓ Licensed Experts</span>
+          <span class="benefit-tag">✓ 100% Private</span>
+        </div>
+
+        <!-- Price with Badge -->
         <div class="price-display">
+          <div class="price-badge">Limited Offer</div>
           <div class="price-main">
             <span class="price-currency">₹</span>
             <span class="price-amount">599</span>
             <span class="price-slash">/</span>
             <span class="price-label">session</span>
           </div>
-          <div class="price-original">Usually ₹1,499</div>
+          <div class="price-original">
+            <span class="strike">₹1,499</span>
+            <span class="savings">Save 60%</span>
+          </div>
         </div>
-        <a href="#contact" class="btn btn-primary btn-large">Begin Your Journey</a>
+
+        <!-- Primary CTA -->
+        <a href="#contact" class="btn btn-primary btn-large cta-pulse">Begin Your Journey</a>
+        
+        <!-- Reassurance -->
+        <p class="hero-reassurance">🔒 Your privacy is our priority</p>
       </div>
       <div class="hero-image">
         <div class="hero-image-blob"></div>
@@ -57,33 +75,33 @@ import Layout from '../layouts/Layout.astro';
     <div class="section-decorative-shape"></div>
     <div class="container">
       <div class="section-header-centered">
-        <span class="section-eyebrow">What We Treat</span>
-        <h2>Compassionate Care for Every Challenge</h2>
-        <p class="section-lead">From everyday stress to deeper struggles, our specialists provide personalized support tailored to your unique journey.</p>
+        <span class="section-eyebrow">How We Can Help</span>
+        <h2>Support for Life's Challenges</h2>
+        <p class="section-lead">Whatever you're going through, our specialists offer personalized guidance tailored to your unique situation.</p>
       </div>
       
       <div class="help-cards-asymmetric">
         <div class="help-card-modern" style="background-image: url('/images/help-depression.webp');">
           <div class="help-card-gradient"></div>
           <div class="help-card-content">
-            <h3>Depression</h3>
-            <p>Gentle, evidence-based support to help you rediscover joy and meaning in daily life.</p>
+            <h3>Feeling Low</h3>
+            <p>Professional support to help you find clarity and move forward with confidence.</p>
           </div>
         </div>
 
         <div class="help-card-modern help-card-elevated" style="background-image: url('/images/help-anxiety.webp');">
           <div class="help-card-gradient"></div>
           <div class="help-card-content">
-            <h3>Anxiety</h3>
-            <p>Learn to quiet racing thoughts and regain a sense of calm and control.</p>
+            <h3>Stress & Worry</h3>
+            <p>Learn practical tools to feel more grounded and at ease in daily life.</p>
           </div>
         </div>
 
         <div class="help-card-modern" style="background-image: url('/images/help-relationship.jpg');">
           <div class="help-card-gradient"></div>
           <div class="help-card-content">
-            <h3>Relationship Issues</h3>
-            <p>Rebuild connection, trust, and intimacy with compassionate couples therapy.</p>
+            <h3>Relationships</h3>
+            <p>Strengthen connection and communication with the people who matter most.</p>
           </div>
         </div>
 
@@ -97,8 +115,8 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
       <div class="services-intro">
-        <h3>Additional Specializations</h3>
-        <p>Comprehensive mental health support across life's challenges</p>
+        <h3>More Ways We Can Help</h3>
+        <p>Professional guidance for whatever life brings your way</p>
       </div>
 
       <!-- Service Illustration Cards -->
@@ -107,48 +125,48 @@ import Layout from '../layouts/Layout.astro';
           <div class="service-icon-modern">
             <img src="/images/service-depression.webp" alt="Depression & Low Mood" width="200" height="200" loading="lazy" />
           </div>
-          <h3>Low Mood Support</h3>
-          <p>Rediscover joy and emotional balance</p>
+          <h3>Emotional Support</h3>
+          <p>Find clarity and emotional balance</p>
         </div>
 
         <div class="service-card-minimal">
           <div class="service-icon-modern">
             <img src="/images/Enhancing-Self-Esteem-Psychologists-and-Therapists.webp" alt="Building Self-Worth" width="200" height="200" loading="lazy" />
           </div>
-          <h3>Self-Worth</h3>
-          <p>Embrace your strengths with confidence</p>
+          <h3>Confidence</h3>
+          <p>Embrace your strengths fully</p>
         </div>
 
         <div class="service-card-minimal">
           <div class="service-icon-modern">
-            <img src="/images/service-anxiety.webp" alt="Overcoming Anxiety" width="200" height="200" loading="lazy" />
+            <img src="/images/service-anxiety.webp" alt="Feeling Calm" width="200" height="200" loading="lazy" />
           </div>
-          <h3>Anxiety Relief</h3>
-          <p>Calm your mind, regain control</p>
+          <h3>Finding Calm</h3>
+          <p>Tools to feel more at ease</p>
         </div>
 
         <div class="service-card-minimal">
           <div class="service-icon-modern">
-            <img src="/images/coping-with-grief.webp" alt="ADHD & Focus" width="200" height="200" loading="lazy" />
+            <img src="/images/coping-with-grief.webp" alt="Focus & Clarity" width="200" height="200" loading="lazy" />
           </div>
-          <h3>Focus & ADHD</h3>
-          <p>Enhance productivity and clarity</p>
+          <h3>Focus & Clarity</h3>
+          <p>Improve productivity and mindset</p>
         </div>
 
         <div class="service-card-minimal">
           <div class="service-icon-modern">
-            <img src="/images/healing Trauma & PTSD.webp" alt="Healing Trauma" width="200" height="200" loading="lazy" />
+            <img src="/images/healing Trauma & PTSD.webp" alt="Past Experiences" width="200" height="200" loading="lazy" />
           </div>
-          <h3>Trauma Healing</h3>
-          <p>Release the past, reclaim yourself</p>
+          <h3>Processing the Past</h3>
+          <p>Move forward with support</p>
         </div>
 
         <div class="service-card-minimal">
           <div class="service-icon-modern">
-            <img src="/images/service-stress.webp" alt="Stress Management" width="200" height="200" loading="lazy" />
+            <img src="/images/service-stress.webp" alt="Work-Life Balance" width="200" height="200" loading="lazy" />
           </div>
-          <h3>Stress Relief</h3>
-          <p>Balance work, life, and wellbeing</p>
+          <h3>Life Balance</h3>
+          <p>Navigate work and personal life</p>
         </div>
       </div>
     </div>
@@ -161,7 +179,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="section-header-split">
         <div>
           <span class="section-eyebrow">Our Team</span>
-          <h2>Meet Your Guides to Healing</h2>
+          <h2>Meet Your Support Team</h2>
         </div>
         <p class="section-lead-side">50+ compassionate professionals, each bringing years of expertise and a deep commitment to your wellbeing.</p>
       </div>
@@ -262,7 +280,7 @@ import Layout from '../layouts/Layout.astro';
   <section class="stats">
     <div class="stats-texture"></div>
     <div class="container">
-      <h2 class="stats-headline">Every number tells a story of transformation</h2>
+      <h2 class="stats-headline">Trusted by thousands across India</h2>
       
       <div class="stats-grid-modern">
         <div class="stat-item">
@@ -278,7 +296,7 @@ import Layout from '../layouts/Layout.astro';
             <span class="stat-number-large">1.5</span>
             <span class="stat-plus">k</span>
           </div>
-          <div class="stat-label">Lives Transformed</div>
+          <div class="stat-label">Happy Clients</div>
         </div>
         
         <div class="stat-item">
@@ -286,7 +304,7 @@ import Layout from '../layouts/Layout.astro';
             <span class="stat-number-large">8.1</span>
             <span class="stat-plus">k</span>
           </div>
-          <div class="stat-label">Hours of Healing</div>
+          <div class="stat-label">Sessions Completed</div>
         </div>
         
         <div class="stat-item">
@@ -305,40 +323,40 @@ import Layout from '../layouts/Layout.astro';
   <!-- Transform Section -->
   <section class="section transform">
     <div class="container">
-      <h2>Transform Your Life with Psychology Zone</h2>
-      <p class="section-subtitle">Feel the change heal, grow, and thrive for a better tomorrow.</p>
+      <h2>What Our Sessions Can Look Like</h2>
+      <p class="section-subtitle">Explore different ways we support you on your journey.</p>
       
       <div class="transform-grid">
         <div class="transform-card">
           <div class="transform-text">
-            <h3>From Overwhelmed to In Control</h3>
-            <h4>Clarity & Peace of Mind</h4>
+            <h3>Individual Sessions</h3>
+            <h4>Clarity & Self-Understanding</h4>
           </div>
-          <img src="/images/transform-individual.webp" alt="Individual Therapy" class="transform-img" />
+          <img src="/images/transform-individual.webp" alt="Individual Sessions" class="transform-img" />
         </div>
 
         <div class="transform-card">
           <div class="transform-text">
-            <h3>From Misunderstood to Deeply Connected</h3>
-            <h4>Stronger Relationships</h4>
+            <h3>Couples Sessions</h3>
+            <h4>Better Communication</h4>
           </div>
-          <img src="/images/transform-couple.webp" alt="Couple Therapy" class="transform-img" />
+          <img src="/images/transform-couple.webp" alt="Couples Sessions" class="transform-img" />
         </div>
 
         <div class="transform-card">
           <div class="transform-text">
-            <h3>From Stagnation to Transformation</h3>
-            <h4>Motivation & Personal Growth</h4>
+            <h3>Personal Growth</h3>
+            <h4>Motivation & Direction</h4>
           </div>
-          <img src="/images/transform-teen.webp" alt="Teen Therapy" class="transform-img" />
+          <img src="/images/transform-teen.webp" alt="Personal Growth" class="transform-img" />
         </div>
 
         <div class="transform-card">
           <div class="transform-text">
-            <h3>From Struggles to Strength</h3>
-            <h4>Lasting Happiness</h4>
+            <h3>Mindfulness Support</h3>
+            <h4>Inner Peace & Balance</h4>
           </div>
-          <img src="/images/transform-meditation.webp" alt="Meditation Therapy" class="transform-img" />
+          <img src="/images/transform-meditation.webp" alt="Mindfulness" class="transform-img" />
         </div>
       </div>
     </div>
@@ -347,12 +365,12 @@ import Layout from '../layouts/Layout.astro';
   <!-- Testimonials Section -->
   <section id="testimonials" class="section testimonials">
     <div class="container">
-      <h2>Real Stories, Real Transformations</h2>
-      <p class="section-subtitle">See What Our Clients Say About Their Life-Changing Experiences.</p>
+      <h2>What Our Clients Say</h2>
+      <p class="section-subtitle">Real experiences from real people.</p>
       
       <div class="testimonials-grid">
         <div class="testimonial-card">
-          <p>"Highly recommend, excellent resources for understanding and managing depression. one of the best Psychologists and Therapists."</p>
+          <p>"Highly recommend. The resources and support have been incredibly helpful. One of the best experiences I've had."</p>
           <div class="testimonial-author">
             <strong>Aarav Patel</strong>
             <span>Teacher</span>
@@ -360,7 +378,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <div class="testimonial-card">
-          <p>"I was hesitant about therapy at first, but my sessions have truly changed my life. My therapist provided a safe, judgment-free space where I could express myself and heal. I feel stronger, happier, and more in control of my emotions."</p>
+          <p>"I was hesitant at first, but my sessions have made such a difference. My therapist provided a safe space where I could express myself freely. I feel more confident and clear-headed."</p>
           <div class="testimonial-author">
             <strong>Priya Sharma</strong>
             <span>Marketing Manager</span>
@@ -368,7 +386,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <div class="testimonial-card">
-          <p>"From the very first session, I felt heard and understood. My therapist helped me navigate my anxiety, and I've seen incredible progress in my confidence and overall well-being. I highly recommend their compassionate approach"</p>
+          <p>"From the very first session, I felt heard and understood. My therapist helped me work through what I was feeling, and I've noticed real progress in my confidence and well-being."</p>
           <div class="testimonial-author">
             <strong>Sneha Gupta</strong>
             <span>Business Owner</span>
@@ -376,7 +394,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <div class="testimonial-card">
-          <p>"The therapy sessions have been a game-changer for me. The practical strategies and emotional support I received made all the difference. I now feel more in control of my thoughts and emotions"</p>
+          <p>"The sessions have been a game-changer for me. The practical strategies and support I received made all the difference. I now feel more grounded."</p>
           <div class="testimonial-author">
             <strong>Siddharth Sharma</strong>
             <span>Lawyer</span>
@@ -384,7 +402,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <div class="testimonial-card">
-          <p>"I struggled with stress and burnout for years, but my therapist helped me regain balance in my life. Their guidance has been invaluable, and I finally feel like myself again"</p>
+          <p>"I was dealing with a lot of pressure at work, and my therapist helped me find better balance. Their guidance has been invaluable."</p>
           <div class="testimonial-author">
             <strong>Harshdeep Singh</strong>
             <span>Athlete</span>
@@ -392,7 +410,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <div class="testimonial-card">
-          <p>"Before reaching out, I felt lost and overwhelmed. The guidance and support I received here have completely transformed my outlook on life. I finally feel heard, understood, and empowered to move forward."</p>
+          <p>"Before reaching out, I wasn't sure what to expect. The guidance and support I received here have given me a fresh perspective. I finally feel heard and supported."</p>
           <div class="testimonial-author">
             <strong>Anonymous</strong>
             <span></span>
@@ -405,26 +423,26 @@ import Layout from '../layouts/Layout.astro';
   <!-- Therapies Section -->
   <section id="therapies" class="section therapies">
     <div class="container">
-      <span class="section-label">OUR THERAPIES</span>
-      <h2>Our Comprehensive Therapies for a Healthier Mind</h2>
+      <span class="section-label">OUR APPROACH</span>
+      <h2>Professional Support Tailored to You</h2>
       
       <div class="therapies-grid">
         <div class="therapy-card">
-          <img src="/images/anxious-man-indoors-front-view_23-2149729600.jpg" alt="Depression Support" class="therapy-img" />
-          <h3>Depression Support</h3>
-          <p>Expert depression therapists offer compassionate support and evidence-based interventions to help you overcome depression and find hope.</p>
+          <img src="/images/anxious-man-indoors-front-view_23-2149729600.jpg" alt="Individual Support" class="therapy-img" />
+          <h3>Individual Support</h3>
+          <p>Our psychologists offer compassionate guidance to help you navigate challenging times and find your path forward.</p>
         </div>
 
         <div class="therapy-card">
-          <img src="/images/domestic-conflicts-young-indian-couple-emotionally-arguing-home_116547-91125.jpg" alt="Couples Therapist" class="therapy-img" />
-          <h3>Couples Therapist Insights</h3>
-          <p>Couples Therapist: Strengthen relationships, improve communication, and resolve conflicts. Achieve harmony and connection in your partnership.</p>
+          <img src="/images/domestic-conflicts-young-indian-couple-emotionally-arguing-home_116547-91125.jpg" alt="Couples Sessions" class="therapy-img" />
+          <h3>Couples & Relationship Sessions</h3>
+          <p>Strengthen your relationship through better communication. Our therapists help couples understand each other and build stronger connections.</p>
         </div>
 
         <div class="therapy-card">
-          <img src="/images/about-image.jpg" alt="Psychiatric Care" class="therapy-img" />
-          <h3>Psychiatric Care Overview</h3>
-          <p>Expert psychiatrists provide medical evaluation and treatment for mental health conditions, prescribing medications when necessary..</p>
+          <img src="/images/about-image.jpg" alt="Professional Consultation" class="therapy-img" />
+          <h3>Professional Consultation</h3>
+          <p>Get expert guidance from qualified professionals who can help you understand your options and create a personalized plan.</p>
         </div>
       </div>
     </div>
@@ -433,8 +451,8 @@ import Layout from '../layouts/Layout.astro';
   <!-- CTA Section -->
   <section class="cta-section">
     <div class="container">
-      <h2>Unlock Your Mental Wellness with Expert Guidance</h2>
-      <a href="#contact" class="btn btn-primary btn-large">Book Session Now</a>
+      <h2>Ready to Take the First Step?</h2>
+      <a href="#contact" class="btn btn-primary btn-large">Book Your Session</a>
     </div>
   </section>
 
@@ -444,35 +462,35 @@ import Layout from '../layouts/Layout.astro';
   <section id="contact" class="section booking">
     <div class="container">
       <span class="section-label">BOOK YOUR SESSION</span>
-      <h2>Start Your Journey to Better Mental Health</h2>
-      <p class="section-subtitle">Complete the form below to book your confidential therapy session</p>
+      <h2>Start Your Journey Today</h2>
+      <p class="section-subtitle">Complete the form below to book your confidential session</p>
       
       <div class="booking-content">
         <form id="bookingForm" class="booking-form">
           <!-- Problem Selection -->
           <div class="form-group">
-            <label for="problem">What challenge are you facing? *</label>
+            <label for="problem">What would you like support with? *</label>
             <select id="problem" name="problem" required>
-              <option value="">Select a problem area</option>
-              <option value="depression">Depression</option>
-              <option value="anxiety">Anxiety</option>
-              <option value="relationship">Relationship Issues</option>
-              <option value="stress">Stress Management</option>
-              <option value="negative-thoughts">Negative Thoughts</option>
-              <option value="obsessions">Obsessions</option>
-              <option value="troubling-emotions">Troubling Emotions</option>
-              <option value="fear-phobias">Fear & Phobias</option>
-              <option value="career">Career Management</option>
-              <option value="eating-disorders">Eating Disorders</option>
-              <option value="past-traumas">Past Traumas</option>
+              <option value="">Select an area</option>
+              <option value="feeling-low">Feeling Low</option>
+              <option value="stress-worry">Stress & Worry</option>
+              <option value="relationship">Relationships</option>
+              <option value="work-life">Work-Life Balance</option>
+              <option value="negative-thoughts">Negative Thinking Patterns</option>
+              <option value="overthinking">Overthinking</option>
+              <option value="emotions">Managing Emotions</option>
+              <option value="fears">Fears & Concerns</option>
+              <option value="career">Career Direction</option>
+              <option value="eating-habits">Eating Habits</option>
+              <option value="past-experiences">Past Experiences</option>
               <option value="motivation">Motivation & Goals</option>
               <option value="parenting">Parenting</option>
               <option value="personal-growth">Personal Growth</option>
-              <option value="self-esteem">Self-Esteem Issues</option>
-              <option value="sexual-wellness">Sexual Wellness</option>
-              <option value="spiritual-growth">Spiritual Growth</option>
-              <option value="sleep">Sleep Issues</option>
-              <option value="anger">Anger Management</option>
+              <option value="confidence">Building Confidence</option>
+              <option value="intimacy">Intimacy & Connection</option>
+              <option value="purpose">Finding Purpose</option>
+              <option value="sleep">Sleep Patterns</option>
+              <option value="frustration">Managing Frustration</option>
             </select>
           </div>
 
@@ -1175,6 +1193,75 @@ import Layout from '../layouts/Layout.astro';
     z-index: -1;
   }
 
+  /* Hero Trust Strip - Social Proof */
+  .hero-trust-strip {
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .trust-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 10px 18px;
+    border-radius: 50px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(200, 122, 92, 0.15);
+  }
+
+  .stars {
+    color: #FFB800;
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .rating-text {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-weight: 500;
+  }
+
+  /* Hero Subhead */
+  .hero-subhead {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 24px;
+    line-height: 1.7;
+    max-width: 520px;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.4s forwards;
+  }
+
+  .hero-subhead strong {
+    color: var(--secondary-color);
+  }
+
+  /* Hero Benefits Tags */
+  .hero-benefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.45s forwards;
+  }
+
+  .benefit-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: rgba(107, 142, 123, 0.1);
+    color: var(--accent-sage);
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
   .hero-content > p {
     font-size: 1.125rem;
     color: var(--text-light);
@@ -1188,9 +1275,9 @@ import Layout from '../layouts/Layout.astro';
 
   .price-display {
     background: white;
-    padding: 28px 40px;
-    border-radius: 24px;
-    margin-bottom: 40px;
+    padding: 24px 32px;
+    border-radius: 20px;
+    margin-bottom: 28px;
     display: inline-flex;
     flex-direction: column;
     gap: 8px;
@@ -1198,6 +1285,21 @@ import Layout from '../layouts/Layout.astro';
     border: 1px solid rgba(200, 122, 92, 0.12);
     opacity: 0;
     animation: fadeInUp 0.8s ease 0.5s forwards;
+    position: relative;
+  }
+
+  .price-badge {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .price-main {
@@ -1234,9 +1336,44 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .price-original {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-size: 0.9rem;
+  }
+
+  .price-original .strike {
     color: var(--text-light);
     text-decoration: line-through;
+  }
+
+  .price-original .savings {
+    background: rgba(46, 204, 113, 0.15);
+    color: #27ae60;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  /* CTA Pulse Animation */
+  .cta-pulse {
+    animation: fadeInUp 0.8s ease 0.6s forwards, pulse 2s ease-in-out 1.5s infinite;
+    opacity: 0;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 4px 14px rgba(200, 122, 92, 0.2), 0 2px 6px rgba(200, 122, 92, 0.15); }
+    50% { box-shadow: 0 8px 28px rgba(200, 122, 92, 0.35), 0 4px 12px rgba(200, 122, 92, 0.25); }
+  }
+
+  /* Hero Reassurance */
+  .hero-reassurance {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.7s forwards;
   }
 
   .hero-content .btn {
@@ -1379,7 +1516,7 @@ import Layout from '../layouts/Layout.astro';
   .help-card-gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(44, 53, 57, 0.2), rgba(44, 53, 57, 0.85));
+    background: linear-gradient(to bottom, rgba(44, 53, 57, 0.4), rgba(44, 53, 57, 0.92));
   }
 
   .help-card-content {
@@ -1398,12 +1535,16 @@ import Layout from '../layouts/Layout.astro';
     margin-bottom: 12px;
     font-family: 'Lora', Georgia, serif;
     letter-spacing: -0.01em;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
 
   .help-card-content p {
     font-size: 1rem;
     line-height: 1.6;
     opacity: 0.95;
+    color: white;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   }
 
   /* Services Grid Modern */
@@ -1706,10 +1847,16 @@ import Layout from '../layouts/Layout.astro';
 
   .transform h2 {
     text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 16px;
   }
 
   .transform .section-subtitle {
     text-align: center;
+    font-size: 1.125rem;
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto 50px;
   }
 
   .transform-grid {
@@ -1735,22 +1882,23 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .transform-text {
-    padding: 36px;
+    padding: 40px 36px;
     flex: 1;
   }
 
   .transform-text h3 {
     font-size: 1.05rem;
     color: var(--text-light);
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     font-weight: 500;
     font-family: 'Inter', sans-serif;
+    line-height: 1.5;
   }
 
   .transform-text h4 {
     font-size: 1.6rem;
     color: var(--secondary-color);
-    margin-bottom: 20px;
+    margin-bottom: 0;
     font-weight: 600;
     letter-spacing: -0.01em;
   }
@@ -2333,9 +2481,9 @@ import Layout from '../layouts/Layout.astro';
       flex-shrink: 0;
     }
 
-    /* Hero Section */
+    /* Hero Section - Mobile CRO Optimized */
     .hero {
-      padding: 110px 0 70px;
+      padding: 100px 0 60px;
     }
 
     .hero .container {
@@ -2343,9 +2491,59 @@ import Layout from '../layouts/Layout.astro';
       text-align: center;
     }
 
+    /* Content first on mobile for faster value proposition */
+    .hero-content {
+      order: 1;
+    }
+
+    .hero-image {
+      order: 2;
+      margin-top: 30px;
+    }
+
+    .hero-trust-strip {
+      margin-bottom: 20px;
+    }
+
+    .trust-rating {
+      padding: 8px 14px;
+      gap: 8px;
+    }
+
+    .stars {
+      font-size: 0.85rem;
+    }
+
+    .rating-text {
+      font-size: 0.8rem;
+    }
+
     .hero h1 {
-      font-size: 2.3rem;
-      line-height: 1.2;
+      font-size: 2rem;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    .hero-emphasis::after {
+      height: 8px;
+      bottom: 4px;
+    }
+
+    .hero-subhead {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      max-width: 100%;
+    }
+
+    .hero-benefits {
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .benefit-tag {
+      padding: 6px 12px;
+      font-size: 0.75rem;
     }
 
     .hero-content > p {
@@ -2354,33 +2552,56 @@ import Layout from '../layouts/Layout.astro';
       margin-bottom: 32px;
     }
 
-    .hero-image {
-      order: -1;
-    }
-
-    .hero-img {
-      max-width: 100%;
-      height: auto;
-      min-height: 320px;
-    }
-
     .price-display {
       display: inline-flex;
-      padding: 20px 32px;
-      margin-bottom: 32px;
+      padding: 24px 28px 20px;
+      margin-bottom: 20px;
+    }
+
+    .price-badge {
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      padding: 4px 12px;
     }
 
     .price-amount {
-      font-size: 3rem;
+      font-size: 2.8rem;
     }
 
     .price-currency {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
+    }
+
+    .price-slash {
+      font-size: 1.4rem;
+    }
+
+    .price-original {
+      justify-content: center;
+    }
+
+    .price-original .savings {
+      font-size: 0.75rem;
     }
 
     .btn-large {
-      padding: 16px 40px;
+      padding: 16px 36px;
       font-size: 1rem;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .hero-reassurance {
+      margin-top: 16px;
+      font-size: 0.85rem;
+    }
+
+    .hero-img {
+      max-width: 280px;
+      height: auto;
+      min-height: auto;
     }
 
     /* Section Headers */
@@ -2391,6 +2612,7 @@ import Layout from '../layouts/Layout.astro';
     .section-header-centered h2 {
       font-size: 2rem;
       padding: 0 10px;
+      color: var(--secondary-color);
     }
 
     .section-lead {
@@ -2445,10 +2667,14 @@ import Layout from '../layouts/Layout.astro';
     .help-card-content h3 {
       font-size: 1.35rem;
       margin-bottom: 8px;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     }
 
     .help-card-content p {
       font-size: 0.9rem;
+      color: white;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     }
 
     /* Services */
@@ -2479,6 +2705,14 @@ import Layout from '../layouts/Layout.astro';
 
     .service-card-minimal h3 {
       font-size: 1.2rem;
+      color: var(--secondary-color);
+    }
+
+    .service-card-minimal {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
     }
 
     /* Experts */
@@ -2533,12 +2767,14 @@ import Layout from '../layouts/Layout.astro';
     /* Transform */
     .transform h2 {
       font-size: 2rem;
-      padding: 0 10px;
+      padding: 0 16px;
+      margin-bottom: 12px;
     }
 
     .transform .section-subtitle {
       font-size: 1rem;
-      padding: 0 10px;
+      padding: 0 16px;
+      margin-bottom: 40px;
     }
 
     .transform-grid {
@@ -2551,15 +2787,17 @@ import Layout from '../layouts/Layout.astro';
     }
 
     .transform-text {
-      padding: 28px 24px;
+      padding: 32px 24px;
     }
 
     .transform-text h3 {
       font-size: 1rem;
+      margin-bottom: 12px;
     }
 
     .transform-text h4 {
       font-size: 1.4rem;
+      color: var(--secondary-color);
     }
 
     .transform-img {
@@ -2741,21 +2979,47 @@ import Layout from '../layouts/Layout.astro';
       font-size: 0.8rem;
     }
 
+    /* Hero - Extra small */
     .hero h1 {
-      font-size: 2rem;
+      font-size: 1.75rem;
+    }
+
+    .hero-subhead {
+      font-size: 0.95rem;
+    }
+
+    .hero-benefits {
+      gap: 6px;
+    }
+
+    .benefit-tag {
+      padding: 5px 10px;
+      font-size: 0.7rem;
     }
 
     .hero-emphasis::after {
-      height: 8px;
-      bottom: 4px;
+      height: 6px;
+      bottom: 2px;
+    }
+
+    .price-display {
+      padding: 20px 24px 16px;
     }
 
     .price-amount {
-      font-size: 2.6rem;
+      font-size: 2.4rem;
     }
 
     .price-currency {
-      font-size: 1.1rem;
+      font-size: 1rem;
+    }
+
+    .price-slash {
+      font-size: 1.2rem;
+    }
+
+    .hero-img {
+      max-width: 240px;
     }
 
     .section-header-centered h2,
@@ -2797,7 +3061,7 @@ import Layout from '../layouts/Layout.astro';
     }
 
     .btn-large {
-      padding: 14px 32px;
+      padding: 14px 28px;
       font-size: 0.95rem;
     }
   }
