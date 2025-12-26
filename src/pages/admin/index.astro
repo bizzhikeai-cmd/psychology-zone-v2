@@ -1,0 +1,394 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getBookings, getBookingStats } from '../../lib/supabase';
+
+// Check authentication
+const adminSession = Astro.cookies.get('admin_session')?.value;
+
+// Simple session validation - redirect if not logged in
+if (!adminSession) {
+  return Astro.redirect('/admin/login');
+}
+
+// Fetch initial data
+const statusFilter = Astro.url.searchParams.get('status') as 'pending' | 'completed' | 'failed' | null;
+const { data: bookings } = await getBookings(statusFilter || undefined);
+const { data: stats } = await getBookingStats();
+
+// Format date for display
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-IN', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric'
+  });
+}
+
+// Format time for display
+function formatTime(timeString: string): string {
+  const [hours, minutes] = timeString.split(':');
+  const hour = parseInt(hours, 10);
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+  const hour12 = hour % 12 || 12;
+  return `${hour12}:${minutes} ${ampm}`;
+}
+
+// Get status badge class
+function getStatusClass(status: string): string {
+  switch (status) {
+    case 'completed': return 'badge-success';
+    case 'pending': return 'badge-warning';
+    case 'failed': return 'badge-error';
+    default: return '';
+  }
+}
+---
+
+<Layout title="Admin Dashboard - Psychology Zone">
+  <main class="admin-page">
+    <div class="admin-container">
+      <!-- Header -->
+      <header class="admin-header">
+        <div class="header-left">
+          <h1>Bookings Dashboard</h1>
+          <p>Manage your therapy session bookings</p>
+        </div>
+        <div class="header-right">
+          <button id="logoutBtn" class="btn btn-outline">Logout</button>
+        </div>
+      </header>
+
+      <!-- Stats Cards -->
+      {stats && (
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value">{stats.total}</span>
+            <span class="stat-label">Total Bookings</span>
+          </div>
+          <div class="stat-card stat-success">
+            <span class="stat-value">{stats.completed}</span>
+            <span class="stat-label">Completed</span>
+          </div>
+          <div class="stat-card stat-warning">
+            <span class="stat-value">{stats.pending}</span>
+            <span class="stat-label">Pending</span>
+          </div>
+          <div class="stat-card stat-error">
+            <span class="stat-value">{stats.failed}</span>
+            <span class="stat-label">Failed</span>
+          </div>
+          <div class="stat-card stat-revenue">
+            <span class="stat-value">₹{stats.revenue.toLocaleString('en-IN')}</span>
+            <span class="stat-label">Total Revenue</span>
+          </div>
+        </div>
+      )}
+
+      <!-- Filters -->
+      <div class="filters">
+        <a href="/admin" class={`filter-btn ${!statusFilter ? 'active' : ''}`}>All</a>
+        <a href="/admin?status=completed" class={`filter-btn ${statusFilter === 'completed' ? 'active' : ''}`}>Completed</a>
+        <a href="/admin?status=pending" class={`filter-btn ${statusFilter === 'pending' ? 'active' : ''}`}>Pending</a>
+        <a href="/admin?status=failed" class={`filter-btn ${statusFilter === 'failed' ? 'active' : ''}`}>Failed</a>
+      </div>
+
+      <!-- Bookings Table -->
+      <div class="table-container">
+        {bookings && bookings.length > 0 ? (
+          <table class="bookings-table">
+            <thead>
+              <tr>
+                <th>Reference</th>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Problem</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bookings.map((booking) => (
+                <tr>
+                  <td class="ref-cell">{booking.booking_ref}</td>
+                  <td>
+                    <div class="customer-info">
+                      <span class="customer-name">{booking.customer_name}</span>
+                      <span class="customer-email">{booking.customer_email}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <a href={`tel:${booking.customer_phone}`} class="phone-link">
+                      {booking.customer_phone}
+                    </a>
+                  </td>
+                  <td class="problem-cell">{booking.problem}</td>
+                  <td>{formatDate(booking.appointment_date)}</td>
+                  <td>{formatTime(booking.appointment_time)}</td>
+                  <td>₹{booking.amount_paid / 100}</td>
+                  <td>
+                    <span class={`badge ${getStatusClass(booking.payment_status)}`}>
+                      {booking.payment_status}
+                    </span>
+                  </td>
+                  <td class="date-cell">
+                    {booking.created_at ? formatDate(booking.created_at) : '-'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div class="empty-state">
+            <p>No bookings found</p>
+          </div>
+        )}
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Logout handler
+    document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+      try {
+        await fetch('/api/admin/login', { method: 'DELETE' });
+        window.location.href = '/admin/login';
+      } catch (error) {
+        console.error('Logout error:', error);
+      }
+    });
+  </script>
+</Layout>
+
+<style>
+  .admin-page {
+    min-height: 100vh;
+    background: #f5f7fa;
+    padding: 24px;
+  }
+
+  .admin-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .header-left h1 {
+    font-size: 1.75rem;
+    color: #1f2937;
+    margin-bottom: 4px;
+  }
+
+  .header-left p {
+    color: #6b7280;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 2px solid #e5e7eb;
+    color: #6b7280;
+  }
+
+  .btn-outline:hover {
+    border-color: #dc2626;
+    color: #dc2626;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .stat-card {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    color: #6b7280;
+    font-size: 0.9rem;
+  }
+
+  .stat-success .stat-value { color: #10b981; }
+  .stat-warning .stat-value { color: #f59e0b; }
+  .stat-error .stat-value { color: #ef4444; }
+  .stat-revenue .stat-value { color: #6b5ce7; }
+
+  .filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: white;
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+  }
+
+  .filter-btn:hover {
+    border-color: #6b5ce7;
+    color: #6b5ce7;
+  }
+
+  .filter-btn.active {
+    background: #6b5ce7;
+    color: white;
+    border-color: #6b5ce7;
+  }
+
+  .table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+  }
+
+  .bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+  }
+
+  .bookings-table th,
+  .bookings-table td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .bookings-table th {
+    background: #f9fafb;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .bookings-table tbody tr:hover {
+    background: #f9fafb;
+  }
+
+  .ref-cell {
+    font-family: monospace;
+    font-weight: 600;
+    color: #6b5ce7;
+  }
+
+  .customer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .customer-name {
+    font-weight: 500;
+    color: #1f2937;
+  }
+
+  .customer-email {
+    font-size: 0.8rem;
+    color: #6b7280;
+  }
+
+  .phone-link {
+    color: #6b5ce7;
+    text-decoration: none;
+  }
+
+  .phone-link:hover {
+    text-decoration: underline;
+  }
+
+  .problem-cell {
+    text-transform: capitalize;
+  }
+
+  .date-cell {
+    color: #6b7280;
+    font-size: 0.9rem;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+
+  .badge-success {
+    background: #d1fae5;
+    color: #065f46;
+  }
+
+  .badge-warning {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  .badge-error {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  .empty-state {
+    padding: 60px 20px;
+    text-align: center;
+    color: #6b7280;
+  }
+
+  @media (max-width: 768px) {
+    .admin-page {
+      padding: 16px;
+    }
+
+    .admin-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

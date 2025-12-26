@@ -24,7 +24,7 @@ import Layout from '../layouts/Layout.astro';
     <!-- Hero -->
     <section class="contact-hero">
       <div class="container">
-        <h1>Get In Touch</h1>
+        <h1>Contact Information</h1>
         <p>Have questions? We're here to help. Reach out to us anytime.</p>
       </div>
     </section>
@@ -33,51 +33,67 @@ import Layout from '../layouts/Layout.astro';
     <section class="contact">
       <div class="container">
         <div class="contact-content">
-          <div class="contact-form">
-            <h2>Contact Us</h2>
-            <form id="contactForm">
-              <div class="form-group">
-                <label for="name">Full Name *</label>
-                <input type="text" id="name" name="name" required />
+          <div class="contact-info-main">
+            <h2>Get in Touch</h2>
+            <p class="intro-text">We're available 7 days a week to answer your questions and help you begin your mental wellness journey.</p>
+            
+            <div class="info-grid">
+              <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div class="info-content">
+                  <h3>Address</h3>
+                  <p>Arjun Singh Bajwa 20<br/>Sector 8A<br/>Chandigarh, India</p>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required />
+              <div class="info-item">
+                <div class="info-icon">📞</div>
+                <div class="info-content">
+                  <h3>Phone</h3>
+                  <p><a href="tel:+918968900002">+91 89689 00002</a></p>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" />
+              <div class="info-item">
+                <div class="info-icon">📧</div>
+                <div class="info-content">
+                  <h3>Email</h3>
+                  <p><a href="mailto:info@psychologyzone.in">info@psychologyzone.in</a></p>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="message">Message *</label>
-                <textarea id="message" name="message" rows="6" required></textarea>
+              <div class="info-item">
+                <div class="info-icon">🕐</div>
+                <div class="info-content">
+                  <h3>Hours</h3>
+                  <p>Monday - Sunday<br/>9:00 AM - 9:00 PM IST</p>
+                </div>
               </div>
-              <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
+            </div>
+
+            <div class="social-section">
+              <h3>Connect With Us</h3>
+              <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=100091701563827" target="_blank" aria-label="Facebook">
+                  <span class="social-icon">📘</span> Facebook
+                </a>
+                <a href="https://instagram.com/psychologyzonechd" target="_blank" aria-label="Instagram">
+                  <span class="social-icon">📸</span> Instagram
+                </a>
+                <a href="https://wa.me/918968900002" target="_blank" aria-label="WhatsApp">
+                  <span class="social-icon">💬</span> WhatsApp
+                </a>
+              </div>
+            </div>
           </div>
 
-          <div class="contact-info">
-            <h2>Our Details</h2>
-            <div class="info-item">
-              <h3>📍 Address</h3>
-              <p>Arjun Singh Bajwa 20<br/>Sector 8A<br/>Chandigarh, India</p>
-            </div>
-            <div class="info-item">
-              <h3>📞 Phone</h3>
-              <p><a href="tel:+918968900002">+91 89689 00002</a></p>
-            </div>
-            <div class="info-item">
-              <h3>📧 Email</h3>
-              <p><a href="mailto:info@psychologyzone.in">info@psychologyzone.in</a></p>
-            </div>
-            <div class="info-item">
-              <h3>🕐 Hours</h3>
-              <p>Monday - Sunday<br/>9:00 AM - 9:00 PM IST</p>
-            </div>
-            <div class="social-links">
-              <a href="https://www.facebook.com/profile.php?id=100091701563827" target="_blank" aria-label="Facebook">Facebook</a>
-              <a href="https://instagram.com/psychologyzonechd" target="_blank" aria-label="Instagram">Instagram</a>
-              <a href="https://wa.me/918968900002" target="_blank" aria-label="WhatsApp">WhatsApp</a>
+          <div class="booking-cta-card">
+            <div class="cta-content">
+              <h2>Ready to Book a Session?</h2>
+              <p>Take the first step towards better mental health. Book your confidential therapy session with our expert psychologists.</p>
+              <div class="price-highlight">
+                <span class="price-label">Session Fee</span>
+                <span class="price-value">₹599</span>
+              </div>
+              <a href="/#contact" class="btn btn-primary btn-large">Book My Session</a>
+              <p class="cta-note">100% Confidential • Expert Psychologists • Flexible Scheduling</p>
             </div>
           </div>
         </div>
@@ -148,45 +164,160 @@ import Layout from '../layouts/Layout.astro';
 
   .contact-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.2fr 1fr;
     gap: 50px;
+    align-items: start;
   }
 
-  .contact-form h2,
-  .contact-info h2 {
+  .contact-info-main h2 {
     font-size: 2rem;
     color: var(--secondary-color);
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     font-family: 'Cormorant Garamond', serif;
   }
 
-  .form-group {
+  .intro-text {
+    color: var(--text-light);
+    margin-bottom: 40px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .info-item {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
+    gap: 15px;
   }
 
-  .form-group label {
-    font-weight: 600;
-    color: var(--secondary-color);
+  .info-icon {
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    background: var(--accent-cream);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
 
-  .form-group input,
-  .form-group textarea {
-    padding: 12px 15px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-family: inherit;
+  .info-content h3 {
     font-size: 1rem;
+    color: var(--secondary-color);
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+
+  .info-content p {
+    color: var(--text-light);
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .info-content a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+
+  .info-content a:hover {
+    color: var(--primary-dark);
+  }
+
+  .social-section h3 {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .social-links a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: var(--accent-cream);
+    color: var(--secondary-color);
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
     transition: all 0.3s;
   }
 
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(209, 122, 92, 0.1);
+  .social-links a:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .booking-cta-card {
+    background: linear-gradient(135deg, #6b5ce7 0%, #8b7cf7 100%);
+    border-radius: 20px;
+    padding: 40px;
+    color: white;
+    position: sticky;
+    top: 120px;
+  }
+
+  .cta-content {
+    text-align: center;
+  }
+
+  .cta-content h2 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .cta-content > p {
+    opacity: 0.9;
+    margin-bottom: 25px;
+    line-height: 1.6;
+  }
+
+  .price-highlight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+  }
+
+  .price-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 5px;
+  }
+
+  .price-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  .btn-large {
+    padding: 16px 40px;
+    font-size: 1.1rem;
+  }
+
+  .cta-note {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-top: 20px;
   }
 
   .btn {
@@ -203,62 +334,14 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .btn-primary {
-    background: var(--primary-color);
-    color: white;
-    box-shadow: 0 4px 16px rgba(209, 122, 92, 0.25);
+    background: white;
+    color: #6b5ce7;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   }
 
   .btn-primary:hover {
-    background: var(--primary-dark);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(209, 122, 92, 0.35);
-  }
-
-  .info-item {
-    margin-bottom: 30px;
-  }
-
-  .info-item h3 {
-    font-size: 1.1rem;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-  }
-
-  .info-item p {
-    color: var(--text-light);
-    line-height: 1.7;
-  }
-
-  .info-item a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s;
-  }
-
-  .info-item a:hover {
-    color: var(--primary-dark);
-  }
-
-  .social-links {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-  }
-
-  .social-links a {
-    padding: 10px 20px;
-    background: var(--accent-cream);
-    color: var(--primary-color);
-    border-radius: 20px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s;
-  }
-
-  .social-links a:hover {
-    background: var(--primary-color);
-    color: white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   }
 
   .container {
@@ -315,6 +398,11 @@ import Layout from '../layouts/Layout.astro';
     transition: all 0.3s;
   }
 
+  .nav .btn-primary {
+    background: var(--primary-color);
+    color: white;
+  }
+
   /* Footer */
   .footer {
     background: var(--secondary-color);
@@ -350,6 +438,11 @@ import Layout from '../layouts/Layout.astro';
   .footer-cta p {
     color: rgba(255,255,255,0.8);
     margin-bottom: 20px;
+  }
+
+  .footer-cta .btn-primary {
+    background: var(--primary-color);
+    color: white;
   }
 
   .footer-connect h4 {
@@ -412,7 +505,33 @@ import Layout from '../layouts/Layout.astro';
 
     .contact-content {
       grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .booking-cta-card {
+      position: static;
+      padding: 30px;
+    }
+
+    .footer-content {
+      grid-template-columns: 1fr;
       gap: 30px;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+    }
+
+    .footer-legal {
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 </style>

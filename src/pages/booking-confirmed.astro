@@ -1,0 +1,422 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getBookingByRef, type Booking } from '../lib/supabase';
+
+// Get booking reference from URL
+const bookingRef = Astro.url.searchParams.get('ref');
+
+let booking: Booking | null = null;
+let error: string | null = null;
+
+if (!bookingRef) {
+  error = 'No booking reference provided';
+} else {
+  const result = await getBookingByRef(bookingRef);
+  if (result.error || !result.data) {
+    error = 'Booking not found';
+  } else if (result.data.payment_status !== 'completed') {
+    error = 'Booking payment not completed';
+  } else {
+    booking = result.data;
+  }
+}
+
+// Format date for display
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-IN', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
+// Format time for display
+function formatTime(timeString: string): string {
+  try {
+    const [hours, minutes] = timeString.split(':');
+    const hour = parseInt(hours, 10);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const hour12 = hour % 12 || 12;
+    return `${hour12}:${minutes} ${ampm}`;
+  } catch {
+    return timeString;
+  }
+}
+
+// Generate Google Calendar URL
+function generateCalendarUrl(booking: Booking): string {
+  try {
+    // Parse time string (HH:MM format)
+    const [hours, minutes] = booking.appointment_time.split(':');
+    const hour = parseInt(hours, 10);
+    const minute = parseInt(minutes, 10);
+    
+    // Create date object with time
+    const startDate = new Date(booking.appointment_date);
+    startDate.setHours(hour, minute, 0, 0);
+    
+    const endDate = new Date(startDate.getTime() + 60 * 60 * 1000); // 1 hour session
+    
+    const formatForCalendar = (date: Date) => {
+      return date.toISOString().replace(/-|:|\.\d\d\d/g, '');
+    };
+    
+    const params = new URLSearchParams({
+      action: 'TEMPLATE',
+      text: 'Psychology Zone - Therapy Session',
+      dates: `${formatForCalendar(startDate)}/${formatForCalendar(endDate)}`,
+      details: `Your therapy session with Psychology Zone.\n\nBooking Reference: ${booking.booking_ref}\n\nFor any queries, call: +91 89689 00002`,
+      location: 'Online Session (Link will be shared)',
+    });
+    
+    return `https://calendar.google.com/calendar/render?${params.toString()}`;
+  } catch (error) {
+    console.error('Calendar URL generation failed:', error);
+    return '#';
+  }
+}
+---
+
+<Layout title="Booking Confirmed - Psychology Zone">
+  <main class="confirmation-page">
+    <div class="container">
+      {error ? (
+        <div class="error-card">
+          <div class="error-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="15" y1="9" x2="9" y2="15"></line>
+              <line x1="9" y1="9" x2="15" y2="15"></line>
+            </svg>
+          </div>
+          <h1>Booking Not Found</h1>
+          <p>{error}</p>
+          <a href="/#contact" class="btn btn-primary">Make a New Booking</a>
+        </div>
+      ) : booking && (
+        <div class="success-card">
+          <div class="success-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          
+          <h1>Booking Confirmed!</h1>
+          <p class="subtitle">Thank you for choosing Psychology Zone. Your session has been successfully booked.</p>
+          
+          <div class="booking-details">
+            <div class="detail-row">
+              <span class="label">Booking Reference</span>
+              <span class="value highlight">{booking.booking_ref}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Name</span>
+              <span class="value">{booking.customer_name}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Date</span>
+              <span class="value">{formatDate(booking.appointment_date)}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Time</span>
+              <span class="value">{formatTime(booking.appointment_time)}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Amount Paid</span>
+              <span class="value">₹{booking.amount_paid / 100}</span>
+            </div>
+          </div>
+
+          <div class="next-steps">
+            <h3>What's Next?</h3>
+            <ul>
+              <li>
+                <span class="step-icon">📱</span>
+                <span>You'll receive a WhatsApp confirmation shortly</span>
+              </li>
+              <li>
+                <span class="step-icon">📧</span>
+                <span>Session link will be sent to your email before the appointment</span>
+              </li>
+              <li>
+                <span class="step-icon">🎯</span>
+                <span>Join the session 5 minutes early for a smooth start</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="action-buttons">
+            <a href={generateCalendarUrl(booking)} target="_blank" class="btn btn-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              Add to Calendar
+            </a>
+            <a href="/" class="btn btn-outline">Back to Home</a>
+          </div>
+
+          <div class="contact-support">
+            <p>Questions? Contact us at <a href="tel:+918968900002">+91 89689 00002</a> or <a href="https://wa.me/918968900002" target="_blank">WhatsApp</a></p>
+          </div>
+        </div>
+      )}
+    </div>
+  </main>
+
+  {/* GTM Purchase Event - Only fires for successful bookings */}
+  {booking && (
+    <script define:vars={{ booking, bookingRef }}>
+      // Push purchase event to dataLayer for conversion tracking
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'purchase',
+        ecommerce: {
+          transaction_id: booking.booking_ref,
+          value: booking.amount_paid / 100,
+          currency: 'INR',
+          items: [{
+            item_id: 'therapy_session',
+            item_name: 'Therapy Session',
+            item_category: booking.problem,
+            price: booking.amount_paid / 100,
+            quantity: 1
+          }]
+        },
+        user_data: {
+          email: booking.customer_email,
+          phone_number: booking.customer_phone,
+          address: {
+            city: booking.city,
+            country: 'IN'
+          }
+        }
+      });
+
+      // Also push for Meta Pixel
+      window.dataLayer.push({
+        event: 'meta_purchase',
+        content_type: 'product',
+        content_ids: ['therapy_session'],
+        value: booking.amount_paid / 100,
+        currency: 'INR'
+      });
+
+      console.log('Conversion tracking events pushed:', bookingRef);
+    </script>
+  )}
+</Layout>
+
+<style>
+  .confirmation-page {
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container {
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .success-card, .error-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    color: white;
+  }
+
+  .error-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    color: white;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    color: #1f2937;
+    margin-bottom: 12px;
+  }
+
+  .subtitle {
+    color: #6b7280;
+    margin-bottom: 32px;
+  }
+
+  .booking-details {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
+    text-align: left;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .detail-row:last-child {
+    border-bottom: none;
+  }
+
+  .label {
+    color: #6b7280;
+    font-size: 0.9rem;
+  }
+
+  .value {
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  .value.highlight {
+    color: #6b5ce7;
+    font-size: 1.1rem;
+  }
+
+  .next-steps {
+    text-align: left;
+    margin-bottom: 32px;
+  }
+
+  .next-steps h3 {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+    color: #1f2937;
+  }
+
+  .next-steps ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .next-steps li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    color: #4b5563;
+  }
+
+  .step-icon {
+    font-size: 1.2rem;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #6b5ce7 0%, #8b7cf7 100%);
+    color: white;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(107, 92, 231, 0.4);
+  }
+
+  .btn-secondary {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(16, 185, 129, 0.4);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: #6b5ce7;
+    border: 2px solid #6b5ce7;
+  }
+
+  .btn-outline:hover {
+    background: #6b5ce7;
+    color: white;
+  }
+
+  .contact-support {
+    color: #6b7280;
+    font-size: 0.9rem;
+  }
+
+  .contact-support a {
+    color: #6b5ce7;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .contact-support a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 480px) {
+    .success-card, .error-card {
+      padding: 24px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .action-buttons {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
