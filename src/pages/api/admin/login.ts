@@ -13,13 +13,15 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       );
     }
 
-    const adminPassword = import.meta.env.ADMIN_PASSWORD;
+    const adminPassword = import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
 
     // Debug logging (remove in production)
     console.log('Environment check:', {
       hasPassword: !!adminPassword,
       passwordLength: adminPassword?.length,
       inputLength: password?.length,
+      fromImportMeta: !!import.meta.env.ADMIN_PASSWORD,
+      fromProcessEnv: !!process.env.ADMIN_PASSWORD,
       isMatch: password === adminPassword
     });
 
