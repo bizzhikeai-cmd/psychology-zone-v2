@@ -171,7 +171,7 @@ class InteraktService {
       callbackData: data.booking_ref,
       type: 'Template',
       template: {
-        name: 'session_feedback_request',
+        name: 'session_feedback_prompt',
         languageCode: 'en',
         bodyValues: [
           data.customer_name,
