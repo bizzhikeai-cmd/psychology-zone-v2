@@ -15,6 +15,14 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 
     const adminPassword = import.meta.env.ADMIN_PASSWORD;
 
+    // Debug logging (remove in production)
+    console.log('Environment check:', {
+      hasPassword: !!adminPassword,
+      passwordLength: adminPassword?.length,
+      inputLength: password?.length,
+      isMatch: password === adminPassword
+    });
+
     if (!adminPassword) {
       return new Response(
         JSON.stringify({ error: 'Admin password not configured' }),
