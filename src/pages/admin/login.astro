@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 
 // Check if already logged in
 const adminSession = Astro.cookies.get('admin_session')?.value;
-const expectedToken = import.meta.env.ADMIN_SESSION_TOKEN;
+const expectedToken = import.meta.env.ADMIN_SESSION_TOKEN || process.env.ADMIN_SESSION_TOKEN;
 
 if (adminSession && adminSession === expectedToken) {
   return Astro.redirect('/admin');

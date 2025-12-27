@@ -4,9 +4,10 @@ import { getBookings, getBookingStats } from '../../lib/supabase';
 
 // Check authentication
 const adminSession = Astro.cookies.get('admin_session')?.value;
+const expectedToken = import.meta.env.ADMIN_SESSION_TOKEN || process.env.ADMIN_SESSION_TOKEN;
 
 // Simple session validation - redirect if not logged in
-if (!adminSession) {
+if (!adminSession || (expectedToken && adminSession !== expectedToken)) {
   return Astro.redirect('/admin/login');
 }
 
