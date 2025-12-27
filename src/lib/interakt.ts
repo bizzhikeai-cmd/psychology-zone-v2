@@ -33,6 +33,13 @@ interface AdminNotificationData {
   amount: number;
 }
 
+interface FeedbackRequestData {
+  customer_name: string;
+  customer_phone: string;
+  booking_ref: string;
+  appointment_date: string;
+}
+
 class InteraktService {
   private apiKey: string;
   private baseUrl: string = 'https://api.interakt.ai/v1/public/message/';
@@ -153,6 +160,30 @@ class InteraktService {
   }
 
   /**
+   * Send feedback request to customer after session completion
+   */
+  async sendFeedbackRequest(data: FeedbackRequestData): Promise<{ success: boolean; error?: string }> {
+    const { countryCode, phoneNumber } = this.normalizePhone(data.customer_phone);
+    
+    const payload: InteraktPayload = {
+      countryCode,
+      phoneNumber,
+      callbackData: data.booking_ref,
+      type: 'Template',
+      template: {
+        name: 'session_feedback_request',
+        languageCode: 'en',
+        bodyValues: [
+          data.customer_name,
+          this.formatDate(data.appointment_date)
+        ]
+      }
+    };
+
+    return this.sendMessage(payload);
+  }
+
+  /**
    * Generic message sender
    */
   private async sendMessage(payload: InteraktPayload): Promise<{ success: boolean; error?: string }> {
@@ -195,4 +226,4 @@ class InteraktService {
 export const interaktService = new InteraktService();
 
 // Export types for use in API routes
-export type { AppointmentData, AdminNotificationData };
+export type { AppointmentData, AdminNotificationData, FeedbackRequestData };

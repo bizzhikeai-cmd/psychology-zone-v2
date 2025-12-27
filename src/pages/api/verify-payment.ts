@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { verifyPaymentSignature } from '../../lib/razorpay';
 import { completeBooking, failBooking, getBookingByOrderId } from '../../lib/supabase';
 import { interaktService } from '../../lib/interakt';
+import { emailService } from '../../lib/email';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -81,8 +82,14 @@ export const POST: APIRoute = async ({ request }) => {
       if (!adminResult.success) {
         console.error('Failed to send admin WhatsApp:', adminResult.error);
       }
-    } catch (whatsappError) {
-      console.error('WhatsApp notification error:', whatsappError);
+
+      // Send email notification to admin
+      const emailResult = await emailService.sendNewBookingAlert(booking);
+      if (!emailResult.success) {
+        console.error('Failed to send admin email:', emailResult.error);
+      }
+    } catch (notificationError) {
+      console.error('Notification error:', notificationError);
       // Continue - don't fail the booking confirmation
     }
 

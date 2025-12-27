@@ -26,6 +26,13 @@ CREATE TABLE IF NOT EXISTS bookings (
   amount_paid INTEGER DEFAULT 59900,
   failure_reason TEXT,
   
+  -- Session Management
+  session_status TEXT DEFAULT 'scheduled' CHECK (session_status IN ('scheduled', 'completed', 'cancelled', 'no-show')),
+  session_completed_at TIMESTAMPTZ,
+  feedback_sent BOOLEAN DEFAULT FALSE,
+  feedback_sent_at TIMESTAMPTZ,
+  admin_notes TEXT,
+  
   -- Metadata
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -34,6 +41,8 @@ CREATE TABLE IF NOT EXISTS bookings (
 CREATE INDEX IF NOT EXISTS idx_bookings_booking_ref ON bookings(booking_ref);
 CREATE INDEX IF NOT EXISTS idx_bookings_razorpay_order_id ON bookings(razorpay_order_id);
 CREATE INDEX IF NOT EXISTS idx_bookings_payment_status ON bookings(payment_status);
+CREATE INDEX IF NOT EXISTS idx_bookings_session_status ON bookings(session_status);
+CREATE INDEX IF NOT EXISTS idx_bookings_appointment_date ON bookings(appointment_date);
 CREATE INDEX IF NOT EXISTS idx_bookings_created_at ON bookings(created_at DESC);
 
 -- Enable Row Level Security

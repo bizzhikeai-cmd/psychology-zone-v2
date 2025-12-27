@@ -3,6 +3,7 @@
 interface ImportMetaEnv {
   readonly ADMIN_PASSWORD: string;
   readonly ADMIN_SESSION_TOKEN: string;
+  readonly ADMIN_EMAIL: string;
   readonly RAZORPAY_KEY_ID: string;
   readonly RAZORPAY_KEY_SECRET: string;
   readonly SUPABASE_URL: string;
@@ -14,6 +15,7 @@ interface ImportMetaEnv {
   readonly ADMIN_WHATSAPP_NUMBER: string;
   readonly GTM_CONTAINER_ID: string;
   readonly SITE_URL: string;
+  readonly RESEND_API_KEY: string;
 }
 
 interface ImportMeta {

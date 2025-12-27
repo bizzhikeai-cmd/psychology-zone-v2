@@ -44,6 +44,33 @@ function getStatusClass(status: string): string {
     default: return '';
   }
 }
+
+// Get session status badge class
+function getSessionStatusClass(status: string): string {
+  switch (status) {
+    case 'completed': return 'badge-success';
+    case 'scheduled': return 'badge-info';
+    case 'cancelled': return 'badge-error';
+    case 'no-show': return 'badge-warning';
+    default: return 'badge-info';
+  }
+}
+
+// Check if appointment is upcoming (today or tomorrow)
+function isUpcoming(appointmentDate: string): 'today' | 'tomorrow' | null {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  
+  const apptDate = new Date(appointmentDate);
+  apptDate.setHours(0, 0, 0, 0);
+  
+  if (apptDate.getTime() === today.getTime()) return 'today';
+  if (apptDate.getTime() === tomorrow.getTime()) return 'tomorrow';
+  return null;
+}
 ---
 
 <Layout title="Admin Dashboard - Psychology Zone">
@@ -107,39 +134,68 @@ function getStatusClass(status: string): string {
                 <th>Date</th>
                 <th>Time</th>
                 <th>Amount</th>
-                <th>Status</th>
-                <th>Created</th>
+                <th>Payment</th>
+                <th>Session</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {bookings.map((booking) => (
-                <tr>
-                  <td class="ref-cell">{booking.booking_ref}</td>
-                  <td>
-                    <div class="customer-info">
-                      <span class="customer-name">{booking.customer_name}</span>
-                      <span class="customer-email">{booking.customer_email}</span>
-                    </div>
-                  </td>
-                  <td>
-                    <a href={`tel:${booking.customer_phone}`} class="phone-link">
-                      {booking.customer_phone}
-                    </a>
-                  </td>
-                  <td class="problem-cell">{booking.problem}</td>
-                  <td>{formatDate(booking.appointment_date)}</td>
-                  <td>{formatTime(booking.appointment_time)}</td>
-                  <td>₹{booking.amount_paid / 100}</td>
-                  <td>
-                    <span class={`badge ${getStatusClass(booking.payment_status)}`}>
-                      {booking.payment_status}
-                    </span>
-                  </td>
-                  <td class="date-cell">
-                    {booking.created_at ? formatDate(booking.created_at) : '-'}
-                  </td>
-                </tr>
-              ))}
+              {bookings.map((booking) => {
+                const upcomingStatus = isUpcoming(booking.appointment_date);
+                const sessionStatus = booking.session_status || 'scheduled';
+                return (
+                  <tr class={upcomingStatus ? `upcoming-${upcomingStatus}` : ''} data-booking-id={booking.id}>
+                    <td class="ref-cell">
+                      {booking.booking_ref}
+                      {upcomingStatus && (
+                        <span class={`upcoming-badge ${upcomingStatus}`}>
+                          {upcomingStatus === 'today' ? '🔔 Today' : '📅 Tomorrow'}
+                        </span>
+                      )}
+                    </td>
+                    <td>
+                      <div class="customer-info">
+                        <span class="customer-name">{booking.customer_name}</span>
+                        <span class="customer-email">{booking.customer_email}</span>
+                      </div>
+                    </td>
+                    <td>
+                      <a href={`tel:${booking.customer_phone}`} class="phone-link">
+                        {booking.customer_phone}
+                      </a>
+                    </td>
+                    <td class="problem-cell">{booking.problem}</td>
+                    <td>{formatDate(booking.appointment_date)}</td>
+                    <td>{formatTime(booking.appointment_time)}</td>
+                    <td>₹{booking.amount_paid / 100}</td>
+                    <td>
+                      <span class={`badge ${getStatusClass(booking.payment_status)}`}>
+                        {booking.payment_status}
+                      </span>
+                    </td>
+                    <td>
+                      <span class={`badge ${getSessionStatusClass(sessionStatus)}`}>
+                        {sessionStatus}
+                      </span>
+                      {booking.feedback_sent && <span class="feedback-icon" title="Feedback sent">✓</span>}
+                    </td>
+                    <td>
+                      {sessionStatus !== 'completed' && booking.payment_status === 'completed' ? (
+                        <button 
+                          class="btn btn-sm btn-complete" 
+                          data-booking-id={booking.id}
+                          data-booking-ref={booking.booking_ref}
+                          onclick="handleCompleteSession(this)"
+                        >
+                          ✓ Complete
+                        </button>
+                      ) : (
+                        <span class="text-muted">-</span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         ) : (
@@ -161,6 +217,54 @@ function getStatusClass(status: string): string {
         console.error('Logout error:', error);
       }
     });
+
+    // Complete session handler
+    window.handleCompleteSession = async function(button: HTMLButtonElement) {
+      const bookingId = button.dataset.bookingId;
+      const bookingRef = button.dataset.bookingRef;
+      
+      if (!bookingId) return;
+      
+      const confirmed = confirm(
+        `Mark session ${bookingRef} as completed?\\n\\nThis will:\\n` +
+        `✓ Update session status to "completed"\\n` +
+        `✓ Send feedback request to customer in 2 hours`
+      );
+      
+      if (!confirmed) return;
+      
+      // Show loading state
+      const originalText = button.innerHTML;
+      button.disabled = true;
+      button.innerHTML = '<span class="spinner">⏳</span> Processing...';
+      
+      try {
+        const response = await fetch('/api/admin/complete-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ booking_id: bookingId })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to complete session');
+        }
+        
+        // Show success message
+        alert('✓ Session marked as completed!\\nFeedback request will be sent in 2 hours.');
+        
+        // Reload page to update UI
+        window.location.reload();
+      } catch (error) {
+        console.error('Error completing session:', error);
+        alert('Error: ' + (error instanceof Error ? error.message : 'Unknown error'));
+        
+        // Reset button
+        button.disabled = false;
+        button.innerHTML = originalText;
+      }
+    };
   </script>
 </Layout>
 
@@ -370,6 +474,82 @@ function getStatusClass(status: string): string {
   .badge-error {
     background: #fee2e2;
     color: #991b1b;
+  }
+
+  .badge-info {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+
+  .btn-sm {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border: none;
+  }
+
+  .btn-complete {
+    background: #10b981;
+    color: white;
+  }
+
+  .btn-complete:hover:not(:disabled) {
+    background: #059669;
+  }
+
+  .btn-complete:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .spinner {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Upcoming appointments highlighting */
+  .upcoming-today {
+    background: #fef3c7 !important;
+    border-left: 4px solid #f59e0b;
+  }
+
+  .upcoming-tomorrow {
+    background: #dbeafe !important;
+    border-left: 4px solid #3b82f6;
+  }
+
+  .upcoming-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .upcoming-badge.today {
+    background: #f59e0b;
+    color: white;
+  }
+
+  .upcoming-badge.tomorrow {
+    background: #3b82f6;
+    color: white;
+  }
+
+  .feedback-icon {
+    display: inline-block;
+    margin-left: 4px;
+    color: #10b981;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .text-muted {
+    color: #9ca3af;
   }
 
   .empty-state {
