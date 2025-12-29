@@ -8,7 +8,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="container">
       <nav class="nav">
         <a href="/" class="logo">
-          <span class="logo-text">Psychology<span class="highlight">Zone</span></span>
+          <img src="/logo.png" alt="Psychology Zone" class="logo-img" />
         </a>
         <div class="nav-spacer"></div>
         <a href="tel:+918968900002" class="phone-link">
@@ -1003,16 +1003,15 @@ import Layout from '../layouts/Layout.astro';
     text-decoration: none;
   }
 
-  .logo-text {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.65rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    letter-spacing: -0.02em;
+  .logo-img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
   }
 
-  .highlight {
-    color: var(--primary-color);
+  .logo:hover .logo-img {
+    transform: scale(1.05);
   }
 
   .phone-link {
