@@ -875,6 +875,15 @@ import Layout from '../layouts/Layout.astro';
                   console.error('Failed to update booking status:', e);
                 }
 
+                // Show cancellation message to user
+                errorDiv.innerHTML = `
+                  <div style="color: #856404; background: #fff3cd; padding: 16px; border-radius: 8px; border: 1px solid #ffc107;">
+                    <strong>Payment cancelled.</strong><br>
+                    Your booking slot has been reserved. You can complete the payment anytime.<br>
+                    <small>We'll send you a reminder if you'd like to complete your booking.</small>
+                  </div>
+                `;
+                errorDiv.style.display = 'block';
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
               }

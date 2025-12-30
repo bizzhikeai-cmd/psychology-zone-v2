@@ -42,6 +42,13 @@ export interface PaymentVerificationInput {
 
 // Create a new Razorpay order
 export async function createOrder(input: CreateOrderInput): Promise<{ data: RazorpayOrder | null; error: Error | null }> {
+  // Check credentials before attempting
+  if (!razorpayKeyId || !razorpayKeySecret) {
+    const error = new Error('Razorpay credentials not configured. Please set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET environment variables.');
+    console.error(error.message);
+    return { data: null, error };
+  }
+
   try {
     const options = {
       amount: input.amount,
@@ -50,10 +57,17 @@ export async function createOrder(input: CreateOrderInput): Promise<{ data: Razo
       notes: input.notes || {},
     };
 
+    console.log('Creating Razorpay order with options:', JSON.stringify(options, null, 2));
     const order = await razorpay.orders.create(options);
+    console.log('Razorpay order created successfully:', order.id);
     return { data: order as RazorpayOrder, error: null };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating Razorpay order:', error);
+    console.error('Error details:', {
+      message: error?.message,
+      statusCode: error?.statusCode,
+      error: error?.error,
+    });
     return { data: null, error: error as Error };
   }
 }

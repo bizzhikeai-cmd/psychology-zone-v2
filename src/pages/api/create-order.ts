@@ -47,8 +47,13 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (orderError || !order) {
       console.error('Failed to create Razorpay order:', orderError);
+      const errorMessage = orderError?.message || 'Unknown error';
       return new Response(
-        JSON.stringify({ error: 'Failed to create payment order' }),
+        JSON.stringify({ 
+          error: 'Failed to create payment order',
+          details: errorMessage,
+          hint: 'Please check your Razorpay API credentials (RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET)'
+        }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }

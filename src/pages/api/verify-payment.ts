@@ -145,6 +145,31 @@ export const PUT: APIRoute = async ({ request }) => {
       );
     }
 
+    // Send payment failed notification via WhatsApp (don't fail the request if this fails)
+    if (booking) {
+      try {
+        const alertResult = await interaktService.sendPaymentFailedAlert({
+          customer_name: booking.customer_name,
+          customer_phone: booking.customer_phone,
+          booking_ref: booking.booking_ref,
+          appointment_date: booking.appointment_date,
+          appointment_time: booking.appointment_time
+        });
+
+        if (!alertResult.success) {
+          console.error('Failed to send payment failed WhatsApp alert:', alertResult.error);
+        } else {
+          console.log(`Payment failed alert sent for booking ${booking.booking_ref}`);
+          
+          // Mark as notified in database (optional - if you want to track this)
+          // This prevents duplicate alerts if the user retries
+        }
+      } catch (notificationError) {
+        console.error('Payment failed notification error:', notificationError);
+        // Continue - don't fail the response
+      }
+    }
+
     return new Response(
       JSON.stringify({
         success: true,

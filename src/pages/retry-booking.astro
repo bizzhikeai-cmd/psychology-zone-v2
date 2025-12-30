@@ -1,0 +1,463 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getBookingByRef } from '../lib/supabase';
+
+// Get booking reference from URL
+const bookingRef = Astro.url.searchParams.get('ref');
+
+let booking = null;
+let error = null;
+
+if (!bookingRef) {
+  error = 'No booking reference provided';
+} else {
+  const result = await getBookingByRef(bookingRef);
+  if (result.error || !result.data) {
+    error = 'Booking not found or has expired';
+  } else if (result.data.payment_status === 'paid') {
+    // Already paid - redirect to confirmation
+    return Astro.redirect(`/booking-confirmed?ref=${bookingRef}`);
+  } else {
+    booking = result.data;
+  }
+}
+
+// Format date for display
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-IN', { 
+    weekday: 'long',
+    day: 'numeric', 
+    month: 'long', 
+    year: 'numeric' 
+  });
+}
+
+// Format time for display
+function formatTime(timeString: string): string {
+  const [hours, minutes] = timeString.split(':');
+  const hour = parseInt(hours, 10);
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+  const hour12 = hour % 12 || 12;
+  return `${hour12}:${minutes} ${ampm}`;
+}
+---
+
+<Layout title="Complete Your Booking - Psychology Zone">
+  <main class="retry-page">
+    <div class="container">
+      {error ? (
+        <div class="error-card">
+          <div class="error-icon">⚠️</div>
+          <h1>Booking Not Found</h1>
+          <p>{error}</p>
+          <a href="/" class="btn btn-primary">Book a New Session</a>
+        </div>
+      ) : booking && (
+        <div class="retry-card">
+          <div class="card-header">
+            <div class="logo">Psychology<span>Zone</span></div>
+            <span class="status-badge">Payment Pending</span>
+          </div>
+          
+          <h1>Complete Your Booking</h1>
+          <p class="subtitle">You're just one step away from your consultation session</p>
+          
+          <div class="booking-details">
+            <h3>Your Appointment Details</h3>
+            
+            <div class="detail-row">
+              <span class="label">Name</span>
+              <span class="value">{booking.customer_name}</span>
+            </div>
+            
+            <div class="detail-row">
+              <span class="label">Date</span>
+              <span class="value">{formatDate(booking.appointment_date)}</span>
+            </div>
+            
+            <div class="detail-row">
+              <span class="label">Time</span>
+              <span class="value">{formatTime(booking.appointment_time)}</span>
+            </div>
+            
+            <div class="detail-row">
+              <span class="label">Concern</span>
+              <span class="value">{booking.problem}</span>
+            </div>
+            
+            <div class="detail-row highlight">
+              <span class="label">Reference</span>
+              <span class="value">{booking.booking_ref}</span>
+            </div>
+          </div>
+          
+          <div class="price-section">
+            <div class="price-row">
+              <span>Session Fee</span>
+              <span class="price">₹599</span>
+            </div>
+          </div>
+          
+          <div id="formError" class="form-error" style="display: none;"></div>
+          
+          <button id="payNowBtn" class="btn btn-primary btn-large" data-booking={JSON.stringify({
+            booking_ref: booking.booking_ref,
+            razorpay_order_id: booking.razorpay_order_id,
+            customer_name: booking.customer_name,
+            customer_email: booking.customer_email,
+            customer_phone: booking.customer_phone,
+            amount: booking.amount_paid
+          })}>
+            Pay ₹599 & Confirm Booking
+          </button>
+          
+          <p class="secure-note">🔒 Secure payment powered by Razorpay</p>
+          
+          <div class="help-section">
+            <p>Need help? Call us at <a href="tel:+918968900002">+91 89689 00002</a></p>
+          </div>
+        </div>
+      )}
+    </div>
+  </main>
+
+  <!-- Razorpay SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <script>
+    const payNowBtn = document.getElementById('payNowBtn');
+    const errorDiv = document.getElementById('formError');
+    
+    if (payNowBtn) {
+      payNowBtn.addEventListener('click', async () => {
+        const bookingData = JSON.parse(payNowBtn.dataset.booking || '{}');
+        
+        if (!bookingData.razorpay_order_id) {
+          errorDiv.textContent = 'Invalid booking data. Please contact support.';
+          errorDiv.style.display = 'block';
+          return;
+        }
+        
+        const originalText = payNowBtn.textContent;
+        payNowBtn.textContent = 'Processing...';
+        payNowBtn.disabled = true;
+        
+        // Fetch Razorpay key from API
+        let keyId = '';
+        try {
+          const keyResponse = await fetch('/api/create-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              customer_name: bookingData.customer_name,
+              customer_email: bookingData.customer_email,
+              customer_phone: bookingData.customer_phone,
+              city: 'N/A',
+              problem: 'Retry Payment',
+              circumstances: 'Retry payment for existing booking',
+              appointment_date: new Date().toISOString().split('T')[0],
+              appointment_time: '09:00',
+              existing_order_id: bookingData.razorpay_order_id
+            })
+          });
+          const keyData = await keyResponse.json();
+          keyId = keyData.key_id;
+        } catch (e) {
+          // Use fallback - the key should be in env
+          keyId = '';
+        }
+        
+        // Configure Razorpay options
+        const razorpayOptions = {
+          key: keyId || 'rzp_test_YourKeyHere', // Fallback
+          amount: bookingData.amount || 59900,
+          currency: 'INR',
+          name: 'Psychology Zone',
+          description: 'Therapy Session Booking',
+          order_id: bookingData.razorpay_order_id,
+          prefill: {
+            name: bookingData.customer_name,
+            email: bookingData.customer_email,
+            contact: bookingData.customer_phone
+          },
+          notes: {
+            booking_ref: bookingData.booking_ref
+          },
+          theme: {
+            color: '#C87A5C'
+          },
+          handler: async function(response) {
+            payNowBtn.textContent = 'Confirming...';
+            
+            try {
+              const verifyResponse = await fetch('/api/verify-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature
+                })
+              });
+
+              const verifyData = await verifyResponse.json();
+
+              if (!verifyResponse.ok) {
+                throw new Error(verifyData.error || 'Payment verification failed');
+              }
+
+              // Redirect to confirmation page
+              window.location.href = `/booking-confirmed?ref=${verifyData.booking_ref}`;
+            } catch (verifyError) {
+              console.error('Verification error:', verifyError);
+              errorDiv.textContent = 'Payment verification failed. Please contact support.';
+              errorDiv.style.display = 'block';
+              payNowBtn.textContent = originalText;
+              payNowBtn.disabled = false;
+            }
+          },
+          modal: {
+            ondismiss: function() {
+              payNowBtn.textContent = originalText;
+              payNowBtn.disabled = false;
+            }
+          }
+        };
+
+        // Open Razorpay checkout
+        const razorpay = new Razorpay(razorpayOptions);
+        razorpay.on('payment.failed', function(response) {
+          errorDiv.textContent = `Payment failed: ${response.error.description}`;
+          errorDiv.style.display = 'block';
+          payNowBtn.textContent = originalText;
+          payNowBtn.disabled = false;
+        });
+        
+        razorpay.open();
+      });
+    }
+  </script>
+
+  <style>
+    .retry-page {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #FDFCFA 0%, #FFF9F5 100%);
+      padding: 60px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .container {
+      max-width: 500px;
+      width: 100%;
+    }
+    
+    .retry-card, .error-card {
+      background: white;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(31, 41, 55, 0.1);
+      text-align: center;
+    }
+    
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #1F2937;
+    }
+    
+    .logo span {
+      color: #C87A5C;
+    }
+    
+    .status-badge {
+      background: #FEF3C7;
+      color: #92400E;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    
+    .error-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+      color: #1F2937;
+      margin-bottom: 12px;
+      font-family: 'Lora', Georgia, serif;
+    }
+    
+    .subtitle {
+      color: #6B7280;
+      margin-bottom: 32px;
+    }
+    
+    .booking-details {
+      background: #F8F5F0;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+    
+    .booking-details h3 {
+      font-size: 1rem;
+      color: #6B7280;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+    
+    .detail-row.highlight {
+      background: rgba(200, 122, 92, 0.1);
+      margin: 12px -12px -12px;
+      padding: 12px;
+      border-radius: 0 0 12px 12px;
+    }
+    
+    .label {
+      color: #6B7280;
+      font-size: 0.9rem;
+    }
+    
+    .value {
+      color: #1F2937;
+      font-weight: 600;
+    }
+    
+    .price-section {
+      padding: 20px 0;
+      margin-bottom: 24px;
+      border-top: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #C87A5C;
+    }
+    
+    .form-error {
+      background: #FEE2E2;
+      color: #DC2626;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+    }
+    
+    .btn {
+      padding: 16px 32px;
+      border-radius: 28px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+      width: 100%;
+    }
+    
+    .btn-primary {
+      background: #C87A5C;
+      color: white;
+      box-shadow: 0 4px 14px rgba(200, 122, 92, 0.3);
+    }
+    
+    .btn-primary:hover {
+      background: #A86648;
+      transform: translateY(-2px);
+    }
+    
+    .btn-primary:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .btn-large {
+      padding: 18px 48px;
+      font-size: 1.1rem;
+    }
+    
+    .secure-note {
+      margin-top: 16px;
+      color: #6B7280;
+      font-size: 0.85rem;
+    }
+    
+    .help-section {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #f0f0f0;
+    }
+    
+    .help-section p {
+      color: #6B7280;
+      font-size: 0.9rem;
+    }
+    
+    .help-section a {
+      color: #C87A5C;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    
+    .help-section a:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 600px) {
+      .retry-page {
+        padding: 20px;
+      }
+      
+      .retry-card, .error-card {
+        padding: 24px;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      .card-header {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</Layout>
