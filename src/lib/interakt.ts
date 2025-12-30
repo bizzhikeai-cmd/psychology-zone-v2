@@ -40,6 +40,14 @@ interface FeedbackRequestData {
   appointment_date: string;
 }
 
+interface CartAbandonedData {
+  customer_name: string;
+  customer_phone: string;
+  booking_ref: string;
+  appointment_date: string;
+  appointment_time: string;
+}
+
 class InteraktService {
   private apiKey: string;
   private baseUrl: string = 'https://api.interakt.ai/v1/public/message/';
@@ -176,6 +184,57 @@ class InteraktService {
         bodyValues: [
           data.customer_name,
           this.formatDate(data.appointment_date)
+        ]
+      }
+    };
+
+    return this.sendMessage(payload);
+  }
+
+  /**
+   * Send abandoned cart reminder to customer who didn't complete payment
+   * Uses template: cart_abandoned_inr50_reminder or checkout_abandoned_inr50_reminder
+   */
+  async sendCartAbandonedReminder(data: CartAbandonedData): Promise<{ success: boolean; error?: string }> {
+    const { countryCode, phoneNumber } = this.normalizePhone(data.customer_phone);
+    
+    const payload: InteraktPayload = {
+      countryCode,
+      phoneNumber,
+      callbackData: data.booking_ref,
+      type: 'Template',
+      template: {
+        name: 'cart_abandoned_inr50_reminder',
+        languageCode: 'en',
+        bodyValues: [
+          data.customer_name,
+          this.formatDate(data.appointment_date),
+          this.formatTime(data.appointment_time)
+        ]
+      }
+    };
+
+    return this.sendMessage(payload);
+  }
+
+  /**
+   * Send checkout abandoned reminder (alternative template)
+   */
+  async sendCheckoutAbandonedReminder(data: CartAbandonedData): Promise<{ success: boolean; error?: string }> {
+    const { countryCode, phoneNumber } = this.normalizePhone(data.customer_phone);
+    
+    const payload: InteraktPayload = {
+      countryCode,
+      phoneNumber,
+      callbackData: data.booking_ref,
+      type: 'Template',
+      template: {
+        name: 'checkout_abandoned_inr50_reminder',
+        languageCode: 'en',
+        bodyValues: [
+          data.customer_name,
+          this.formatDate(data.appointment_date),
+          this.formatTime(data.appointment_time), CartAbandonedData
         ]
       }
     };

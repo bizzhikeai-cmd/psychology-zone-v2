@@ -56,37 +56,37 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       );
     }
 
-    // Schedule feedback message to be sent after 2 hours
-    // Note: In production, you'd use a proper queue/cron job
-    // For now, we'll send it immediately and track with a timestamp
-    setTimeout(async () => {
-      try {
-        await interaktService.sendFeedbackRequest({
-          customer_name: booking.customer_name,
-          customer_phone: booking.customer_phone,
-          booking_ref: booking.booking_ref,
-          appointment_date: booking.appointment_date
-        });
+    // Send feedback request immediately
+    // NOTE: In production, you should use a proper queue system (like Vercel Cron, 
+    // AWS SQS, or a service like Inngest) to delay this by 2 hours.
+    // setTimeout doesn't work in serverless - the function terminates after response.
+    try {
+      await interaktService.sendFeedbackRequest({
+        customer_name: booking.customer_name,
+        customer_phone: booking.customer_phone,
+        booking_ref: booking.booking_ref,
+        appointment_date: booking.appointment_date
+      });
 
-        // Mark feedback as sent
-        await supabase
-          .from('bookings')
-          .update({
-            feedback_sent: true,
-            feedback_sent_at: new Date().toISOString()
-          })
-          .eq('id', booking_id);
+      // Mark feedback as sent
+      await supabase
+        .from('bookings')
+        .update({
+          feedback_sent: true,
+          feedback_sent_at: new Date().toISOString()
+        })
+        .eq('id', booking_id);
 
-        console.log(`Feedback sent for booking ${booking.booking_ref}`);
-      } catch (error) {
-        console.error('Error sending feedback:', error);
-      }
-    }, 2 * 60 * 60 * 1000); // 2 hours in milliseconds
+      console.log(`Feedback sent for booking ${booking.booking_ref}`);
+    } catch (error) {
+      console.error('Error sending feedback:', error);
+      // Don't fail the request if feedback fails
+    }
 
     return new Response(
       JSON.stringify({
         success: true,
-        message: 'Session marked as completed. Feedback will be sent in 2 hours.'
+        message: 'Session marked as completed and feedback request sent!'
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );

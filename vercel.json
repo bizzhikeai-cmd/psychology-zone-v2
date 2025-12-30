@@ -6,6 +6,12 @@
   "public": false,
   "cleanUrls": true,
   "trailingSlash": true,
+  "crons": [
+    {
+      "path": "/api/cron/abandoned-cart",
+      "schedule": "0 * * * *"
+    }
+  ],
   "headers": [
     {
       "source": "/api/(.*)",

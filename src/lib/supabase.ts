@@ -38,6 +38,14 @@ export interface Booking {
   razorpay_payment_id?: string;
   amount_paid: number;
   failure_reason?: string;
+  session_status?: 'scheduled' | 'completed' | 'cancelled' | 'no-show';
+  session_completed_at?: string;
+  feedback_sent?: boolean;
+  feedback_sent_at?: string;
+  admin_notes?: string;
+  updated_at?: string;
+  cart_reminder_sent?: boolean;
+  cart_reminder_sent_at?: string;
 }
 
 export interface BookingInput {

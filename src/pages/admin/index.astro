@@ -219,7 +219,8 @@ function isUpcoming(appointmentDate: string): 'today' | 'tomorrow' | null {
     });
 
     // Complete session handler
-    window.handleCompleteSession = async function(button: HTMLButtonElement) {
+    // @ts-ignore - Adding to window for inline onclick handler
+    window.handleCompleteSession = async function(button) {
       const bookingId = button.dataset.bookingId;
       const bookingRef = button.dataset.bookingRef;
       
@@ -228,7 +229,7 @@ function isUpcoming(appointmentDate: string): 'today' | 'tomorrow' | null {
       const confirmed = confirm(
         `Mark session ${bookingRef} as completed?\\n\\nThis will:\\n` +
         `✓ Update session status to "completed"\\n` +
-        `✓ Send feedback request to customer in 2 hours`
+        `✓ Send feedback request to customer immediately`
       );
       
       if (!confirmed) return;
@@ -252,7 +253,7 @@ function isUpcoming(appointmentDate: string): 'today' | 'tomorrow' | null {
         }
         
         // Show success message
-        alert('✓ Session marked as completed!\\nFeedback request will be sent in 2 hours.');
+        alert('✓ Session marked as completed!\\nFeedback request has been sent to customer.');
         
         // Reload page to update UI
         window.location.reload();
