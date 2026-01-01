@@ -15,6 +15,7 @@
     "@supabase/supabase-js": "^2.39.0",
     "astro": "^5.16.6",
     "nanoid": "^5.0.4",
-    "razorpay": "^2.9.2"
+    "razorpay": "^2.9.2",
+    "typescript": "^5.9.3"
   }
 }

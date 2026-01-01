@@ -130,6 +130,16 @@ class InteraktService {
   }
 
   /**
+   * Sanitize text for WhatsApp templates (remove tabs, newlines, multiple spaces)
+   */
+  private sanitizeText(text: string): string {
+    return text
+      .replace(/[\t\n\r]/g, ' ')  // Replace tabs and newlines with space
+      .replace(/\s{2,}/g, ' ')     // Replace multiple spaces with single space
+      .trim();                      // Remove leading/trailing whitespace
+  }
+
+  /**
    * Send customer appointment confirmation via WhatsApp
    * Template: appointment_confirmation (Utility)
    * Variables: {{1}}=name, {{2}}=date, {{3}}=time, {{4}}=booking_ref
@@ -146,7 +156,7 @@ class InteraktService {
         name: import.meta.env.INTERAKT_CUSTOMER_TEMPLATE || 'appointment_confirmation',
         languageCode: 'en',
         bodyValues: [
-          data.customer_name,
+          this.sanitizeText(data.customer_name),
           this.formatDate(data.appointment_date),
           this.formatTime(data.appointment_time),
           data.booking_ref
@@ -235,7 +245,7 @@ class InteraktService {
         name: import.meta.env.INTERAKT_ABANDONED_TEMPLATE || 'payment_incomplete_notification',
         languageCode: 'en',
         bodyValues: [
-          data.customer_name,
+          this.sanitizeText(data.customer_name),
           this.formatDate(data.appointment_date),
           this.formatTime(data.appointment_time),
           retryLink
@@ -263,7 +273,7 @@ class InteraktService {
         name: import.meta.env.INTERAKT_REMINDER_TEMPLATE || 'appointment_reminder',
         languageCode: 'en',
         bodyValues: [
-          data.customer_name,
+          this.sanitizeText(data.customer_name),
           this.formatDate(data.appointment_date),
           this.formatTime(data.appointment_time)
         ]
@@ -325,7 +335,7 @@ class InteraktService {
         name: import.meta.env.INTERAKT_PAYMENT_FAILED_TEMPLATE || 'payment_failed_alert',
         languageCode: 'en',
         bodyValues: [
-          data.customer_name,
+          this.sanitizeText(data.customer_name),
           this.formatDate(data.appointment_date),
           this.formatTime(data.appointment_time),
           retryLink
