@@ -150,7 +150,7 @@ class InteraktService {
       callbackData: data.booking_ref,
       type: 'Template',
       template: {
-        name: import.meta.env.INTERAKT_CUSTOMER_TEMPLATE || 'appointment_confirmation',
+        name: 'appointment_confirmation',
         languageCode: 'en',
         bodyValues: [
           this.sanitizeText(data.customer_name),
@@ -178,7 +178,7 @@ class InteraktService {
       callbackData: data.booking_ref,
       type: 'Template',
       template: {
-        name: import.meta.env.INTERAKT_ADMIN_TEMPLATE || 'new_booking_admin',
+        name: 'new_booking_admin',
         languageCode: 'en',
         bodyValues: [
           data.booking_ref,
@@ -210,7 +210,7 @@ class InteraktService {
       callbackData: data.booking_ref,
       type: 'Template',
       template: {
-        name: import.meta.env.INTERAKT_FEEDBACK_TEMPLATE || 'session_feedback_prompt',
+        name: 'session_feedback_prompt',
         languageCode: 'en',
         bodyValues: [
           data.customer_name
@@ -230,8 +230,8 @@ class InteraktService {
     const { countryCode, phoneNumber } = this.normalizePhone(data.customer_phone);
     
     // Generate retry link
-    const siteUrl = import.meta.env.SITE_URL || 'https://psychologyzone.in';
-    const retryLink = data.retry_link || `${siteUrl}/retry-booking?ref=${data.booking_ref}`;
+    const siteUrl = (import.meta.env.SITE_URL || 'https://psychologyzone.in').trim();
+    const retryLink = (data.retry_link || `${siteUrl}/retry-booking?ref=${data.booking_ref}`).trim();
     
     const payload: InteraktPayload = {
       countryCode,
@@ -239,7 +239,7 @@ class InteraktService {
       callbackData: data.booking_ref,
       type: 'Template',
       template: {
-        name: import.meta.env.INTERAKT_ABANDONED_TEMPLATE || 'payment_incomplete_notification',
+        name: 'payment_incomplete_notification',
         languageCode: 'en',
         bodyValues: [
           this.sanitizeText(data.customer_name),
@@ -252,7 +252,10 @@ class InteraktService {
       }
     };
 
-    console.log('🔍 Cart abandoned payload bodyValues:', JSON.stringify(payload.template.bodyValues, null, 2));
+    console.log('🔍 Cart abandoned payload:', JSON.stringify({
+      bodyValues: payload.template.bodyValues,
+      buttonValues: payload.template.buttonValues
+    }, null, 2));
 
     return this.sendMessage(payload);
   }
@@ -271,7 +274,7 @@ class InteraktService {
       callbackData: data.booking_ref,
       type: 'Template',
       template: {
-        name: import.meta.env.INTERAKT_REMINDER_TEMPLATE || 'appointment_reminder',
+        name: 'appointment_reminder',
         languageCode: 'en',
         bodyValues: [
           this.sanitizeText(data.customer_name),
@@ -299,7 +302,7 @@ class InteraktService {
       callbackData: data.booking_ref,
       type: 'Template',
       template: {
-        name: import.meta.env.INTERAKT_CART_RECOVERY_TEMPLATE || 'cart_recovery_offer',
+        name: 'cart_recovery_offer',
         languageCode: 'en',
         bodyValues: [
           data.booking_ref,  // {{1}} - for URL button
@@ -333,7 +336,7 @@ class InteraktService {
       callbackData: data.booking_ref,
       type: 'Template',
       template: {
-        name: import.meta.env.INTERAKT_PAYMENT_FAILED_TEMPLATE || 'payment_failed_alert',
+        name: 'payment_failed_alert',
         languageCode: 'en',
         bodyValues: [
           this.sanitizeText(data.customer_name),
