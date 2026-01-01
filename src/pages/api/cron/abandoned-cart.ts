@@ -79,6 +79,16 @@ export const GET: APIRoute = async ({ request }) => {
           try {
             const retryLink = `${siteUrl}/retry-booking?ref=${booking.booking_ref}`;
             
+            console.log(`Processing booking ${booking.booking_ref}:`, JSON.stringify({
+              customer_name: booking.customer_name,
+              customer_phone: booking.customer_phone,
+              appointment_date: booking.appointment_date,
+              appointment_time: booking.appointment_time,
+              name_length: booking.customer_name?.length,
+              has_newlines: /[\n\r\t]/.test(booking.customer_name || ''),
+              has_double_space: /\s{2,}/.test(booking.customer_name || '')
+            }));
+            
             const result = await interaktService.sendCartAbandonedReminder({
               customer_name: booking.customer_name,
               customer_phone: booking.customer_phone,
