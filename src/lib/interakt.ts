@@ -104,18 +104,15 @@ class InteraktService {
   }
 
   /**
-   * Format date for display (Monday, 6 January 2025)
+   * Format date for display (1 Jan 2025)
    */
   private formatDate(dateString: string): string {
     const date = new Date(dateString);
-    const options: Intl.DateTimeFormatOptions = { 
-      weekday: 'long',
-      day: 'numeric', 
-      month: 'long', 
-      year: 'numeric' 
-    };
-    // Replace multiple spaces with single space to comply with WhatsApp template rules
-    return date.toLocaleDateString('en-IN', options).replace(/\s+/g, ' ');
+    const day = date.getDate();
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
   }
 
   /**
