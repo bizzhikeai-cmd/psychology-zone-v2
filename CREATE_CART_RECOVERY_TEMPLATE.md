@@ -53,13 +53,13 @@ Your mental wellness journey is just one click away! 💙
 | Button # | Type | Button Text | Action |
 |----------|------|-------------|--------|
 | 1 | Quick Reply | `Book Now` | - |
-| 2 | URL (Dynamic) | `Complete Booking` | `https://psychologyzone.in/retry-booking?ref={{1}}` |
+| 2 | URL (Dynamic) | `Complete Booking` | `https://book.psychologyzone.in/retry-booking?ref={{1}}` |
 
 **⚠️ IMPORTANT:** Interakt requires dynamic URLs to end with `{{1}}` - not any other variable!
 
 **Correct format:**
 ```
-https://psychologyzone.in/retry-booking?ref={{1}}
+https://book.psychologyzone.in/retry-booking?ref={{1}}
 ```
 
 ---
@@ -115,7 +115,7 @@ https://psychologyzone.in/retry-booking?ref={{1}}
 │  │  Book Now   │ │Complete Booking│ │
 │  └─────────────┘ └────────────────┘ │
 │                                     │
-│  URL: psychologyzone.in/retry-      │
+│  URL: book.psychologyzone.in/retry- │
 │       booking?ref=PZ-ABC123         │
 └─────────────────────────────────────┘
 ```
@@ -138,7 +138,7 @@ https://psychologyzone.in/retry-booking?ref={{1}}
 - [ ] Body uses `{{2}}` for name, `{{3}}` for date, `{{4}}` for time
 - [ ] Footer text added
 - [ ] Quick Reply button: "Book Now"
-- [ ] URL button: "Complete Booking" with URL `https://psychologyzone.in/retry-booking?ref={{1}}`
+- [ ] URL button: "Complete Booking" with URL `https://book.psychologyzone.in/retry-booking?ref={{1}}`
 - [ ] Sample values: {{1}}=`PZ-ABC123`, {{2}}=`Rahul`, {{3}}=`Monday, January 6`, {{4}}=`10:00 AM`
 
 ---

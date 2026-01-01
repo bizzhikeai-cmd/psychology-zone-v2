@@ -34,7 +34,7 @@ export const GET: APIRoute = async ({ request }) => {
     const isTestMode = url.searchParams.get('test') === 'true';
     const stageOnly = url.searchParams.get('stage'); // '1' or '2' to test specific stage
 
-    const siteUrl = import.meta.env.SITE_URL || process.env.SITE_URL || 'https://psychologyzone.in';
+    const siteUrl = import.meta.env.SITE_URL || process.env.SITE_URL || 'https://book.psychologyzone.in';
     const today = new Date().toISOString().split('T')[0];
 
     const results = {

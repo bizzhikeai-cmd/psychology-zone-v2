@@ -75,22 +75,22 @@
    - Name: `cart_recovery_offer`
    - Category: Marketing
    - Variables: `{{1}}`=booking_ref, `{{2}}`=name, `{{3}}`=date, `{{4}}`=time
-   - URL Button: `https://psychologyzone.in/retry-booking?ref={{1}}`
+   - URL Button: `https://book.psychologyzone.in/retry-booking?ref={{1}}`
 4. Wait for approval (24-48 hours)
 
 ### Priority 2: Test Endpoints After Deployment
 ```bash
 # Test abandoned cart (both stages)
-GET https://psychologyzone.in/api/cron/abandoned-cart?test=true
+GET https://book.psychologyzone.in/api/cron/abandoned-cart?test=true
 
 # Test Stage 1 only
-GET https://psychologyzone.in/api/cron/abandoned-cart?test=true&stage=1
+GET https://book.psychologyzone.in/api/cron/abandoned-cart?test=true&stage=1
 
 # Test Stage 2 only  
-GET https://psychologyzone.in/api/cron/abandoned-cart?test=true&stage=2
+GET https://book.psychologyzone.in/api/cron/abandoned-cart?test=true&stage=2
 
 # Test 24h reminder
-GET https://psychologyzone.in/api/cron/session-reminders?test=true
+GET https://book.psychologyzone.in/api/cron/session-reminders?test=true
 ```
 
 ### Priority 3: Verify Vercel Deployment
@@ -156,7 +156,7 @@ INTERAKT_CART_RECOVERY_TEMPLATE=cart_recovery_offer
 ADMIN_WHATSAPP_NUMBER=918968900002
 
 # Site
-SITE_URL=https://psychologyzone.in
+SITE_URL=https://book.psychologyzone.in
 CRON_SECRET=xxx
 ```
 
