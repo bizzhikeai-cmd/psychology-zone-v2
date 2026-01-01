@@ -250,6 +250,8 @@ class InteraktService {
       }
     };
 
+    console.log('🔍 Cart abandoned payload bodyValues:', JSON.stringify(payload.template.bodyValues, null, 2));
+
     return this.sendMessage(payload);
   }
 
