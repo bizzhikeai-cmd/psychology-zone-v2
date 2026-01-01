@@ -327,8 +327,8 @@ class InteraktService {
   async sendPaymentFailedAlert(data: PaymentFailedData): Promise<{ success: boolean; error?: string }> {
     const { countryCode, phoneNumber } = this.normalizePhone(data.customer_phone);
     
-    const siteUrl = import.meta.env.SITE_URL || 'https://psychologyzone.in';
-    const retryLink = `${siteUrl}/retry-booking?ref=${data.booking_ref}`;
+    const siteUrl = (import.meta.env.SITE_URL || 'https://psychologyzone.in').trim();
+    const retryLink = `${siteUrl}/retry-booking?ref=${data.booking_ref}`.trim();
     
     const payload: InteraktPayload = {
       countryCode,
@@ -341,9 +341,11 @@ class InteraktService {
         bodyValues: [
           this.sanitizeText(data.customer_name),
           this.formatDate(data.appointment_date),
-          this.formatTime(data.appointment_time),
-          retryLink
-        ]
+          this.formatTime(data.appointment_time)
+        ],
+        buttonValues: {
+          '0': [retryLink]  // Button for retry link
+        }
       }
     };
 
