@@ -114,7 +114,8 @@ class InteraktService {
       month: 'long', 
       year: 'numeric' 
     };
-    return date.toLocaleDateString('en-IN', options);
+    // Replace multiple spaces with single space to comply with WhatsApp template rules
+    return date.toLocaleDateString('en-IN', options).replace(/\s+/g, ' ');
   }
 
   /**
