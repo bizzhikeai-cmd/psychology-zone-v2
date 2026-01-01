@@ -244,9 +244,11 @@ class InteraktService {
         bodyValues: [
           this.sanitizeText(data.customer_name),
           this.formatDate(data.appointment_date),
-          this.formatTime(data.appointment_time),
-          retryLink
-        ]
+          this.formatTime(data.appointment_time)
+        ],
+        buttonValues: {
+          '0': [retryLink]  // Button 1 (Complete Booking button)
+        }
       }
     };
 
