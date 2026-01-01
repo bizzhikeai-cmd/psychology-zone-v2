@@ -229,10 +229,6 @@ class InteraktService {
   async sendCartAbandonedReminder(data: CartAbandonedData): Promise<{ success: boolean; error?: string }> {
     const { countryCode, phoneNumber } = this.normalizePhone(data.customer_phone);
     
-    // Generate retry link
-    const siteUrl = (import.meta.env.SITE_URL || 'https://psychologyzone.in').trim();
-    const retryLink = (data.retry_link || `${siteUrl}/retry-booking?ref=${data.booking_ref}`).trim();
-    
     const payload: InteraktPayload = {
       countryCode,
       phoneNumber,
@@ -247,7 +243,7 @@ class InteraktService {
           this.formatTime(data.appointment_time)
         ],
         buttonValues: {
-          '0': [retryLink]  // Button 1 (Complete Booking button)
+          '0': [data.booking_ref]  // Pass only booking ref - URL is in template
         }
       }
     };
@@ -327,9 +323,6 @@ class InteraktService {
   async sendPaymentFailedAlert(data: PaymentFailedData): Promise<{ success: boolean; error?: string }> {
     const { countryCode, phoneNumber } = this.normalizePhone(data.customer_phone);
     
-    const siteUrl = (import.meta.env.SITE_URL || 'https://psychologyzone.in').trim();
-    const retryLink = `${siteUrl}/retry-booking?ref=${data.booking_ref}`.trim();
-    
     const payload: InteraktPayload = {
       countryCode,
       phoneNumber,
@@ -344,7 +337,7 @@ class InteraktService {
           this.formatTime(data.appointment_time)
         ],
         buttonValues: {
-          '0': [retryLink]  // Button for retry link
+          '0': [data.booking_ref]  // Pass only booking ref - URL is in template
         }
       }
     };
