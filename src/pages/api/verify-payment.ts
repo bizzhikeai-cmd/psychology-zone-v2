@@ -67,22 +67,6 @@ export const POST: APIRoute = async ({ request }) => {
         console.error('Failed to send customer WhatsApp:', customerResult.error);
       }
 
-      // Send admin notification
-      const adminResult = await interaktService.sendAdminNotification({
-        customer_name: booking.customer_name,
-        customer_phone: booking.customer_phone,
-        customer_email: booking.customer_email,
-        problem: booking.problem,
-        appointment_date: booking.appointment_date,
-        appointment_time: booking.appointment_time,
-        booking_ref: booking.booking_ref,
-        amount: booking.amount_paid / 100 // Convert paise to rupees
-      });
-
-      if (!adminResult.success) {
-        console.error('Failed to send admin WhatsApp:', adminResult.error);
-      }
-
       // Send email notification to admin
       const emailResult = await emailService.sendNewBookingAlert(booking);
       if (!emailResult.success) {
