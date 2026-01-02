@@ -298,7 +298,7 @@ class InteraktService {
       callbackData: data.booking_ref,
       type: 'Template',
       template: {
-        name: 'cart_recovery_offer',
+        name: 'cart_recovery_offer_hv',
         languageCode: 'en',
         bodyValues: [
           data.booking_ref,  // {{1}} - for URL button
