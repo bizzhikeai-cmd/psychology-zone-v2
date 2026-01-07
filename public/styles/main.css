@@ -769,7 +769,7 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--primary-color);
+  background: #C87A5C;
   color: white;
   padding: 5px 15px;
   border-radius: 20px;
@@ -779,7 +779,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .expert-title {
   display: block;
-  color: var(--primary-color);
+  color: #B8693C;
   font-size: 0.9rem;
   font-weight: 500;
   margin-bottom: 10px;
@@ -807,8 +807,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .expert-tags span {
-  background: var(--bg-light);
-  color: var(--primary-color);
+  background: rgba(200, 122, 92, 0.12);
+  color: #B8693C;
   padding: 5px 12px;
   border-radius: 15px;
   font-size: 0.8rem;
@@ -876,7 +876,7 @@ h1, h2, h3, h4, h5, h6 {
 .stat-plus {
   font-size: 2.5rem;
   font-weight: 600;
-  color: var(--accent-sage);
+  color: var(--primary-light);
   margin-left: 4px;
 }
 
