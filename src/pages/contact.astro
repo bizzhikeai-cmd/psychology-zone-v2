@@ -39,14 +39,7 @@ import Layout from '../layouts/Layout.astro';
             
             <div class="info-grid">
               <div class="info-item">
-                <div class="info-icon">📍</div>
-                <div class="info-content">
-                  <h3>Address</h3>
-                  <p>Arjun Singh Bajwa 20<br/>Sector 8A<br/>Chandigarh, India</p>
-                </div>
-              </div>
-              <div class="info-item">
-                <div class="info-icon">📞</div>
+                <div class="info-icon"></div>
                 <div class="info-content">
                   <h3>Phone</h3>
                   <p><a href="tel:+918968900002">+91 89689 00002</a></p>
@@ -118,7 +111,6 @@ import Layout from '../layouts/Layout.astro';
         
         <div class="footer-connect">
           <h4>Contact Us</h4>
-          <p>Arjun Singh Bajwa 20 sector 8A Chandigarh</p>
           <p><a href="tel:+918968900002">+91 89689 00002</a></p>
           <p><a href="mailto:info@psychologyzone.in">info@psychologyzone.in</a></p>
         </div>
@@ -263,12 +255,13 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .booking-cta-card {
-    background: linear-gradient(135deg, #D35400 0%, #E67E22 100%);
+    background: white;
     border-radius: 20px;
     padding: 40px;
-    color: white;
+    color: var(--secondary-color);
     position: sticky;
     top: 120px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   }
 
   .cta-content {
@@ -278,12 +271,12 @@ import Layout from '../layouts/Layout.astro';
   .cta-content h2 {
     font-size: 1.6rem;
     margin-bottom: 15px;
-    color: white;
+    color: var(--secondary-color);
     font-family: 'Cormorant Garamond', serif;
   }
 
   .cta-content > p {
-    opacity: 0.9;
+    color: var(--text-light);
     margin-bottom: 25px;
     line-height: 1.6;
   }
@@ -294,19 +287,20 @@ import Layout from '../layouts/Layout.astro';
     align-items: center;
     margin-bottom: 25px;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--accent-cream);
     border-radius: 12px;
   }
 
   .price-label {
     font-size: 0.9rem;
-    opacity: 0.8;
+    color: var(--text-light);
     margin-bottom: 5px;
   }
 
   .price-value {
     font-size: 2.5rem;
     font-weight: 700;
+    color: var(--secondary-color);
   }
 
   .btn-large {
@@ -316,7 +310,7 @@ import Layout from '../layouts/Layout.astro';
 
   .cta-note {
     font-size: 0.85rem;
-    opacity: 0.8;
+    color: var(--text-light);
     margin-top: 20px;
   }
 
@@ -334,9 +328,9 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .btn-primary {
-    background: white;
-    color: #6b5ce7;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 16px rgba(209, 122, 92, 0.25);
   }
 
   .btn-primary:hover {
