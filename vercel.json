@@ -3,7 +3,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".vercel/output",
   "framework": "astro",
-  "public": false,
+  "public": true,
   "cleanUrls": true,
   "trailingSlash": true,
   "crons": [
