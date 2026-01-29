@@ -214,12 +214,12 @@ const validationRules = {
 };
 
 // Validation functions
-function validateVariable(key, value, rules) {
+function validateVariable(key, value, rules, isExampleFile = false) {
   const errors = [];
 
   // Check if value exists
   if (!value || value === '') {
-    if (rules.required) {
+    if (rules.required && !isExampleFile) {
       errors.push(`Missing required variable`);
     }
     return errors;
@@ -240,7 +240,29 @@ function validateVariable(key, value, rules) {
     errors.push(`Contains leading or trailing whitespace`);
   }
 
-  // Check pattern
+  // For .env.example files, skip strict pattern validation
+  // Just check for obvious placeholder values
+  if (isExampleFile) {
+    const placeholderPatterns = [
+      /^(xxx|yyy|zzz|your_|replace_|example_|placeholder)/i,
+      /\*\*\*/,
+      /^(test|demo|sample)/i
+    ];
+
+    const isPlaceholder = placeholderPatterns.some(pattern => pattern.test(value));
+
+    if (!isPlaceholder && rules.pattern) {
+      // Still validate actual-looking values in example files
+      if (!rules.pattern.test(value)) {
+        errors.push(`Invalid format. ${rules.description}`);
+        errors.push(`Example: ${rules.example}`);
+      }
+    }
+
+    return errors;
+  }
+
+  // Check pattern (for non-example files)
   if (rules.pattern && !rules.pattern.test(value)) {
     errors.push(`Invalid format. ${rules.description}`);
     errors.push(`Example: ${rules.example}`);
@@ -263,8 +285,12 @@ function validateVariable(key, value, rules) {
 }
 
 // Main validation function
-function validateEnvironment(env, environment = 'development') {
+function validateEnvironment(env, environment = 'development', isExampleFile = false) {
   console.log(`${colors.blue}🔍 Validating ${environment} environment variables...${colors.reset}\n`);
+
+  if (isExampleFile) {
+    console.log(`${colors.yellow}ℹ️  Example file mode: Allowing placeholder values${colors.reset}\n`);
+  }
 
   let hasErrors = false;
   let hasMissing = false;
@@ -274,7 +300,7 @@ function validateEnvironment(env, environment = 'development') {
   // Check each variable
   for (const [key, rules] of Object.entries(validationRules)) {
     const value = env[key];
-    const errors = validateVariable(key, value, rules);
+    const errors = validateVariable(key, value, rules, isExampleFile);
 
     if (errors.length > 0) {
       hasErrors = true;
@@ -386,9 +412,11 @@ function main() {
   }
 
   // Determine environment name from filename
-  const environment = path.basename(envPath).replace('.env', '') || 'development';
+  const filename = path.basename(envPath);
+  const environment = filename.replace('.env', '') || 'development';
+  const isExampleFile = filename.includes('example') || filename.includes('template');
 
-  const exitCode = validateEnvironment(env, environment);
+  const exitCode = validateEnvironment(env, environment, isExampleFile);
   process.exit(exitCode);
 }
 
