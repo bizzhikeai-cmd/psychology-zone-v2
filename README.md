@@ -13,10 +13,11 @@ Professional booking platform for Psychology Zone's online therapy sessions. Bui
 ## Table of Contents
 
 1. [Deployment Workflow](#deployment-workflow)
-2. [Environment Setup](#environment-setup)
-3. [Development](#development)
-4. [Emergency Procedures](#emergency-procedures)
-5. [Architecture](#architecture)
+2. [Health Monitoring](#health-monitoring)
+3. [Environment Setup](#environment-setup)
+4. [Development](#development)
+5. [Emergency Procedures](#emergency-procedures)
+6. [Architecture](#architecture)
 
 ---
 
@@ -116,14 +117,215 @@ git push origin staging
 After merge to `main`:
 
 ```bash
-# Check production site
+# Run automated health check (recommended)
+npm run health-check
+
+# Or manually check health endpoint
 curl https://book.psychologyzone.in/api/health
 
-# Monitor Vercel logs
+# Monitor Vercel logs for errors
 vercel logs https://book.psychologyzone.in
 ```
 
+**Expected output:**
+```
+✅ Overall Status: HEALTHY
+✅ Database (Supabase): OK - Connected (150ms)
+✅ Email (Resend): OK - API key configured
+✅ Payment (Razorpay): OK - Credentials configured
+✅ WhatsApp (Interakt): OK - API key configured
+✨ All systems operational!
+```
+
 **If anything breaks:** See [Emergency Rollback](#emergency-rollback)
+
+---
+
+## Health Monitoring
+
+The application includes automated health checks to verify all critical services are operational.
+
+### Health Check Endpoint
+
+**URL:** `https://book.psychologyzone.in/api/health`
+
+The health endpoint checks:
+- ✅ **Database (Supabase)** - Verifies connection and query performance
+- ✅ **Email (Resend)** - Validates API key format and detects corruption
+- ✅ **Payment (Razorpay)** - Checks credentials are configured correctly
+- ✅ **WhatsApp (Interakt)** - Validates API key
+
+**Response Format:**
+
+```json
+{
+  "status": "healthy",
+  "timestamp": "2026-01-29T10:00:00.000Z",
+  "services": {
+    "database": {
+      "status": "ok",
+      "message": "Connected",
+      "responseTime": 150
+    },
+    "email": {
+      "status": "ok",
+      "message": "API key configured"
+    },
+    "payment": {
+      "status": "ok",
+      "message": "Credentials configured"
+    },
+    "whatsapp": {
+      "status": "ok",
+      "message": "API key configured"
+    }
+  },
+  "version": "1.0.0"
+}
+```
+
+**Status Codes:**
+- `200` - All services healthy
+- `503` - One or more services degraded or down
+
+**Service Status Values:**
+- `ok` - Service operational
+- `degraded` - Service has issues but may still function
+- `down` - Service unavailable
+
+### Running Health Checks
+
+#### Production Health Check
+
+```bash
+# Check production services
+npm run health-check
+
+# Output shows:
+# ✅ Overall Status: HEALTHY
+# ✅ Database (Supabase): OK - Connected (150ms)
+# ✅ Email (Resend): OK - API key configured
+# ✅ Payment (Razorpay): OK - Credentials configured
+# ✅ WhatsApp (Interakt): OK - API key configured
+```
+
+#### Local Development Health Check
+
+```bash
+# Start dev server first
+npm run dev
+
+# In another terminal, check local health
+npm run health-check:local
+```
+
+#### Custom URL Health Check
+
+```bash
+# Check any environment
+node scripts/health-check.cjs https://your-preview-url.vercel.app
+```
+
+### Health Check Script Exit Codes
+
+The health check script returns different exit codes for automation:
+
+- `0` - All services healthy (success)
+- `1` - One or more services degraded/down
+- `2` - Health check failed (network error, endpoint unreachable)
+
+**Example in CI/CD:**
+
+```bash
+# Run health check after deployment
+npm run health-check
+if [ $? -ne 0 ]; then
+  echo "❌ Health check failed! Consider rollback."
+  exit 1
+fi
+```
+
+### When to Run Health Checks
+
+**After every deployment:**
+```bash
+# 1. Deploy to production (via PR merge)
+# 2. Wait 30 seconds for deployment to stabilize
+# 3. Run health check
+npm run health-check
+```
+
+**During debugging:**
+```bash
+# Check if services are configured correctly
+npm run health-check
+
+# If any service shows "degraded" or "down":
+# - Check environment variables in Vercel dashboard
+# - Look for newlines or corruption in API keys
+# - Verify service credentials are correct
+```
+
+**For monitoring (optional):**
+```bash
+# Set up cron job to check health every 5 minutes
+*/5 * * * * cd /path/to/project && npm run health-check
+```
+
+### Common Health Check Issues
+
+#### Database Shows "down"
+- Check Supabase service status
+- Verify SUPABASE_URL and keys are correct
+- Check if Supabase project is paused
+
+#### Email Shows "degraded" - Corrupted API Key
+```bash
+# This means RESEND_API_KEY has newlines/whitespace
+# Fix by re-adding the key:
+printf "re_your_key_here" | vercel env add RESEND_API_KEY production
+vercel --prod --yes  # Redeploy
+```
+
+#### Payment Shows "degraded" - Invalid Key Format
+- Check RAZORPAY_KEY_ID starts with `rzp_live_` or `rzp_test_`
+- Verify RAZORPAY_KEY_SECRET is at least 20 characters
+
+#### WhatsApp Shows "down"
+- Check INTERAKT_API_KEY is set in Vercel
+- Verify your Interakt plan is active
+
+### Health Check Features
+
+**✅ Detects Environment Variable Corruption**
+
+The health check automatically detects common issues like:
+- Newline characters in API keys (major cause of failures)
+- Whitespace corruption
+- Invalid key formats
+- Missing credentials
+
+**Example:**
+
+```bash
+npm run health-check
+
+# If RESEND_API_KEY has a newline:
+# ⚠️  Email (Resend): DEGRADED - API key corrupted (contains newlines or whitespace)
+```
+
+**✅ Color-Coded Terminal Output**
+
+- 🟢 Green = Healthy
+- 🟡 Yellow = Degraded (warning)
+- 🔴 Red = Down (critical)
+
+**✅ Response Time Tracking**
+
+See how long each service takes to respond:
+```
+✅ Database (Supabase): OK - Connected (150ms)
+```
 
 ---
 
@@ -239,6 +441,8 @@ npm run validate-env           # Validate .env file
 npm run validate-env:prod      # Validate .env.production
 npm run sync-env               # Sync .env to Vercel
 npm run sync-env:dry-run       # Preview sync changes
+npm run health-check           # Check production health
+npm run health-check:local     # Check local dev server health
 ```
 
 ### Admin Panel Access
@@ -348,12 +552,14 @@ psychology-zone-v2/
 │   │   ├── supabase.ts     # Database client
 │   │   ├── email.ts        # Email service (Resend)
 │   │   ├── interakt.ts     # WhatsApp service
-│   │   └── razorpay.ts     # Payment processing
+│   │   ├── razorpay.ts     # Payment processing
+│   │   └── auth.ts         # Authentication utilities
 │   ├── layouts/            # Page layouts
 │   └── components/         # Reusable components
 ├── scripts/                # Utility scripts
 │   ├── validate-env.cjs    # Environment validation
-│   └── sync-env-to-vercel.cjs  # Vercel sync tool
+│   ├── sync-env-to-vercel.cjs  # Vercel sync tool
+│   └── health-check.cjs    # Health monitoring script
 ├── public/                 # Static assets
 ├── .env.example            # Environment template
 └── vercel.json             # Vercel configuration
