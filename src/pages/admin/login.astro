@@ -50,48 +50,50 @@ if (adminSession && adminPassword && verifySessionToken(adminSession, adminPassw
     </div>
   </main>
 
-  <script>
-    const form = document.getElementById('loginForm') as HTMLFormElement;
-    const errorMessage = document.getElementById('errorMessage') as HTMLDivElement;
-    const loginBtn = document.getElementById('loginBtn') as HTMLButtonElement;
-    const btnText = loginBtn.querySelector('.btn-text') as HTMLSpanElement;
-    const btnLoader = loginBtn.querySelector('.btn-loader') as HTMLSpanElement;
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('loginForm');
+      const errorMessage = document.getElementById('errorMessage');
+      const loginBtn = document.getElementById('loginBtn');
+      const btnText = loginBtn.querySelector('.btn-text');
+      const btnLoader = loginBtn.querySelector('.btn-loader');
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const password = (document.getElementById('password') as HTMLInputElement).value;
-      
-      // Show loading state
-      btnText.style.display = 'none';
-      btnLoader.style.display = 'inline-block';
-      loginBtn.disabled = true;
-      errorMessage.style.display = 'none';
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-      try {
-        const response = await fetch('/api/admin/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password })
-        });
+        const password = document.getElementById('password').value;
 
-        const data = await response.json();
+        // Show loading state
+        btnText.style.display = 'none';
+        btnLoader.style.display = 'inline-block';
+        loginBtn.disabled = true;
+        errorMessage.style.display = 'none';
 
-        if (!response.ok) {
-          throw new Error(data.error || 'Login failed');
+        try {
+          const response = await fetch('/api/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password })
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error || 'Login failed');
+          }
+
+          // Redirect to admin dashboard
+          window.location.href = data.redirect || '/admin';
+        } catch (error) {
+          errorMessage.textContent = error instanceof Error ? error.message : 'Login failed';
+          errorMessage.style.display = 'block';
+
+          // Reset button
+          btnText.style.display = 'inline';
+          btnLoader.style.display = 'none';
+          loginBtn.disabled = false;
         }
-
-        // Redirect to admin dashboard
-        window.location.href = data.redirect || '/admin';
-      } catch (error) {
-        errorMessage.textContent = error instanceof Error ? error.message : 'Login failed';
-        errorMessage.style.display = 'block';
-        
-        // Reset button
-        btnText.style.display = 'inline';
-        btnLoader.style.display = 'none';
-        loginBtn.disabled = false;
-      }
+      });
     });
   </script>
 </Layout>
