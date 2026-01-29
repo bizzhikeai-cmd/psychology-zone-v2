@@ -5,9 +5,8 @@ export const GET: APIRoute = async ({ request, cookies }) => {
   try {
     // Check admin authentication
     const adminSession = cookies.get('admin_session')?.value;
-    const expectedToken = import.meta.env.ADMIN_SESSION_TOKEN || process.env.ADMIN_SESSION_TOKEN;
-    
-    if (!adminSession || (expectedToken && adminSession !== expectedToken)) {
+
+    if (!adminSession) {
       return new Response(
         JSON.stringify({ error: 'Unauthorized' }),
         { status: 401, headers: { 'Content-Type': 'application/json' } }
