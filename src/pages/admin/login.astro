@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { verifySessionToken } from '../api/admin/login';
+import { verifySessionToken } from '../../lib/auth';
 
 // Check if already logged in
 const adminSession = Astro.cookies.get('admin_session')?.value;

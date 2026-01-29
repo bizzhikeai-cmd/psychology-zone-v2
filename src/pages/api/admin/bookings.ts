@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getBookings, getBookingStats } from '../../../lib/supabase';
-import { verifySessionToken } from './login';
+import { verifySessionToken } from '../../../lib/auth';
 
 export const GET: APIRoute = async ({ request, cookies }) => {
   try {
