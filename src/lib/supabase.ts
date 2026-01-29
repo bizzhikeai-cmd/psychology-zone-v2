@@ -37,6 +37,7 @@ export interface Booking {
   razorpay_order_id: string;
   razorpay_payment_id?: string;
   amount_paid: number;
+  payment_completed_at?: string;
   failure_reason?: string;
   session_status?: 'scheduled' | 'completed' | 'cancelled' | 'no-show';
   session_completed_at?: string;
@@ -104,6 +105,7 @@ export async function completeBooking(
       .update({
         payment_status: 'completed',
         razorpay_payment_id: razorpayPaymentId,
+        payment_completed_at: new Date().toISOString(),
       })
       .eq('razorpay_order_id', razorpayOrderId)
       .select()
