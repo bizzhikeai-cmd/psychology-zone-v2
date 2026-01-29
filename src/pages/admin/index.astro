@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getBookings, getBookingStats } from '../../lib/supabase';
-import { verifySessionToken } from '../api/admin/login';
+import { verifySessionToken } from '../../lib/auth';
 
 // Check authentication
 const adminSession = Astro.cookies.get('admin_session')?.value;

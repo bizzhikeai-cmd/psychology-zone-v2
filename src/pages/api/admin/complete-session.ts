@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { supabase } from '../../../lib/supabase';
 import { interaktService } from '../../../lib/interakt';
-import { verifySessionToken } from './login';
+import { verifySessionToken } from '../../../lib/auth';
 
 export const POST: APIRoute = async ({ request, cookies }) => {
   try {
