@@ -1,13 +1,14 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getBookings, getBookingStats } from '../../lib/supabase';
+import { verifySessionToken } from '../api/admin/login';
 
 // Check authentication
 const adminSession = Astro.cookies.get('admin_session')?.value;
+const adminPassword = import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
 
-// Simple session validation - redirect if not logged in
-// Just check if session cookie exists (token validation not needed in cookie-based auth)
-if (!adminSession) {
+// Verify session token with HMAC signature
+if (!adminSession || !adminPassword || !verifySessionToken(adminSession, adminPassword)) {
   return Astro.redirect('/admin/login');
 }
 

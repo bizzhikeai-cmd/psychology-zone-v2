@@ -1,13 +1,15 @@
 import type { APIRoute } from 'astro';
 import { supabase } from '../../../lib/supabase';
 import { interaktService } from '../../../lib/interakt';
+import { verifySessionToken } from './login';
 
 export const POST: APIRoute = async ({ request, cookies }) => {
   try {
     // Check admin authentication
     const adminSession = cookies.get('admin_session')?.value;
+    const adminPassword = import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
 
-    if (!adminSession) {
+    if (!adminSession || !adminPassword || !verifySessionToken(adminSession, adminPassword)) {
       return new Response(
         JSON.stringify({ error: 'Unauthorized' }),
         { status: 401, headers: { 'Content-Type': 'application/json' } }

@@ -1,12 +1,14 @@
 import type { APIRoute } from 'astro';
 import { getBookings, getBookingStats } from '../../../lib/supabase';
+import { verifySessionToken } from './login';
 
 export const GET: APIRoute = async ({ request, cookies }) => {
   try {
     // Check admin authentication
     const adminSession = cookies.get('admin_session')?.value;
+    const adminPassword = import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
 
-    if (!adminSession) {
+    if (!adminSession || !adminPassword || !verifySessionToken(adminSession, adminPassword)) {
       return new Response(
         JSON.stringify({ error: 'Unauthorized' }),
         { status: 401, headers: { 'Content-Type': 'application/json' } }
