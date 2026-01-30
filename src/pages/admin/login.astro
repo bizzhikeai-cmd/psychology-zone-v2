@@ -78,6 +78,20 @@ console.log('Login page - showing login form (no valid session)');
 
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
+      // Client-side auth check as fallback
+      // If server-side redirect failed but user has valid session, this catches it
+      fetch('/api/admin/bookings?stats=false', { credentials: 'include' })
+        .then(res => {
+          if (res.ok) {
+            // User is authenticated, redirect to dashboard
+            console.log('Client-side auth check passed - redirecting to dashboard');
+            window.location.replace('/admin');
+          }
+        })
+        .catch(() => {
+          // Auth check failed, stay on login page
+        });
+
       const form = document.getElementById('loginForm');
       const errorMessage = document.getElementById('errorMessage');
       const loginBtn = document.getElementById('loginBtn');
