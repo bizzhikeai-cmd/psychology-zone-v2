@@ -70,8 +70,10 @@ class InteraktService {
   private baseUrl: string = 'https://api.interakt.ai/v1/public/message/';
 
   constructor() {
-    this.apiKey = import.meta.env.INTERAKT_API_KEY || '';
-    
+    // Use both import.meta.env and process.env fallback for Vercel serverless compatibility
+    // Also trim to handle any newline corruption in environment variables
+    this.apiKey = (import.meta.env.INTERAKT_API_KEY || process.env.INTERAKT_API_KEY || '').trim();
+
     if (!this.apiKey) {
       console.warn('Interakt API key not configured');
     }
@@ -169,7 +171,7 @@ class InteraktService {
    * Template: new_booking_admin
    */
   async sendAdminNotification(data: AdminNotificationData): Promise<{ success: boolean; error?: string }> {
-    const adminPhone = import.meta.env.ADMIN_WHATSAPP_NUMBER || '918968900002';
+    const adminPhone = (import.meta.env.ADMIN_WHATSAPP_NUMBER || process.env.ADMIN_WHATSAPP_NUMBER || '918968900002').trim();
     const { countryCode, phoneNumber } = this.normalizePhone(adminPhone);
     
     const payload: InteraktPayload = {

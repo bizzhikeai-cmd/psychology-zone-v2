@@ -13,7 +13,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       );
     }
 
-    const adminPassword = import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
+    const adminPassword = (import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || '').trim();
 
     if (!adminPassword) {
       return new Response(
