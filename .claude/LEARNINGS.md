@@ -85,29 +85,44 @@ const adminPassword = (
 
 ## Session Token Design
 
-### PREFER simple static hashes over time-based tokens
+### PREFER simple static hashes over time-based tokens (for simple admin panels)
 
 **Problem discovered**: Complex HMAC tokens with timestamps (`timestamp.randomData.signature`) fail in serverless because:
 1. Each function invocation generates different random data
 2. Timestamps can drift between function cold starts
 3. Token verification fails when different functions handle login vs. verification
 
-**Solution**: Use simple deterministic hashes:
+**Current solution** (simple deterministic hashes):
 
 ```typescript
-// GOOD: Same input = same output, always
+// Works in serverless: Same input = same output, always
 function generateSessionHash(password: string): string {
   return crypto
     .createHash('sha256')
     .update(password + 'static-salt')
     .digest('hex');
 }
+```
 
-// BAD: Different output every time
+**Security note**: This approach is simple and works reliably in serverless, but has limitations:
+- Cannot invalidate individual sessions
+- If password leaks, all sessions are compromised
+- Same token every login (no rotation)
+
+**For production systems with higher security needs**, implement proper session management:
+- Generate random session tokens with `crypto.randomUUID()` or `crypto.randomBytes(32)`
+- Store sessions server-side (Supabase, Redis, or Vercel KV)
+- Implement session expiration and rotation
+- See OWASP Session Management guidelines
+
+**What DOESN'T work in serverless** (avoid these patterns):
+
+```typescript
+// BAD: Different output every time - verification fails
 function createToken(secret: string): string {
   const timestamp = Date.now();  // Different each time!
   const random = crypto.randomBytes(16);  // Different each time!
-  // ... verification will fail
+  // ... verification will fail across function invocations
 }
 ```
 
@@ -130,17 +145,17 @@ When admin login breaks, check in this order:
 
 When debugging auth issues, these are ALL the files to check:
 
-| File | Purpose |
-|------|---------|
-| `src/lib/auth.ts` | Token generation & verification |
-| `src/lib/cookies.ts` | Cookie reading from raw headers |
-| `src/pages/api/admin/login.ts` | Login API - sets cookie |
-| `src/pages/admin/index.astro` | Dashboard - verifies cookie |
-| `src/pages/admin/login.astro` | Login page - checks if already logged in |
-| `src/pages/api/admin/bookings.ts` | API - requires auth |
-| `src/pages/api/admin/complete-session.ts` | API - requires auth |
-| `src/pages/api/admin/reports.ts` | API - requires auth |
-| `vercel.json` | Vercel config - can affect redirects/caching |
+| File                                       | Purpose                                    |
+| ------------------------------------------ | ------------------------------------------ |
+| `src/lib/auth.ts`                          | Token generation & verification            |
+| `src/lib/cookies.ts`                       | Cookie reading from raw headers            |
+| `src/pages/api/admin/login.ts`             | Login API - sets cookie                    |
+| `src/pages/admin/index.astro`              | Dashboard - verifies cookie                |
+| `src/pages/admin/login.astro`              | Login page - checks if already logged in   |
+| `src/pages/api/admin/bookings.ts`          | API - requires auth                        |
+| `src/pages/api/admin/complete-session.ts`  | API - requires auth                        |
+| `src/pages/api/admin/reports.ts`           | API - requires auth                        |
+| `vercel.json`                              | Vercel config - can affect redirects/caching |
 
 ---
 
@@ -148,13 +163,13 @@ When debugging auth issues, these are ALL the files to check:
 
 These were tried and failed:
 
-| Attempted Fix | Why It Failed |
-|--------------|---------------|
-| Using `sameSite: 'strict'` | Doesn't help with Vercel's internal redirects |
-| Using `Astro.cookies.set()` | Cookie set correctly but reading fails |
-| Adding more logging | Helps debug but doesn't fix root cause |
-| Changing token format | If reading fails, format doesn't matter |
-| Multiple PRs with small fixes | Need to fix root cause, not symptoms |
+| Attempted Fix                  | Why It Failed                                  |
+| ------------------------------ | ---------------------------------------------- |
+| Using `sameSite: 'strict'`     | Doesn't help with Vercel's internal redirects  |
+| Using `Astro.cookies.set()`    | Cookie set correctly but reading fails         |
+| Adding more logging            | Helps debug but doesn't fix root cause         |
+| Changing token format          | If reading fails, format doesn't matter        |
+| Multiple PRs with small fixes  | Need to fix root cause, not symptoms           |
 
 ---
 
@@ -168,4 +183,6 @@ These were tried and failed:
 
 ---
 
-*Last updated: January 2026 after 3-day debugging session*
+## Last Updated
+
+January 2026 after 3-day debugging session
