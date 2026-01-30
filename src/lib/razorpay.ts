@@ -2,16 +2,18 @@ import Razorpay from 'razorpay';
 import crypto from 'crypto';
 
 // Initialize Razorpay instance
-const razorpayKeyId = import.meta.env.RAZORPAY_KEY_ID;
-const razorpayKeySecret = import.meta.env.RAZORPAY_KEY_SECRET;
+// Use both import.meta.env and process.env fallback for Vercel serverless compatibility
+// Also trim to handle any newline corruption in environment variables
+const razorpayKeyId = (import.meta.env.RAZORPAY_KEY_ID || process.env.RAZORPAY_KEY_ID || '').trim();
+const razorpayKeySecret = (import.meta.env.RAZORPAY_KEY_SECRET || process.env.RAZORPAY_KEY_SECRET || '').trim();
 
 if (!razorpayKeyId || !razorpayKeySecret) {
   console.warn('Razorpay credentials not configured');
 }
 
 const razorpay = new Razorpay({
-  key_id: razorpayKeyId || '',
-  key_secret: razorpayKeySecret || '',
+  key_id: razorpayKeyId,
+  key_secret: razorpayKeySecret,
 });
 
 // Types

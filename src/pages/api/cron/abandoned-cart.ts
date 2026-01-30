@@ -13,7 +13,7 @@ import { interaktService } from '../../../lib/interakt';
 export const GET: APIRoute = async ({ request }) => {
   // Verify cron secret to prevent unauthorized calls
   const authHeader = request.headers.get('authorization');
-  const cronSecret = import.meta.env.CRON_SECRET || process.env.CRON_SECRET;
+  const cronSecret = (import.meta.env.CRON_SECRET || process.env.CRON_SECRET || '').trim();
   
   // Allow calls from Vercel Cron (they use a different auth mechanism)
   const isVercelCron = request.headers.get('x-vercel-cron') === '1';
@@ -34,7 +34,7 @@ export const GET: APIRoute = async ({ request }) => {
     const isTestMode = url.searchParams.get('test') === 'true';
     const stageOnly = url.searchParams.get('stage'); // '1' or '2' to test specific stage
 
-    const siteUrl = import.meta.env.SITE_URL || process.env.SITE_URL || 'https://book.psychologyzone.in';
+    const siteUrl = (import.meta.env.SITE_URL || process.env.SITE_URL || 'https://book.psychologyzone.in').trim();
     const today = new Date().toISOString().split('T')[0];
 
     const results = {

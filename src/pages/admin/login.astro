@@ -4,7 +4,7 @@ import { verifySessionToken } from '../../lib/auth';
 
 // Check if already logged in
 const adminSession = Astro.cookies.get('admin_session')?.value;
-const adminPassword = import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
+const adminPassword = (import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || '').trim();
 
 if (adminSession && adminPassword && verifySessionToken(adminSession, adminPassword)) {
   return Astro.redirect('/admin');

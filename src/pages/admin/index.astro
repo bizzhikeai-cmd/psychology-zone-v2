@@ -5,7 +5,7 @@ import { verifySessionToken } from '../../lib/auth';
 
 // Check authentication
 const adminSession = Astro.cookies.get('admin_session')?.value;
-const adminPassword = import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
+const adminPassword = (import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || '').trim();
 
 // Verify session token with HMAC signature
 if (!adminSession || !adminPassword || !verifySessionToken(adminSession, adminPassword)) {
