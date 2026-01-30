@@ -27,7 +27,27 @@ console.log('Admin page auth check:', {
 // Verify session - must have both cookie and password
 if (!adminSession || !adminPassword) {
   console.log('Auth failed - no session or password');
-  return Astro.redirect('/admin/login');
+  // CRITICAL FIX: Use HTML meta-refresh instead of 302 redirect
+  // This allows the browser to process Set-Cookie BEFORE redirecting
+  // Prevents redirect loops in Vercel serverless
+  return new Response(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url=/admin/login">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Redirecting to login...</p>
+</body>
+</html>`, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/html',
+      'Set-Cookie': 'admin_session=; Path=/; HttpOnly; Max-Age=0; SameSite=Lax',
+      'Cache-Control': 'no-cache, no-store, must-revalidate, private, max-age=0'
+    }
+  });
 }
 
 // Verify the session token
@@ -35,14 +55,24 @@ const isValid = verifySessionToken(adminSession, adminPassword);
 console.log('Admin page - session verification:', isValid);
 
 if (!isValid) {
-  // Invalid/stale cookie - clear it AND redirect to prevent loop
+  // Invalid/stale cookie - clear it using HTML meta-refresh
   console.log('Admin page - clearing invalid cookie and redirecting');
-  return new Response(null, {
-    status: 302,
+  return new Response(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url=/admin/login">
+  <title>Session Expired</title>
+</head>
+<body>
+  <p>Session expired. Redirecting to login...</p>
+</body>
+</html>`, {
+    status: 200,
     headers: {
-      'Location': '/admin/login',
+      'Content-Type': 'text/html',
       'Set-Cookie': 'admin_session=; Path=/; HttpOnly; Max-Age=0; SameSite=Lax',
-      'Cache-Control': 'no-cache, no-store, must-revalidate'
+      'Cache-Control': 'no-cache, no-store, must-revalidate, private, max-age=0'
     }
   });
 }
