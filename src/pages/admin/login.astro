@@ -1,13 +1,17 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { verifySessionToken } from '../../lib/auth';
+import { getAdminSession } from '../../lib/cookies';
 
-// Check if already logged in
-const adminSession = Astro.cookies.get('admin_session')?.value;
+// Get admin password from environment
 const adminPassword = (import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || '').trim();
 
+// Read cookie from raw request header (more reliable in Vercel)
+const adminSession = getAdminSession(Astro.request);
+
+// If already logged in, redirect to dashboard
 if (adminSession && adminPassword && verifySessionToken(adminSession, adminPassword)) {
-  return Astro.redirect('/admin');
+  return Astro.redirect('/admin/');
 }
 ---
 

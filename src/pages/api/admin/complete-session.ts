@@ -2,11 +2,12 @@ import type { APIRoute } from 'astro';
 import { supabase } from '../../../lib/supabase';
 import { interaktService } from '../../../lib/interakt';
 import { verifySessionToken } from '../../../lib/auth';
+import { getAdminSession } from '../../../lib/cookies';
 
-export const POST: APIRoute = async ({ request, cookies }) => {
+export const POST: APIRoute = async ({ request }) => {
   try {
-    // Check admin authentication
-    const adminSession = cookies.get('admin_session')?.value;
+    // Check admin authentication using raw cookie header
+    const adminSession = getAdminSession(request);
     const adminPassword = (import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || '').trim();
 
     if (!adminSession || !adminPassword || !verifySessionToken(adminSession, adminPassword)) {
