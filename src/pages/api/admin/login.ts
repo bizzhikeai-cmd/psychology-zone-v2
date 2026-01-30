@@ -33,13 +33,32 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     const sessionToken = createSessionToken(adminPassword);
 
     // Set session cookie (expires in 24 hours)
-    cookies.set('admin_session', sessionToken, {
-      path: '/',
-      httpOnly: true,
-      secure: import.meta.env.PROD,
-      sameSite: 'strict',
-      maxAge: 60 * 60 * 24 // 24 hours
+    // Use 'lax' sameSite to allow cookie on redirects
+    // Ensure secure is properly evaluated for production
+    const isProduction = import.meta.env.PROD || process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production';
+
+    console.log('Setting admin cookie:', {
+      isProduction,
+      tokenLength: sessionToken.length,
+      passwordLength: adminPassword.length
     });
+
+    // Build cookie string manually to ensure it's set correctly
+    const maxAge = 60 * 60 * 24; // 24 hours
+    const cookieParts = [
+      `admin_session=${sessionToken}`,
+      'Path=/',
+      'HttpOnly',
+      `Max-Age=${maxAge}`,
+      'SameSite=Lax'
+    ];
+
+    if (isProduction) {
+      cookieParts.push('Secure');
+    }
+
+    const cookieString = cookieParts.join('; ');
+    console.log('Cookie string:', cookieString.substring(0, 50) + '...');
 
     return new Response(
       JSON.stringify({
@@ -47,7 +66,13 @@ export const POST: APIRoute = async ({ request, cookies }) => {
         message: 'Login successful',
         redirect: '/admin'
       }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Set-Cookie': cookieString
+        }
+      }
     );
   } catch (error) {
     console.error('Admin login API error:', error);
@@ -61,11 +86,18 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 };
 
 // Logout endpoint
-export const DELETE: APIRoute = async ({ cookies }) => {
-  cookies.delete('admin_session', { path: '/' });
+export const DELETE: APIRoute = async () => {
+  // Clear cookie by setting it with expired date
+  const cookieString = 'admin_session=; Path=/; HttpOnly; Max-Age=0; SameSite=Lax';
 
   return new Response(
     JSON.stringify({ success: true, message: 'Logged out' }),
-    { status: 200, headers: { 'Content-Type': 'application/json' } }
+    {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Set-Cookie': cookieString
+      }
+    }
   );
 };

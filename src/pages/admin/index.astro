@@ -7,10 +7,27 @@ import { verifySessionToken } from '../../lib/auth';
 const adminSession = Astro.cookies.get('admin_session')?.value;
 const adminPassword = (import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || '').trim();
 
+// Debug logging
+console.log('Admin page auth check:', {
+  hasSession: !!adminSession,
+  sessionLength: adminSession?.length || 0,
+  hasPassword: !!adminPassword,
+  passwordLength: adminPassword?.length || 0,
+  importMetaEnvPassword: !!import.meta.env.ADMIN_PASSWORD,
+  processEnvPassword: !!process.env.ADMIN_PASSWORD
+});
+
 // Verify session token with HMAC signature
 if (!adminSession || !adminPassword || !verifySessionToken(adminSession, adminPassword)) {
+  console.log('Auth failed:', {
+    noSession: !adminSession,
+    noPassword: !adminPassword,
+    tokenInvalid: adminSession && adminPassword ? !verifySessionToken(adminSession, adminPassword) : 'N/A'
+  });
   return Astro.redirect('/admin/login');
 }
+
+console.log('Auth successful');
 
 // Fetch initial data
 const statusFilter = Astro.url.searchParams.get('status') as 'pending' | 'completed' | 'failed' | null;
