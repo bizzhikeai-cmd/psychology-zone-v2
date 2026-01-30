@@ -2,10 +2,13 @@
 import Layout from '../../layouts/Layout.astro';
 import { getBookings, getBookingStats } from '../../lib/supabase';
 import { verifySessionToken } from '../../lib/auth';
+import { getAdminSession } from '../../lib/cookies';
 
-// Check authentication
-const adminSession = Astro.cookies.get('admin_session')?.value;
+// Get admin password from environment
 const adminPassword = (import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || '').trim();
+
+// Read cookie from raw request header (more reliable in Vercel than Astro.cookies.get)
+const adminSession = getAdminSession(Astro.request);
 
 // Debug logging
 console.log('Admin page auth check:', {
@@ -13,21 +16,16 @@ console.log('Admin page auth check:', {
   sessionLength: adminSession?.length || 0,
   hasPassword: !!adminPassword,
   passwordLength: adminPassword?.length || 0,
-  importMetaEnvPassword: !!import.meta.env.ADMIN_PASSWORD,
-  processEnvPassword: !!process.env.ADMIN_PASSWORD
+  rawCookieHeader: Astro.request.headers.get('cookie')?.substring(0, 100) || 'none'
 });
 
-// Verify session token with HMAC signature
+// Verify session
 if (!adminSession || !adminPassword || !verifySessionToken(adminSession, adminPassword)) {
-  console.log('Auth failed:', {
-    noSession: !adminSession,
-    noPassword: !adminPassword,
-    tokenInvalid: adminSession && adminPassword ? !verifySessionToken(adminSession, adminPassword) : 'N/A'
-  });
+  console.log('Auth failed - redirecting to login');
   return Astro.redirect('/admin/login');
 }
 
-console.log('Auth successful');
+console.log('Auth successful - loading dashboard');
 
 // Fetch initial data
 const statusFilter = Astro.url.searchParams.get('status') as 'pending' | 'completed' | 'failed' | null;

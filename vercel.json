@@ -5,7 +5,6 @@
   "framework": "astro",
   "public": true,
   "cleanUrls": true,
-  "trailingSlash": true,
   "crons": [
     {
       "path": "/api/cron/abandoned-cart",
