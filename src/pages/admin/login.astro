@@ -3,16 +3,38 @@ import Layout from '../../layouts/Layout.astro';
 import { verifySessionToken } from '../../lib/auth';
 import { getAdminSession } from '../../lib/cookies';
 
+// Set response headers to prevent ANY caching
+Astro.response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate, private, max-age=0');
+Astro.response.headers.set('Pragma', 'no-cache');
+Astro.response.headers.set('Expires', '0');
+
 // Get admin password from environment
 const adminPassword = (import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || '').trim();
 
 // Read cookie from raw request header (more reliable in Vercel)
 const adminSession = getAdminSession(Astro.request);
 
+// Timestamp for debugging - proves this is a fresh render
+const renderTimestamp = new Date().toISOString();
+
+// Debug logging - same as index.astro for comparison
+console.log('Login page auth check:', {
+  timestamp: renderTimestamp,
+  hasSession: !!adminSession,
+  sessionLength: adminSession?.length || 0,
+  hasPassword: !!adminPassword,
+  passwordLength: adminPassword?.length || 0,
+  rawCookieHeader: Astro.request.headers.get('cookie')?.substring(0, 100) || 'none',
+  url: Astro.request.url
+});
+
 // If already logged in, redirect to dashboard
 if (adminSession && adminPassword && verifySessionToken(adminSession, adminPassword)) {
-  return Astro.redirect('/admin/');
+  console.log('Login page - valid session found, redirecting to /admin');
+  return Astro.redirect('/admin');
 }
+
+console.log('Login page - showing login form (no valid session)');
 ---
 
 <Layout title="Admin Login - Psychology Zone">

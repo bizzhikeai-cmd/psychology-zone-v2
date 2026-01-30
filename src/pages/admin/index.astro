@@ -4,14 +4,23 @@ import { getBookings, getBookingStats } from '../../lib/supabase';
 import { verifySessionToken } from '../../lib/auth';
 import { getAdminSession } from '../../lib/cookies';
 
+// Set response headers to prevent ANY caching
+Astro.response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate, private, max-age=0');
+Astro.response.headers.set('Pragma', 'no-cache');
+Astro.response.headers.set('Expires', '0');
+
 // Get admin password from environment
 const adminPassword = (import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || '').trim();
 
 // Read cookie from raw request header (more reliable in Vercel than Astro.cookies.get)
 const adminSession = getAdminSession(Astro.request);
 
+// Timestamp for debugging - proves this is a fresh render
+const renderTimestamp = new Date().toISOString();
+
 // Debug logging
 console.log('Admin page auth check:', {
+  timestamp: renderTimestamp,
   hasSession: !!adminSession,
   sessionLength: adminSession?.length || 0,
   hasPassword: !!adminPassword,
