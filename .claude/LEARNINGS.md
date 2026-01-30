@@ -1,6 +1,7 @@
 # Project Learnings & Anti-Patterns
 
-This document captures hard-won lessons from debugging sessions. **Read this FIRST** before making changes to authentication, cookies, or Vercel configuration.
+> **AUTO-MAINTAINED:** This document is automatically updated by the `self-learning` skill during debugging sessions.
+> **Read this FIRST** before making changes to authentication, cookies, or Vercel configuration.
 
 ---
 
