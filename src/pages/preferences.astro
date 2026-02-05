@@ -1,0 +1,301 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="User Preferences">
+  <main class="container">
+    <h1>User Preferences</h1>
+
+    <div class="preferences-form">
+      <section class="pref-section">
+        <h2>Appearance</h2>
+
+        <div class="form-group">
+          <label for="theme">Theme</label>
+          <select id="theme" name="theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="auto">Auto (System)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="language">Language</label>
+          <select id="language" name="language">
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+            <option value="mr">Marathi</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="timezone">Timezone</label>
+          <select id="timezone" name="timezone">
+            <option value="Asia/Kolkata">India (IST)</option>
+            <option value="Asia/Dubai">Dubai (GST)</option>
+            <option value="UTC">UTC</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="pref-section">
+        <h2>Notifications</h2>
+
+        <div class="form-group checkbox">
+          <input type="checkbox" id="emailNotifications" name="notifications.email">
+          <label for="emailNotifications">Email notifications</label>
+        </div>
+
+        <div class="form-group checkbox">
+          <input type="checkbox" id="whatsappNotifications" name="notifications.whatsapp">
+          <label for="whatsappNotifications">WhatsApp notifications</label>
+        </div>
+
+        <div class="form-group checkbox">
+          <input type="checkbox" id="sessionReminders" name="notifications.sessionReminders">
+          <label for="sessionReminders">Session reminders</label>
+        </div>
+
+        <div class="form-group checkbox">
+          <input type="checkbox" id="promotions" name="notifications.promotions">
+          <label for="promotions">Promotional updates</label>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button id="saveBtn" class="btn btn-primary">Save Preferences</button>
+        <button id="resetBtn" class="btn btn-secondary">Reset to Defaults</button>
+      </div>
+
+      <div id="message" class="message"></div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  h1 {
+    margin-bottom: 2rem;
+    color: #333;
+  }
+
+  .preferences-form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .pref-section {
+    margin-bottom: 2rem;
+  }
+
+  .pref-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #555;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #555;
+  }
+
+  .form-group.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .form-group.checkbox label {
+    margin-bottom: 0;
+  }
+
+  .form-group.checkbox input {
+    width: auto;
+  }
+
+  select, input[type="checkbox"] {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+  select {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .btn-primary {
+    background-color: #2563eb;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: #1d4ed8;
+  }
+
+  .btn-secondary {
+    background-color: #6b7280;
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background-color: #4b5563;
+  }
+
+  .message {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+    display: none;
+  }
+
+  .message.success {
+    background-color: #d1fae5;
+    color: #065f46;
+    display: block;
+  }
+
+  .message.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    display: block;
+  }
+</style>
+
+<script>
+  // Simple userId for demo - in production, get from auth session
+  const userId = 'demo-user-123';
+
+  // Load preferences on page load
+  async function loadPreferences() {
+    try {
+      const response = await fetch(`/api/preferences?userId=${userId}`);
+      const data = await response.json();
+
+      if (data) {
+        // Set form values
+        (document.getElementById('theme') as HTMLSelectElement).value = data.theme || 'auto';
+        (document.getElementById('language') as HTMLSelectElement).value = data.language || 'en';
+        (document.getElementById('timezone') as HTMLSelectElement).value = data.timezone || 'Asia/Kolkata';
+
+        // Set checkboxes
+        (document.getElementById('emailNotifications') as HTMLInputElement).checked = data.notifications?.email ?? true;
+        (document.getElementById('whatsappNotifications') as HTMLInputElement).checked = data.notifications?.whatsapp ?? true;
+        (document.getElementById('sessionReminders') as HTMLInputElement).checked = data.notifications?.sessionReminders ?? true;
+        (document.getElementById('promotions') as HTMLInputElement).checked = data.notifications?.promotions ?? false;
+      }
+    } catch (error) {
+      console.error('Error loading preferences:', error);
+      showMessage('Failed to load preferences', 'error');
+    }
+  }
+
+  // Save preferences
+  async function savePreferences() {
+    try {
+      const preferences = {
+        theme: (document.getElementById('theme') as HTMLSelectElement).value,
+        language: (document.getElementById('language') as HTMLSelectElement).value,
+        timezone: (document.getElementById('timezone') as HTMLSelectElement).value,
+        notifications: {
+          email: (document.getElementById('emailNotifications') as HTMLInputElement).checked,
+          whatsapp: (document.getElementById('whatsappNotifications') as HTMLInputElement).checked,
+          sessionReminders: (document.getElementById('sessionReminders') as HTMLInputElement).checked,
+          promotions: (document.getElementById('promotions') as HTMLInputElement).checked,
+        },
+      };
+
+      const response = await fetch('/api/preferences', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, preferences }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        showMessage('Preferences saved successfully!', 'success');
+      } else {
+        showMessage(data.error || 'Failed to save preferences', 'error');
+      }
+    } catch (error) {
+      console.error('Error saving preferences:', error);
+      showMessage('Failed to save preferences', 'error');
+    }
+  }
+
+  // Reset preferences
+  async function resetPreferences() {
+    if (!confirm('Are you sure you want to reset all preferences to defaults?')) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/preferences?userId=${userId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        showMessage('Preferences reset to defaults', 'success');
+        await loadPreferences(); // Reload to show defaults
+      } else {
+        const data = await response.json();
+        showMessage(data.error || 'Failed to reset preferences', 'error');
+      }
+    } catch (error) {
+      console.error('Error resetting preferences:', error);
+      showMessage('Failed to reset preferences', 'error');
+    }
+  }
+
+  // Show message
+  function showMessage(text: string, type: 'success' | 'error') {
+    const messageEl = document.getElementById('message');
+    if (messageEl) {
+      messageEl.textContent = text;
+      messageEl.className = `message ${type}`;
+
+      setTimeout(() => {
+        messageEl.className = 'message';
+      }, 3000);
+    }
+  }
+
+  // Event listeners
+  document.getElementById('saveBtn')?.addEventListener('click', savePreferences);
+  document.getElementById('resetBtn')?.addEventListener('click', resetPreferences);
+
+  // Load on page load
+  loadPreferences();
+</script>

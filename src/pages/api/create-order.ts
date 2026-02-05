@@ -2,6 +2,13 @@ import type { APIRoute } from 'astro';
 import { createOrder, getRazorpayKeyId } from '../../lib/razorpay';
 import { createBooking } from '../../lib/supabase';
 
+// Package pricing configuration
+const PACKAGES = {
+  starter: { sessions: 1, price: 64900, name: 'STARTER' },    // ₹649
+  popular: { sessions: 5, price: 259500, name: 'POPULAR' },   // ₹2,595
+  premium: { sessions: 10, price: 487000, name: 'PREMIUM' }   // ₹4,870
+} as const;
+
 export const POST: APIRoute = async ({ request }) => {
   try {
     const data = await request.json();
@@ -9,13 +16,17 @@ export const POST: APIRoute = async ({ request }) => {
     // Validate required fields
     const required = [
       'customer_name',
-      'customer_email', 
+      'customer_email',
       'customer_phone',
       'city',
       'problem',
       'circumstances',
       'appointment_date',
-      'appointment_time'
+      'appointment_time',
+      'package_id',
+      'session_count',
+      'package_name',
+      'page_source'
     ];
 
     for (const field of required) {
@@ -27,8 +38,27 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    // Amount in paise (₹599 = 59900 paise)
-    const amount = 59900;
+    // Validate package_id and get pricing
+    const packageId = data.package_id as keyof typeof PACKAGES;
+    if (!PACKAGES[packageId]) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid package_id. Must be: starter, popular, or premium' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const packageInfo = PACKAGES[packageId];
+
+    // Validate session count matches package
+    if (packageInfo.sessions !== data.session_count) {
+      return new Response(
+        JSON.stringify({ error: 'Session count does not match selected package' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Amount in paise
+    const amount = packageInfo.price;
 
     // Create Razorpay order
     const { data: order, error: orderError } = await createOrder({
@@ -41,7 +71,11 @@ export const POST: APIRoute = async ({ request }) => {
         customer_phone: data.customer_phone,
         problem: data.problem,
         appointment_date: data.appointment_date,
-        appointment_time: data.appointment_time
+        appointment_time: data.appointment_time,
+        package_id: data.package_id,
+        package_name: data.package_name,
+        session_count: data.session_count,
+        page_source: data.page_source
       }
     });
 
@@ -69,7 +103,11 @@ export const POST: APIRoute = async ({ request }) => {
       appointment_date: data.appointment_date,
       appointment_time: data.appointment_time,
       razorpay_order_id: order.id,
-      amount_paid: amount
+      amount_paid: amount,
+      package_id: data.package_id,
+      session_count: data.session_count,
+      package_name: data.package_name,
+      page_source: data.page_source
     });
 
     if (bookingError || !booking) {
