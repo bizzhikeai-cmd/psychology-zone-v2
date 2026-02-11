@@ -3,3 +3,11 @@ node_modules
 .env*.local
 .env
 .DS_Store
+
+# Planning/reference docs (keep README.md)
+*_PLAN.md
+*_STATUS.md
+*_CHECKLIST.md
+*_SUMMARY.md
+*_RESEARCH.md
+!README.md
