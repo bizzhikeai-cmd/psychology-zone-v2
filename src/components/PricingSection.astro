@@ -1,7 +1,7 @@
 ---
 // PricingSection Component - Displays 3 pricing tiers with "Most Popular" highlight
 interface Props {
-  pageType: 'psychologist' | 'therapy' | 'couples';
+  pageType: 'psychologist' | 'therapy' | 'couples' | 'homepage';
 }
 
 const { pageType } = Astro.props;
@@ -11,11 +11,11 @@ const packages = [
     id: 'starter',
     name: 'STARTER',
     sessions: 1,
-    price: 649,
-    priceInPaise: 64900,
-    perSession: 649,
-    discount: null,
-    savings: null,
+    price: 799,
+    priceInPaise: 79900,
+    perSession: 799,
+    discount: 47,
+    savings: 700,
     features: [
       'Single 60-minute session',
       'Expert psychologist',
@@ -26,46 +26,44 @@ const packages = [
   {
     id: 'popular',
     name: 'POPULAR',
-    sessions: 5,
-    price: 2595,
-    priceInPaise: 259500,
-    perSession: 519,
-    discount: 20,
-    savings: 650,
+    sessions: 3,
+    price: 1647,
+    priceInPaise: 164700,
+    perSession: 549,
+    discount: 63,
+    savings: 2850,
     features: [
-      'Five 60-minute sessions',
+      'Three 60-minute sessions',
       'Priority scheduling',
       'Same psychologist continuity',
-      'Email support between sessions',
-      'Progress tracking'
+      'Email support between sessions'
     ],
     recommended: true
   },
   {
     id: 'premium',
     name: 'PREMIUM',
-    sessions: 10,
-    price: 4870,
-    priceInPaise: 487000,
-    perSession: 487,
-    discount: 25,
-    savings: 1620,
+    sessions: 5,
+    price: 2495,
+    priceInPaise: 249500,
+    perSession: 499,
+    discount: 67,
+    savings: 5000,
     features: [
-      'Ten 60-minute sessions',
+      'Five 60-minute sessions',
       'Dedicated psychologist',
       'Priority scheduling',
-      'Comprehensive progress reports',
-      '24/7 email support',
-      'Crisis support access'
+      'Email support between sessions',
+      'Progress tracking'
     ]
   }
 ];
 ---
 
 <section id="pricing" class="py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-6">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="text-center mb-16">
-      <h2 class="text-4xl lg:text-5xl mb-6 text-slate-900" style="font-family: 'Lora', serif;">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl mb-6 text-slate-900" style="font-family: 'Lora', serif;">
         Choose Your Package
       </h2>
       <p class="text-gray-500 text-lg max-w-2xl mx-auto">
@@ -73,7 +71,7 @@ const packages = [
       </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       {packages.map((pkg) => (
         <div class={`relative bg-white rounded-3xl shadow-lg border-2 transition-all hover:shadow-xl ${
           pkg.recommended ? 'border-[#D35400] transform lg:-translate-y-4' : 'border-slate-100'
@@ -98,12 +96,12 @@ const packages = [
             {/* Pricing */}
             <div class="mb-8">
               <div class="flex items-baseline gap-2">
-                <span class="text-5xl font-bold text-[#D35400]" style="font-family: 'Lora', serif;">
+                <span class="text-4xl sm:text-5xl font-bold text-[#D35400]" style="font-family: 'Lora', serif;">
                   ₹{pkg.price.toLocaleString('en-IN')}
                 </span>
                 {pkg.discount && (
                   <span class="text-sm text-gray-400 line-through">
-                    ₹{(pkg.sessions * 649).toLocaleString('en-IN')}
+                    ₹{(pkg.sessions * 1499).toLocaleString('en-IN')}
                   </span>
                 )}
               </div>
@@ -116,7 +114,7 @@ const packages = [
 
               {pkg.savings && (
                 <div class="mt-3 inline-block bg-green-50 text-green-700 text-sm font-bold px-3 py-1 rounded-full">
-                  SAVE ₹{pkg.savings}!
+                  {pkg.discount}% OFF — Save ₹{pkg.savings.toLocaleString('en-IN')}!
                 </div>
               )}
             </div>
@@ -135,7 +133,7 @@ const packages = [
 
             {/* CTA Button */}
             <button
-              class={`w-full py-4 rounded-xl font-bold transition-all transform hover:scale-105 select-package-btn ${
+              class={`w-full py-4 rounded-xl font-bold transition-all transform hover:scale-105 select-package-btn min-h-[44px] ${
                 pkg.recommended
                   ? 'bg-orange-gradient text-white shadow-lg shadow-orange-500/20'
                   : 'border-2 border-[#D35400] text-[#D35400] hover:bg-[#D35400] hover:text-white'
@@ -148,7 +146,7 @@ const packages = [
               data-per-session={pkg.perSession}
               data-page-type={pageType}
             >
-              Select Plan
+              {pageType === 'psychologist' ? 'Start My Sessions' : pageType === 'therapy' ? 'Begin My Journey' : pageType === 'couples' ? 'Strengthen Our Bond' : 'Get Started'}
             </button>
           </div>
         </div>
@@ -208,7 +206,7 @@ const packages = [
         window.dispatchEvent(new CustomEvent('packageSelected', { detail: selectedPackage }));
 
         // Smooth scroll to booking form
-        const bookingSection = document.getElementById('booking');
+        const bookingSection = document.getElementById('booking') || document.getElementById('contact');
         if (bookingSection) {
           bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 

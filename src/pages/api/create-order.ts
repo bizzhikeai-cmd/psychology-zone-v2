@@ -4,9 +4,9 @@ import { createBooking } from '../../lib/supabase';
 
 // Package pricing configuration
 const PACKAGES = {
-  starter: { sessions: 1, price: 64900, name: 'STARTER' },    // ₹649
-  popular: { sessions: 5, price: 259500, name: 'POPULAR' },   // ₹2,595
-  premium: { sessions: 10, price: 487000, name: 'PREMIUM' }   // ₹4,870
+  starter: { sessions: 1, price: 79900, name: 'STARTER' },    // ₹799
+  popular: { sessions: 3, price: 164700, name: 'POPULAR' },   // ₹1,647
+  premium: { sessions: 5, price: 249500, name: 'PREMIUM' }    // ₹2,495
 } as const;
 
 export const POST: APIRoute = async ({ request }) => {
@@ -20,7 +20,6 @@ export const POST: APIRoute = async ({ request }) => {
       'customer_phone',
       'city',
       'problem',
-      'circumstances',
       'appointment_date',
       'appointment_time',
       'package_id',

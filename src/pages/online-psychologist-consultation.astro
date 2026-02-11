@@ -8,7 +8,7 @@ import BookingForm from "../components/BookingForm.astro";
 <Layout title="Online Psychologist Consultation | RCI-Licensed Psychologists | Psychology Zone">
     <!-- Header -->
     <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-orange-100 top-0">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <div class="flex items-center gap-2">
                     <div class="flex items-center justify-center p-1.5 bg-orange-50 rounded-lg border border-orange-200">
@@ -19,8 +19,8 @@ import BookingForm from "../components/BookingForm.astro";
                         </div>
                     </div>
                     <div class="flex flex-col leading-none">
-                        <span class="text-2xl font-black text-[#D35400] tracking-tighter" style="font-family: 'Lora', serif;">PSYCHOLOGY</span>
-                        <span class="text-sm font-bold text-gray-400 tracking-[0.2em] uppercase -mt-0.5 ml-0.5">ZONE</span>
+                        <span class="text-xl sm:text-2xl font-black text-[#D35400] tracking-tighter" style="font-family: 'Lora', serif;">PSYCHOLOGY</span>
+                        <span class="text-xs sm:text-sm font-bold text-gray-400 tracking-[0.2em] uppercase -mt-0.5 ml-0.5">ZONE</span>
                     </div>
                 </div>
             </div>
@@ -37,23 +37,23 @@ import BookingForm from "../components/BookingForm.astro";
                     </svg>
                     +91 89689 00002
                 </a>
-                <a href="#booking" class="bg-orange-gradient text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-md hover:shadow-lg transition-all transform hover:scale-105">Book My Session</a>
+                <a href="#booking" class="bg-orange-gradient text-white px-4 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all transform hover:scale-105 whitespace-nowrap">Book My Session</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-24 px-6 relative overflow-hidden bg-gradient-to-br from-[#FFF7ED] to-[#F8F5F0]">
+    <section class="pt-24 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6 relative overflow-hidden bg-gradient-to-br from-[#FFF7ED] to-[#F8F5F0]">
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
             <div class="flex-1 space-y-8">
                 <div class="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 border border-orange-100 text-[#D35400] text-sm font-bold rounded-full shadow-sm">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                     4.7★ Rating from 18,500+ Sessions
                 </div>
-                <h1 class="text-5xl lg:text-7xl font-bold leading-tight text-gray-900" style="font-family: 'Lora', serif;">
-                    Professional <span class="text-[#D35400]">Online</span> Psychologist Consultation
+                <h1 class="text-3xl sm:text-5xl lg:text-7xl font-bold leading-tight text-gray-900" style="font-family: 'Lora', serif;">
+                    Feel Heard by an <span class="text-[#D35400]">Expert</span> Psychologist — Online
                 </h1>
-                <p class="text-xl text-gray-600 max-w-2xl leading-relaxed">
+                <p class="text-base sm:text-xl text-gray-600 max-w-2xl leading-relaxed">
                     Access professional psychological support through secure online sessions. Connect with RCI-licensed psychologists who can help you work through stress, emotional concerns, relationship challenges, and life transitions using evidence-based approaches. <strong>Outcomes may vary based on individual circumstances.</strong>
                 </p>
                 <div class="flex flex-wrap gap-4">
@@ -68,11 +68,11 @@ import BookingForm from "../components/BookingForm.astro";
                     </span>
                 </div>
                 <div class="flex flex-col sm:flex-row items-center gap-6">
-                    <a href="#booking" class="w-full sm:w-auto bg-orange-gradient text-white px-10 py-5 rounded-full text-xl font-bold shadow-xl hover:shadow-orange-200 transition-all transform hover:-translate-y-1">
+                    <a href="#booking" class="w-full sm:w-auto bg-orange-gradient text-white px-8 py-4 sm:px-10 sm:py-5 rounded-full text-lg sm:text-xl font-bold shadow-xl hover:shadow-orange-200 transition-all transform hover:-translate-y-1 text-center min-h-[44px] flex items-center justify-center">
                         Begin Your Journey
                     </a>
                     <p class="text-sm text-gray-500">
-                        <span class="block font-bold text-gray-900">₹1,299 per session</span>
+                        <span class="block font-bold text-gray-900">From ₹799 per session</span>
                         Individual outcomes may vary
                     </p>
                 </div>
@@ -93,19 +93,19 @@ import BookingForm from "../components/BookingForm.astro";
             <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12" style="font-family: 'Lora', serif;">Trusted by thousands across India</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div>
-                    <div class="text-5xl md:text-6xl font-bold text-[#E67E22] mb-2">50+</div>
+                    <div class="text-3xl sm:text-5xl md:text-6xl font-bold text-[#E67E22] mb-2">50+</div>
                     <div class="text-white/80">Expert Psychologists</div>
                 </div>
                 <div>
-                    <div class="text-5xl md:text-6xl font-bold text-[#E67E22] mb-2">1.5k</div>
+                    <div class="text-3xl sm:text-5xl md:text-6xl font-bold text-[#E67E22] mb-2">1.5k</div>
                     <div class="text-white/80">Happy Clients</div>
                 </div>
                 <div>
-                    <div class="text-5xl md:text-6xl font-bold text-[#E67E22] mb-2">8.1k</div>
+                    <div class="text-3xl sm:text-5xl md:text-6xl font-bold text-[#E67E22] mb-2">8.1k</div>
                     <div class="text-white/80">Sessions Completed</div>
                 </div>
                 <div>
-                    <div class="text-5xl md:text-6xl font-bold text-[#E67E22] mb-2">10k+</div>
+                    <div class="text-3xl sm:text-5xl md:text-6xl font-bold text-[#E67E22] mb-2">10k+</div>
                     <div class="text-white/80">Community Strong</div>
                 </div>
             </div>
@@ -117,25 +117,25 @@ import BookingForm from "../components/BookingForm.astro";
     <section id="services" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-4xl font-bold mb-6" style="font-family: 'Lora', serif;">What Our Psychologists Can Support You With</h2>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-6" style="font-family: 'Lora', serif;">What Our Psychologists Can Support You With</h2>
                 <p class="text-gray-600 text-lg">Professional guidance for various life challenges. <strong>Individual outcomes may vary.</strong></p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="p-10 bg-[#FFF7ED] rounded-[28px] border border-orange-50 hover-card group">
+                <div class="p-6 sm:p-10 bg-[#FFF7ED] rounded-[28px] border border-orange-50 hover-card group">
                     <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 group-hover:bg-orange-500 transition-colors">
                         <svg class="w-8 h-8 text-[#D35400] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     </div>
                     <h3 class="text-2xl font-bold mb-4" style="font-family: 'Lora', serif;">Work-Related Stress</h3>
                     <p class="text-gray-600 leading-relaxed">Support for managing burnout, performance concerns, and professional challenges.</p>
                 </div>
-                <div class="p-10 bg-[#FFF7ED] rounded-[28px] border border-orange-50 hover-card group">
+                <div class="p-6 sm:p-10 bg-[#FFF7ED] rounded-[28px] border border-orange-50 hover-card group">
                     <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 group-hover:bg-orange-500 transition-colors">
                         <svg class="w-8 h-8 text-[#D35400] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                     </div>
                     <h3 class="text-2xl font-bold mb-4" style="font-family: 'Lora', serif;">Relationship Concerns</h3>
                     <p class="text-gray-600 leading-relaxed">Professional support for navigating relationship dynamics and interpersonal challenges.</p>
                 </div>
-                <div class="p-10 bg-[#FFF7ED] rounded-[28px] border border-orange-50 hover-card group">
+                <div class="p-6 sm:p-10 bg-[#FFF7ED] rounded-[28px] border border-orange-50 hover-card group">
                     <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 group-hover:bg-orange-500 transition-colors">
                         <svg class="w-8 h-8 text-[#D35400] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </div>
@@ -146,14 +146,8 @@ import BookingForm from "../components/BookingForm.astro";
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <PricingSection pageType="psychologist" />
-
-    <!-- Booking Form -->
-    <BookingForm pageType="psychologist" />
-
     <!-- Team Section -->
-    <section class="py-24 bg-[#F8F5F0]">
+    <section id="experts" class="py-24 bg-[#F8F5F0]">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl lg:text-5xl font-bold mb-4" style="font-family: 'Lora', serif;">Our Expert Psychologists</h2>
@@ -167,7 +161,7 @@ import BookingForm from "../components/BookingForm.astro";
                     <h3 class="text-2xl font-bold mb-2" style="font-family: 'Lora', serif;">Lekha Murali</h3>
                     <p class="text-[#6B8E7B] font-semibold mb-2">PhD Psychology</p>
                     <p class="text-sm text-gray-500 mb-4">19+ years • Clinical Psychology, Psychotherapy, Guidance Counseling</p>
-                    <p class="text-gray-600 text-sm leading-relaxed">PhD, MSc, MS, PGDGC</p>
+                    <p class="text-gray-600 text-sm leading-relaxed">PhD, MSc, PGDGC</p>
                 </div>
                 <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-shadow">
                     <div class="mb-6">
@@ -176,7 +170,7 @@ import BookingForm from "../components/BookingForm.astro";
                     <h3 class="text-2xl font-bold mb-2" style="font-family: 'Lora', serif;">Dr. Jaismeen Kaur</h3>
                     <p class="text-[#6B8E7B] font-semibold mb-2">Choice Theory & Reality Therapy</p>
                     <p class="text-sm text-gray-500 mb-4">6+ years • William Glasser Institute (USA)</p>
-                    <p class="text-gray-600 text-sm leading-relaxed">PhD, MSc, MS, PGDGC</p>
+                    <p class="text-gray-600 text-sm leading-relaxed">PhD, MSc, PGDGC</p>
                 </div>
                 <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-shadow">
                     <div class="mb-6">
@@ -185,7 +179,7 @@ import BookingForm from "../components/BookingForm.astro";
                     <h3 class="text-2xl font-bold mb-2" style="font-family: 'Lora', serif;">Jyotsna Mohanta</h3>
                     <p class="text-[#6B8E7B] font-semibold mb-2">NLP Expert & Life Coach</p>
                     <p class="text-sm text-gray-500 mb-4">7+ years • Mental Wellness, Personal Growth</p>
-                    <p class="text-gray-600 text-sm leading-relaxed">PhD, MSc, MS, PGDGC</p>
+                    <p class="text-gray-600 text-sm leading-relaxed">PhD, MSc, PGDGC</p>
                 </div>
                 <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-shadow">
                     <div class="mb-6">
@@ -218,9 +212,6 @@ import BookingForm from "../components/BookingForm.astro";
         </div>
     </section>
 
-    <!-- Why Choose Section -->
-    <WhyChooseSection />
-
     <!-- Testimonials -->
     <section class="py-24 bg-slate-800">
         <div class="max-w-7xl mx-auto px-6">
@@ -229,97 +220,143 @@ import BookingForm from "../components/BookingForm.astro";
                 <p class="text-white/70">Real experiences from real people.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-slate-700/50 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                <div class="bg-slate-700/50 p-6 sm:p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
                     <p class="text-white/90 italic mb-6 leading-relaxed">"Highly recommend. The resources and support have been incredibly helpful. One of the best experiences I've had."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">AP</div>
-                        <div>
-                            <p class="font-bold text-white">Aarav Patel</p>
-                            <p class="text-sm text-white/60">Teacher</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">AP</div>
+                            <div>
+                                <p class="font-bold text-white">Aarav Patel</p>
+                                <p class="text-sm text-white/60">Teacher</p>
+                            </div>
                         </div>
+                        <span class="text-xs text-green-400 font-semibold flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Verified</span>
                     </div>
                 </div>
-                <div class="bg-slate-700/50 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                <div class="bg-slate-700/50 p-6 sm:p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
                     <p class="text-white/90 italic mb-6 leading-relaxed">"I was hesitant at first, but my sessions have made such a difference. My therapist provided a safe space where I could express myself freely. I feel more confident and clear-headed."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">PS</div>
-                        <div>
-                            <p class="font-bold text-white">Priya Sharma</p>
-                            <p class="text-sm text-white/60">Marketing Manager</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">PS</div>
+                            <div>
+                                <p class="font-bold text-white">Priya Sharma</p>
+                                <p class="text-sm text-white/60">Marketing Manager</p>
+                            </div>
                         </div>
+                        <span class="text-xs text-green-400 font-semibold flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Verified</span>
                     </div>
                 </div>
-                <div class="bg-slate-700/50 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                <div class="bg-slate-700/50 p-6 sm:p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
                     <p class="text-white/90 italic mb-6 leading-relaxed">"From the very first session, I felt heard and understood. My therapist helped me work through what I was feeling, and I've noticed real progress in my confidence and well-being."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">SG</div>
-                        <div>
-                            <p class="font-bold text-white">Sneha Gupta</p>
-                            <p class="text-sm text-white/60">Business Owner</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">SG</div>
+                            <div>
+                                <p class="font-bold text-white">Sneha Gupta</p>
+                                <p class="text-sm text-white/60">Business Owner</p>
+                            </div>
                         </div>
+                        <span class="text-xs text-green-400 font-semibold flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Verified</span>
                     </div>
                 </div>
-                <div class="bg-slate-700/50 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                <div class="bg-slate-700/50 p-6 sm:p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
                     <p class="text-white/90 italic mb-6 leading-relaxed">"The sessions have been a game-changer for me. The practical strategies and support I received made all the difference. I now feel more grounded."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">SS</div>
-                        <div>
-                            <p class="font-bold text-white">Siddharth Sharma</p>
-                            <p class="text-sm text-white/60">Lawyer</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">SS</div>
+                            <div>
+                                <p class="font-bold text-white">Siddharth Sharma</p>
+                                <p class="text-sm text-white/60">Lawyer</p>
+                            </div>
                         </div>
+                        <span class="text-xs text-green-400 font-semibold flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Verified</span>
                     </div>
                 </div>
-                <div class="bg-slate-700/50 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                <div class="bg-slate-700/50 p-6 sm:p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
                     <p class="text-white/90 italic mb-6 leading-relaxed">"I was dealing with a lot of pressure at work, and my therapist helped me find better balance. Their guidance has been invaluable."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">HS</div>
-                        <div>
-                            <p class="font-bold text-white">Harshdeep Singh</p>
-                            <p class="text-sm text-white/60">Athlete</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">HS</div>
+                            <div>
+                                <p class="font-bold text-white">Harshdeep Singh</p>
+                                <p class="text-sm text-white/60">Athlete</p>
+                            </div>
                         </div>
+                        <span class="text-xs text-green-400 font-semibold flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Verified</span>
                     </div>
                 </div>
-                <div class="bg-slate-700/50 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                <div class="bg-slate-700/50 p-6 sm:p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
                     <p class="text-white/90 italic mb-6 leading-relaxed">"Before reaching out, I wasn't sure what to expect. The guidance and support I received here have given me a fresh perspective. I finally feel heard and supported."</p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">A</div>
-                        <div>
-                            <p class="font-bold text-white">Anonymous</p>
-                            <p class="text-sm text-white/60">Client</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">A</div>
+                            <div>
+                                <p class="font-bold text-white">Anonymous</p>
+                                <p class="text-sm text-white/60">Client</p>
+                            </div>
                         </div>
+                        <span class="text-xs text-green-400 font-semibold flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Verified</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Emergency Disclaimer Footer -->
-    <div class="bg-yellow-50 border-y border-yellow-200 py-12">
-        <div class="max-w-4xl mx-auto px-6 text-center space-y-4">
-            <h3 class="text-2xl font-bold text-gray-900" style="font-family: 'Lora', serif;">Important: Not Emergency Medical Care</h3>
-            <p class="text-gray-700 leading-relaxed">
-                <strong>This service is not for emergencies or crisis situations.</strong> If you or someone you know is in immediate danger or experiencing a mental health crisis, please contact emergency services immediately. <strong>Individual outcomes from therapy may vary.</strong>
-            </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-                <a href="tel:9152987821" class="flex items-center gap-2 font-bold text-red-600 hover:underline">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                    Crisis Helpline: 9152987821 (24/7)
-                </a>
-                <span class="text-gray-400">|</span>
-                <a href="tel:112" class="flex items-center gap-2 font-bold text-red-600 hover:underline">
-                    Emergency: 112
-                </a>
-            </div>
-            <p class="text-sm text-gray-600 pt-4">
-                All therapists are RCI-licensed professionals. Sessions are confidential and conducted via secure, encrypted video platform.
-            </p>
-        </div>
-    </div>
+    <!-- Why Choose Section -->
+    <WhyChooseSection />
+
+    <!-- Pricing Section -->
+    <PricingSection pageType="psychologist" />
+
+    <!-- Booking Form -->
+    <BookingForm pageType="psychologist" />
 
     <!-- Footer -->
-    <footer class="bg-[#1F2937] text-white py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-12 mb-12">
+    <footer class="bg-[#1F2937] text-white py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 mb-12">
                 <div>
                     <h4 class="font-bold text-xl mb-4" style="font-family: 'Lora', serif;">Psychology Zone</h4>
                     <p class="text-gray-400 leading-relaxed">Professional online psychological support from RCI-licensed experts.</p>
@@ -346,6 +383,13 @@ import BookingForm from "../components/BookingForm.astro";
         </div>
     </footer>
 
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/918968900002?text=Hi%2C%20I%27d%20like%20to%20speak%20with%20a%20psychologist" class="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 bg-[#25d366] w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-xl shadow-green-500/40 z-50 hover:scale-110 transition-transform" target="_blank" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 32 32" width="32" height="32" class="text-white">
+            <path fill="currentColor" d="M16 0C7.164 0 0 7.164 0 16c0 2.834.745 5.498 2.047 7.805L.08 31.92l8.355-2.047A15.934 15.934 0 0 0 16 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm9.484 22.574c-.398 1.12-1.98 2.046-3.234 2.314-.863.18-1.988.321-5.777-1.24-4.836-1.995-7.95-6.891-8.19-7.207-.24-.317-1.958-2.603-1.958-4.966s1.24-3.526 1.68-4.006c.44-.48.96-.6 1.28-.6.32 0 .64.002.92.016.295.014.691-.112 1.081.826.4.96 1.36 3.32 1.48 3.562.12.24.2.521.04.838-.16.317-.24.515-.48.797-.24.28-.504.627-.72.842-.24.24-.49.5-.21.98.28.48 1.243 2.048 2.668 3.318 1.835 1.635 3.38 2.143 3.86 2.383.48.24.76.2 1.04-.12.28-.32 1.2-1.4 1.52-1.88.32-.48.64-.4 1.08-.24.44.16 2.798 1.32 3.278 1.56.48.24.8.36.92.56.12.2.12 1.16-.28 2.28z"/>
+        </svg>
+    </a>
+
     <style>
         .bg-orange-gradient {
             background: linear-gradient(135deg, #D35400 0%, #E67E22 100%);
@@ -357,4 +401,29 @@ import BookingForm from "../components/BookingForm.astro";
             transform: translateY(-8px);
         }
     </style>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // GTM tracking for CTA clicks
+        document.querySelectorAll('[id*="cta"], [id*="price-"]').forEach(button => {
+            button.addEventListener('click', () => {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    event: 'cta_click',
+                    page: 'psychologist_consultation',
+                    button_id: button.id
+                });
+            });
+        });
+    </script>
 </Layout>

@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PricingSection from '../components/PricingSection.astro';
 ---
 
 <Layout title="Psychology Zone - Talk to Licensed Psychologists Online | Confidential Sessions">
@@ -46,13 +47,13 @@ import Layout from '../layouts/Layout.astro';
         <div class="price-display">
           <div class="price-main">
             <span class="price-currency">₹</span>
-            <span class="price-amount">599</span>
+            <span class="price-amount">799</span>
             <span class="price-slash">/</span>
             <span class="price-label">session</span>
           </div>
           <div class="price-original">
             <span class="strike">₹1,499</span>
-            <span class="savings">Save 60%</span>
+            <span class="savings">Save 47%</span>
           </div>
         </div>
 
@@ -457,6 +458,9 @@ import Layout from '../layouts/Layout.astro';
 
 
 
+  <!-- Pricing Packages -->
+  <PricingSection pageType="homepage" />
+
   <!-- Booking Section -->
   <section id="contact" class="section booking">
     <div class="container">
@@ -495,8 +499,8 @@ import Layout from '../layouts/Layout.astro';
 
           <!-- Circumstances -->
           <div class="form-group">
-            <label for="circumstances">Briefly describe your situation *</label>
-            <textarea id="circumstances" name="circumstances" rows="4" placeholder="Tell us more about what you're experiencing..." required></textarea>
+            <label for="circumstances">Briefly describe your situation (optional)</label>
+            <textarea id="circumstances" name="circumstances" rows="4" placeholder="Tell us more about what you're experiencing..."></textarea>
           </div>
 
           <!-- Name and Phone -->
@@ -563,8 +567,8 @@ import Layout from '../layouts/Layout.astro';
           <!-- Price Display -->
           <div class="price-summary">
             <div class="price-item">
-              <span>Session Cost</span>
-              <span class="price-value">Rs. 599/-</span>
+              <span id="priceLabel">Session Cost</span>
+              <span class="price-value" id="priceValue">Rs. 799/-</span>
             </div>
           </div>
 
@@ -572,7 +576,8 @@ import Layout from '../layouts/Layout.astro';
           <div id="formError" class="form-error" style="display: none;"></div>
 
           <!-- Submit Button -->
-          <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">Proceed For Payment</button>
+          <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">Secure My Session</button>
+          <p style="text-align: center; font-size: 0.85rem; color: #888; margin-top: 10px;">Secure checkout powered by Razorpay</p>
 
           <p class="form-disclaimer">Your information is secure and confidential. We'll contact you to confirm your booking.</p>
         </form>
@@ -586,7 +591,7 @@ import Layout from '../layouts/Layout.astro';
             <li>✓ Flexible Scheduling</li>
             <li>✓ Affordable Pricing</li>
             <li>✓ 24/7 Support Available</li>
-            <li>✓ Money-Back Guarantee</li>
+            <li>✓ Evidence-Based Approach</li>
           </ul>
           <p style="margin-top: 20px; color: var(--text-light); font-size: 0.9rem;">Questions? Call us at <a href="tel:+918968900002" style="color: var(--primary-color); font-weight: 600;">+91 89689 00002</a></p>
         </div>
@@ -655,6 +660,30 @@ import Layout from '../layouts/Layout.astro';
 
     // Initialize dataLayer for tracking
     window.dataLayer = window.dataLayer || [];
+
+    // Read selected package from sessionStorage (set by PricingSection)
+    let selectedPackage = { id: 'starter', name: 'STARTER', sessions: 1, price: 799, pricePaise: 79900 };
+    const stored = sessionStorage.getItem('selectedPackage');
+    if (stored) {
+      try { selectedPackage = JSON.parse(stored); } catch(e) {}
+    }
+
+    // Update price display
+    function updatePriceDisplay(pkg) {
+      const priceLabel = document.getElementById('priceLabel');
+      const priceValue = document.getElementById('priceValue');
+      if (priceLabel && priceValue) {
+        priceLabel.textContent = pkg.sessions > 1 ? `${pkg.sessions} Sessions` : 'Session Cost';
+        priceValue.textContent = `Rs. ${pkg.price.toLocaleString('en-IN')}/-`;
+      }
+    }
+    updatePriceDisplay(selectedPackage);
+
+    // Listen for package selection changes
+    window.addEventListener('packageSelected', (e) => {
+      selectedPackage = e.detail;
+      updatePriceDisplay(selectedPackage);
+    });
 
     // Set minimum date to today + 1 day
     const dateInput = document.getElementById('date');
@@ -764,10 +793,14 @@ import Layout from '../layouts/Layout.astro';
           circumstances: document.getElementById('circumstances').value,
           appointment_date: document.getElementById('date').value,
           appointment_time: document.getElementById('time').value,
+          package_id: selectedPackage.id,
+          session_count: selectedPackage.sessions,
+          package_name: selectedPackage.name,
+          page_source: 'homepage',
         };
 
         // Validate form
-        const requiredFields = ['customer_name', 'customer_email', 'customer_phone', 'city', 'problem', 'circumstances', 'appointment_date', 'appointment_time'];
+        const requiredFields = ['customer_name', 'customer_email', 'customer_phone', 'city', 'problem', 'appointment_date', 'appointment_time'];
         for (const field of requiredFields) {
           if (!formData[field]) {
             errorDiv.textContent = 'Please fill in all required fields';
@@ -804,12 +837,12 @@ import Layout from '../layouts/Layout.astro';
           event: 'begin_checkout',
           ecommerce: {
             currency: 'INR',
-            value: 599,
+            value: selectedPackage.price,
             items: [{
-              item_id: 'therapy_session',
-              item_name: 'Therapy Session',
+              item_id: selectedPackage.id,
+              item_name: selectedPackage.name,
               item_category: formData.problem,
-              price: 599,
+              price: selectedPackage.price,
               quantity: 1
             }]
           }
