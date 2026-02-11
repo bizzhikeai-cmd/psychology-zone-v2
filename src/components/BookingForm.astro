@@ -1,0 +1,639 @@
+---
+// BookingForm Component - Displays booking form with selected package and Razorpay integration
+interface Props {
+  pageType: 'psychologist' | 'therapy' | 'couples';
+}
+
+const { pageType } = Astro.props;
+
+const problemOptions = [
+  { value: 'feeling-low', label: 'Feeling Low' },
+  { value: 'stress-worry', label: 'Stress & Worry' },
+  { value: 'relationship', label: 'Relationships' },
+  { value: 'work-life', label: 'Work-Life Balance' },
+  { value: 'negative-thoughts', label: 'Negative Thinking Patterns' },
+  { value: 'overthinking', label: 'Overthinking' },
+  { value: 'emotions', label: 'Managing Emotions' },
+  { value: 'fears', label: 'Fears & Concerns' },
+  { value: 'career', label: 'Career Direction' },
+  { value: 'eating-habits', label: 'Eating Habits' },
+  { value: 'past-experiences', label: 'Past Experiences' },
+  { value: 'motivation', label: 'Motivation & Goals' },
+  { value: 'parenting', label: 'Parenting' },
+  { value: 'personal-growth', label: 'Personal Growth' },
+  { value: 'confidence', label: 'Building Confidence' },
+  { value: 'intimacy', label: 'Intimacy & Connection' },
+  { value: 'purpose', label: 'Finding Purpose' },
+  { value: 'sleep', label: 'Sleep Patterns' },
+  { value: 'frustration', label: 'Managing Frustration' },
+  { value: 'other', label: 'Other' }
+];
+
+const timeSlots = [
+  '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
+  '12:00', '12:30', '14:00', '14:30', '15:00', '15:30',
+  '16:00', '16:30', '17:00', '17:30', '18:00', '18:30',
+  '19:00', '19:30', '20:00', '20:30', '21:00'
+];
+
+const timeLabels: Record<string, string> = {
+  '09:00': '09:00 AM', '09:30': '09:30 AM', '10:00': '10:00 AM', '10:30': '10:30 AM',
+  '11:00': '11:00 AM', '11:30': '11:30 AM', '12:00': '12:00 PM', '12:30': '12:30 PM',
+  '14:00': '02:00 PM', '14:30': '02:30 PM', '15:00': '03:00 PM', '15:30': '03:30 PM',
+  '16:00': '04:00 PM', '16:30': '04:30 PM', '17:00': '05:00 PM', '17:30': '05:30 PM',
+  '18:00': '06:00 PM', '18:30': '06:30 PM', '19:00': '07:00 PM', '19:30': '07:30 PM',
+  '20:00': '08:00 PM', '20:30': '08:30 PM', '21:00': '09:00 PM'
+};
+---
+
+<section id="booking" class="py-24 bg-[#F8F5F0]">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl lg:text-5xl mb-4 text-slate-900" style="font-family: 'Lora', serif;">
+        Book Your Session
+      </h2>
+      <p class="text-gray-600 text-lg">
+        Complete the form below to schedule your confidential session
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-12 items-start">
+      {/* Booking Form */}
+      <div class="lg:col-span-2">
+        {/* Selected Package Display */}
+        <div id="packageDisplay" class="bg-white p-6 rounded-2xl shadow-lg mb-6 hidden">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm text-gray-500 mb-1">Selected Package</p>
+              <h3 class="text-2xl font-bold text-slate-900" style="font-family: 'Lora', serif;" id="packageName"></h3>
+              <p class="text-gray-600 mt-1" id="packageDetails"></p>
+            </div>
+            <div class="text-right">
+              <p class="text-3xl font-bold text-[#D35400]" style="font-family: 'Lora', serif;" id="packagePrice"></p>
+              <p class="text-sm text-gray-500" id="packagePerSession"></p>
+            </div>
+          </div>
+        </div>
+
+        {/* Form */}
+        <div class="bg-white p-8 rounded-3xl shadow-lg">
+          <form id="bookingForm">
+            {/* Problem Selection */}
+            <div class="form-group mb-6">
+              <label for="problem" class="block text-sm font-semibold text-gray-700 mb-2">
+                What would you like support with? *
+              </label>
+              <select
+                id="problem"
+                name="problem"
+                required
+                class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#D35400] focus:ring-2 focus:ring-[#D35400]/20 transition-all outline-none"
+              >
+                <option value="">Select an area</option>
+                {problemOptions.map((option) => (
+                  <option value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Circumstances */}
+            <div class="form-group mb-6">
+              <label for="circumstances" class="block text-sm font-semibold text-gray-700 mb-2">
+                Briefly describe your situation *
+              </label>
+              <textarea
+                id="circumstances"
+                name="circumstances"
+                rows="4"
+                required
+                placeholder="Tell us more about what you're experiencing..."
+                class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#D35400] focus:ring-2 focus:ring-[#D35400]/20 transition-all outline-none resize-none"
+              ></textarea>
+            </div>
+
+            {/* Name and Phone */}
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+              <div class="form-group">
+                <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  placeholder="Your full name"
+                  class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#D35400] focus:ring-2 focus:ring-[#D35400]/20 transition-all outline-none"
+                />
+              </div>
+              <div class="form-group">
+                <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Phone Number *
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  placeholder="Your phone number"
+                  class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#D35400] focus:ring-2 focus:ring-[#D35400]/20 transition-all outline-none"
+                />
+              </div>
+            </div>
+
+            {/* Email and City */}
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+              <div class="form-group">
+                <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="Your email address"
+                  class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#D35400] focus:ring-2 focus:ring-[#D35400]/20 transition-all outline-none"
+                />
+              </div>
+              <div class="form-group">
+                <label for="city" class="block text-sm font-semibold text-gray-700 mb-2">
+                  City *
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  required
+                  placeholder="Your city"
+                  class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#D35400] focus:ring-2 focus:ring-[#D35400]/20 transition-all outline-none"
+                />
+              </div>
+            </div>
+
+            {/* Date and Time */}
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+              <div class="form-group">
+                <label for="date" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Preferred Date *
+                </label>
+                <input
+                  type="date"
+                  id="date"
+                  name="date"
+                  required
+                  class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#D35400] focus:ring-2 focus:ring-[#D35400]/20 transition-all outline-none"
+                />
+              </div>
+              <div class="form-group">
+                <label for="time" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Preferred Time *
+                </label>
+                <select
+                  id="time"
+                  name="time"
+                  required
+                  class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#D35400] focus:ring-2 focus:ring-[#D35400]/20 transition-all outline-none"
+                >
+                  <option value="">Select a time slot</option>
+                  {timeSlots.map((slot) => (
+                    <option value={slot}>{timeLabels[slot]}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Error Message */}
+            <div id="formError" class="hidden bg-red-50 border-2 border-red-200 text-red-700 px-4 py-3 rounded-xl mb-6 text-sm"></div>
+
+            {/* Privacy Notice */}
+            <div class="bg-blue-50 p-4 rounded-xl mb-6">
+              <p class="text-sm text-gray-700">
+                <svg class="w-5 h-5 inline-block mr-2 text-[#6B8E7B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                Your information is secure and confidential. We'll contact you to confirm your booking.
+              </p>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              class="w-full bg-orange-gradient text-white px-10 py-5 rounded-full text-xl font-bold shadow-xl hover:shadow-orange-500/30 transition-all transform hover:-translate-y-1"
+            >
+              Proceed For Payment
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Sidebar Info */}
+      <div class="lg:col-span-1">
+        <div class="bg-white p-8 rounded-3xl shadow-lg sticky top-24">
+          <img
+            src="/images/Online-consulting.webp"
+            alt="Online Consulting"
+            class="w-full rounded-2xl mb-6"
+          />
+          <h3 class="text-2xl font-bold mb-4 text-slate-900" style="font-family: 'Lora', serif;">
+            Why Choose Psychology Zone?
+          </h3>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-start gap-3 text-sm text-gray-700">
+              <svg class="w-5 h-5 text-[#6B8E7B] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              50+ Expert Psychologists
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-700">
+              <svg class="w-5 h-5 text-[#6B8E7B] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              Confidential & Secure Sessions
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-700">
+              <svg class="w-5 h-5 text-[#6B8E7B] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              Flexible Scheduling
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-700">
+              <svg class="w-5 h-5 text-[#6B8E7B] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              24/7 Support Available
+            </li>
+            <li class="flex items-start gap-3 text-sm text-gray-700">
+              <svg class="w-5 h-5 text-[#6B8E7B] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              Money-Back Guarantee
+            </li>
+          </ul>
+          <p class="text-gray-600 text-sm">
+            Questions? Call us at <a href="tel:+918968900002" class="text-[#D35400] font-bold hover:underline">+91 89689 00002</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bg-orange-gradient {
+    background: linear-gradient(135deg, #D35400 0%, #E67E22 100%);
+  }
+
+  @keyframes highlight-pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(211, 84, 0, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 20px rgba(211, 84, 0, 0);
+    }
+  }
+
+  .highlight-pulse {
+    animation: highlight-pulse 2s ease-out;
+  }
+</style>
+
+<script define:vars={{ pageType }}>
+  // Lazy load Razorpay SDK
+  let razorpayLoaded = false;
+  function loadRazorpay() {
+    if (razorpayLoaded) return Promise.resolve();
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.onload = () => {
+        razorpayLoaded = true;
+        resolve();
+      };
+      document.body.appendChild(script);
+    });
+  }
+
+  // Initialize dataLayer
+  window.dataLayer = window.dataLayer || [];
+
+  // Function to update package display
+  function updatePackageDisplay() {
+    const packageData = sessionStorage.getItem('selectedPackage');
+    if (packageData) {
+      const pkg = JSON.parse(packageData);
+      const packageDisplay = document.getElementById('packageDisplay');
+      const packageName = document.getElementById('packageName');
+      const packageDetails = document.getElementById('packageDetails');
+      const packagePrice = document.getElementById('packagePrice');
+      const packagePerSession = document.getElementById('packagePerSession');
+
+      if (packageDisplay && packageName && packageDetails && packagePrice && packagePerSession) {
+        packageDisplay.classList.remove('hidden');
+        packageName.textContent = pkg.name;
+        packageDetails.textContent = `${pkg.sessions} ${pkg.sessions === 1 ? 'Session' : 'Sessions'}`;
+        packagePrice.textContent = `₹${pkg.price.toLocaleString('en-IN')}`;
+        if (pkg.perSession !== pkg.price) {
+          packagePerSession.textContent = `₹${pkg.perSession}/session`;
+        } else {
+          packagePerSession.textContent = '';
+        }
+      }
+    }
+  }
+
+  // Display selected package on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    updatePackageDisplay();
+
+    // Listen for package selection changes
+    window.addEventListener('packageSelected', () => {
+      updatePackageDisplay();
+    });
+
+    // Set minimum date to tomorrow
+    const dateInput = document.getElementById('date');
+    if (dateInput) {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const minDate = tomorrow.toISOString().split('T')[0];
+      dateInput.min = minDate;
+
+      dateInput.addEventListener('change', function() {
+        const dateError = this.parentElement.querySelector('.date-error');
+        if (this.value < minDate) {
+          this.value = '';
+          if (!dateError) {
+            const msg = document.createElement('p');
+            msg.className = 'date-error';
+            msg.style.cssText = 'color:#dc2626;font-size:0.85rem;margin-top:4px;';
+            msg.textContent = 'That date has already passed. Please pick a date from tomorrow onwards.';
+            this.parentElement.appendChild(msg);
+          }
+        } else if (dateError) {
+          dateError.remove();
+        }
+      });
+    }
+
+    // Track form start
+    let formStarted = false;
+    const formFields = document.querySelectorAll('#bookingForm input, #bookingForm select, #bookingForm textarea');
+    formFields.forEach(field => {
+      field.addEventListener('focus', () => {
+        if (!formStarted) {
+          formStarted = true;
+          window.dataLayer.push({
+            event: 'booking_form_started',
+            page_type: pageType
+          });
+
+          // Load Razorpay on first interaction
+          loadRazorpay();
+        }
+      });
+    });
+
+    // Track problem selection
+    const problemSelect = document.getElementById('problem');
+    if (problemSelect) {
+      problemSelect.addEventListener('change', (e) => {
+        if (e.target.value) {
+          window.dataLayer.push({
+            event: 'form_field_complete',
+            field_name: 'problem',
+            field_value: e.target.value,
+            page_type: pageType
+          });
+        }
+      });
+    }
+
+    // Track date selection
+    const dateField = document.getElementById('date');
+    if (dateField) {
+      dateField.addEventListener('change', () => {
+        window.dataLayer.push({
+          event: 'form_field_complete',
+          field_name: 'appointment_date',
+          page_type: pageType
+        });
+      });
+    }
+
+    // Form submission handler
+    const bookingForm = document.getElementById('bookingForm');
+    if (bookingForm) {
+      bookingForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Load Razorpay if not already loaded
+        await loadRazorpay();
+
+        const submitBtn = bookingForm.querySelector('button[type="submit"]');
+        const errorDiv = document.getElementById('formError');
+
+        // Get selected package
+        const packageData = sessionStorage.getItem('selectedPackage');
+        if (!packageData) {
+          errorDiv.textContent = 'Please select a package first';
+          errorDiv.classList.remove('hidden');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+
+        const selectedPackage = JSON.parse(packageData);
+
+        // Get form data
+        const formData = {
+          customer_name: document.getElementById('name').value,
+          customer_email: document.getElementById('email').value,
+          customer_phone: document.getElementById('phone').value,
+          city: document.getElementById('city').value,
+          problem: document.getElementById('problem').value,
+          circumstances: document.getElementById('circumstances').value,
+          appointment_date: document.getElementById('date').value,
+          appointment_time: document.getElementById('time').value,
+          package_id: selectedPackage.id,
+          session_count: selectedPackage.sessions,
+          package_name: selectedPackage.name,
+          page_source: pageType
+        };
+
+        // Validate required fields
+        const requiredFields = ['customer_name', 'customer_email', 'customer_phone', 'city', 'problem', 'circumstances', 'appointment_date', 'appointment_time'];
+        for (const field of requiredFields) {
+          if (!formData[field]) {
+            errorDiv.textContent = 'Please fill in all required fields';
+            errorDiv.classList.remove('hidden');
+            return;
+          }
+        }
+
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.customer_email)) {
+          errorDiv.textContent = 'Please enter a valid email address';
+          errorDiv.classList.remove('hidden');
+          return;
+        }
+
+        // Validate phone
+        const phoneClean = formData.customer_phone.replace(/\D/g, '');
+        if (phoneClean.length < 10) {
+          errorDiv.textContent = 'Please enter a valid phone number';
+          errorDiv.classList.remove('hidden');
+          return;
+        }
+
+        errorDiv.classList.add('hidden');
+
+        // Show loading state
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Processing...';
+        submitBtn.disabled = true;
+
+        // Track begin_checkout
+        window.dataLayer.push({
+          event: 'begin_checkout',
+          page_type: pageType,
+          ecommerce: {
+            currency: 'INR',
+            value: selectedPackage.price,
+            items: [{
+              item_id: selectedPackage.id,
+              item_name: `${selectedPackage.name} Package`,
+              item_category: pageType,
+              price: selectedPackage.price,
+              quantity: 1
+            }]
+          }
+        });
+
+        try {
+          // Create order
+          const response = await fetch('/api/create-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+          });
+
+          const orderData = await response.json();
+
+          if (!response.ok) {
+            throw new Error(orderData.error || 'Failed to create order');
+          }
+
+          // Track payment initiated
+          window.dataLayer.push({
+            event: 'payment_initiated',
+            order_id: orderData.order_id,
+            booking_ref: orderData.booking_ref,
+            package_id: selectedPackage.id,
+            page_type: pageType
+          });
+
+          // Configure Razorpay
+          const razorpayOptions = {
+            key: orderData.key_id,
+            amount: orderData.amount,
+            currency: orderData.currency,
+            name: 'Psychology Zone',
+            description: `${selectedPackage.name} Package - ${selectedPackage.sessions} Session${selectedPackage.sessions > 1 ? 's' : ''}`,
+            order_id: orderData.order_id,
+            prefill: orderData.prefill,
+            notes: {
+              booking_ref: orderData.booking_ref,
+              package_id: selectedPackage.id,
+              package_name: selectedPackage.name
+            },
+            theme: {
+              color: '#D35400'
+            },
+            handler: async function(response) {
+              submitBtn.textContent = 'Confirming...';
+
+              try {
+                const verifyResponse = await fetch('/api/verify-payment', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    razorpay_order_id: response.razorpay_order_id,
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_signature: response.razorpay_signature
+                  })
+                });
+
+                const verifyData = await verifyResponse.json();
+
+                if (!verifyResponse.ok) {
+                  throw new Error(verifyData.error || 'Payment verification failed');
+                }
+
+                // Clear selected package
+                sessionStorage.removeItem('selectedPackage');
+
+                // Redirect to confirmation page
+                window.location.href = `/booking-confirmed?ref=${verifyData.booking_ref}`;
+              } catch (verifyError) {
+                console.error('Verification error:', verifyError);
+                errorDiv.textContent = 'Payment verification failed. Please contact support.';
+                errorDiv.classList.remove('hidden');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+              }
+            },
+            modal: {
+              ondismiss: async function() {
+                window.dataLayer.push({
+                  event: 'payment_cancelled',
+                  order_id: orderData.order_id,
+                  page_type: pageType
+                });
+
+                try {
+                  await fetch('/api/verify-payment', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      razorpay_order_id: orderData.order_id,
+                      reason: 'Payment modal closed by user'
+                    })
+                  });
+                } catch (e) {
+                  console.error('Failed to update booking status:', e);
+                }
+
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+              }
+            }
+          };
+
+          const rzp = new Razorpay(razorpayOptions);
+          rzp.on('payment.failed', function(response) {
+            window.dataLayer.push({
+              event: 'payment_failed',
+              error_code: response.error.code,
+              error_description: response.error.description,
+              page_type: pageType
+            });
+
+            errorDiv.textContent = `Payment failed: ${response.error.description}`;
+            errorDiv.classList.remove('hidden');
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+          });
+
+          rzp.open();
+        } catch (error) {
+          console.error('Order creation error:', error);
+          errorDiv.textContent = error.message || 'Failed to create order. Please try again.';
+          errorDiv.classList.remove('hidden');
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        }
+      });
+    }
+  });
+</script>

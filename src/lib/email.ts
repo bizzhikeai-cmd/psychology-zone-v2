@@ -194,11 +194,22 @@ class EmailService {
 
             <div class="content">
               <div class="price-card">
-                <div class="label">Session Price</div>
-                <div class="amount">₹${booking.amount_paid / 100}</div>
+                <div class="label">${booking.package_name || 'Session'} Package</div>
+                <div class="amount">₹${(booking.amount_paid / 100).toLocaleString('en-IN')}</div>
+                ${booking.session_count ? `
+                  <div style="margin-top: 8px; font-size: 14px; color: #78350f;">
+                    <strong>${booking.session_count} ${booking.session_count === 1 ? 'Session' : 'Sessions'}</strong>
+                    ${booking.session_count > 1 ? ` • ₹${Math.round(booking.amount_paid / 100 / booking.session_count)} per session` : ''}
+                  </div>
+                ` : ''}
                 <div class="booking-ref">
                   <strong>Booking ID:</strong> ${booking.booking_ref}
                 </div>
+                ${booking.page_source ? `
+                  <div style="margin-top: 8px; font-size: 12px; color: #78350f;">
+                    Source: ${booking.page_source.charAt(0).toUpperCase() + booking.page_source.slice(1)} Page
+                  </div>
+                ` : ''}
               </div>
 
               <div class="section-card">

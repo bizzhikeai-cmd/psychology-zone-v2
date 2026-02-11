@@ -255,13 +255,12 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .booking-cta-card {
-    background: white;
+    background: linear-gradient(135deg, #D35400 0%, #E67E22 100%);
     border-radius: 20px;
     padding: 40px;
-    color: var(--secondary-color);
+    color: white;
     position: sticky;
     top: 120px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   }
 
   .cta-content {
@@ -271,12 +270,12 @@ import Layout from '../layouts/Layout.astro';
   .cta-content h2 {
     font-size: 1.6rem;
     margin-bottom: 15px;
-    color: var(--secondary-color);
+    color: white;
     font-family: 'Cormorant Garamond', serif;
   }
 
   .cta-content > p {
-    color: var(--text-light);
+    opacity: 0.9;
     margin-bottom: 25px;
     line-height: 1.6;
   }
@@ -287,20 +286,19 @@ import Layout from '../layouts/Layout.astro';
     align-items: center;
     margin-bottom: 25px;
     padding: 20px;
-    background: var(--accent-cream);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 12px;
   }
 
   .price-label {
     font-size: 0.9rem;
-    color: var(--text-light);
+    opacity: 0.8;
     margin-bottom: 5px;
   }
 
   .price-value {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--secondary-color);
   }
 
   .btn-large {
@@ -310,7 +308,7 @@ import Layout from '../layouts/Layout.astro';
 
   .cta-note {
     font-size: 0.85rem;
-    color: var(--text-light);
+    opacity: 0.8;
     margin-top: 20px;
   }
 
@@ -328,9 +326,9 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .btn-primary {
-    background: var(--primary-color);
-    color: white;
-    box-shadow: 0 4px 16px rgba(209, 122, 92, 0.25);
+    background: white;
+    color: #6b5ce7;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   }
 
   .btn-primary:hover {

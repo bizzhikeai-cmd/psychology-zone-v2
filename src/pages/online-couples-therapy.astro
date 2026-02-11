@@ -1,0 +1,546 @@
+---
+import Layout from "../layouts/Layout.astro";
+import WhyChooseSection from "../components/WhyChooseSection.astro";
+import PricingSection from "../components/PricingSection.astro";
+import BookingForm from "../components/BookingForm.astro";
+---
+
+<Layout
+    title="Online Couples Therapy | Relationship Support & Counseling | Psychology Zone"
+>
+    <style>
+        :root {
+            --cream: #F8F5F0;
+            --sage: #6B8E7B;
+            --orange-start: #D35400;
+            --orange-end: #E67E22;
+            --text-dark: #2C3E50;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3, .serif {
+            font-family: 'Lora', serif;
+        }
+        .bg-orange-gradient {
+            background: linear-gradient(135deg, var(--orange-start) 0%, var(--orange-end) 100%);
+        }
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            background-color: rgba(248, 245, 240, 0.9);
+        }
+    </style>
+
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-black/5">
+            <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+                <a href="#" id="nav-logo" class="flex items-center gap-2">
+                    <div class="flex items-center justify-center p-1.5 bg-orange-50 rounded-lg border border-orange-200">
+                        <div class="w-9 h-9 bg-orange-gradient rounded-md flex items-center justify-center shadow-inner transform rotate-3">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex flex-col leading-none">
+                        <span class="text-2xl font-black text-[#D35400] tracking-tighter serif">PSYCHOLOGY</span>
+                        <span class="text-sm font-bold text-gray-400 tracking-[0.2em] uppercase -mt-0.5 ml-0.5">ZONE</span>
+                    </div>
+                </a>
+                <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-700">
+                    <a href="#services" id="nav-services" class="hover:text-[#D35400] transition-colors">Services</a>
+                    <a href="#process" id="nav-process" class="hover:text-[#D35400] transition-colors">The Process</a>
+                    <a href="#therapists" id="nav-therapists" class="hover:text-[#D35400] transition-colors">Clinicians</a>
+                    <a href="#pricing" id="nav-pricing" class="hover:text-[#D35400] transition-colors">Pricing</a>
+                    <a href="#faq" id="nav-faq" class="hover:text-[#D35400] transition-colors">FAQ</a>
+                </div>
+                <a href="#pricing" id="header-cta" class="bg-orange-gradient text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg hover:shadow-orange-500/20 transition-all">
+                    Begin Your Journey
+                </a>
+            </nav>
+        </header>
+
+        <main class="pt-20">
+            <!-- Hero Section -->
+            <section class="relative py-20 lg:py-32 px-6 overflow-hidden">
+                <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="relative z-10">
+                        <span class="inline-block px-4 py-1 bg-[#6B8E7B]/10 text-[#6B8E7B] rounded-full text-xs font-bold uppercase tracking-widest mb-6">
+                            Relationship Support for Partners
+                        </span>
+                        <h1 class="text-5xl lg:text-7xl leading-tight mb-8 text-slate-900 serif">
+                            Online <br/><span class="text-[#D35400] italic">Couples</span> Therapy
+                        </h1>
+                        <p class="text-xl text-gray-600 mb-10 leading-relaxed max-w-lg">
+                            Strengthen your connection through modern, evidence-based therapy. Join sessions together or separately from the comfort of your home.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="#pricing" id="hero-cta-primary" class="bg-orange-gradient text-white px-8 py-4 rounded-xl text-lg font-bold text-center hover:scale-105 transition-transform shadow-xl shadow-orange-500/30">
+                                Begin Your Journey
+                            </a>
+                            <a href="#services" id="hero-cta-secondary" class="bg-white border-2 border-slate-100 text-slate-700 px-8 py-4 rounded-xl text-lg font-bold text-center hover:bg-slate-50 transition-colors">
+                                Learn More
+                            </a>
+                        </div>
+                        <div class="mt-8 flex items-center gap-3 text-sm text-gray-500 font-medium">
+                            <svg class="w-5 h-5 text-[#6B8E7B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                            </svg>
+                            <span>Active participation encouraged from both partners</span>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-orange-gradient rounded-[2rem] opacity-10 blur-3xl"></div>
+                        <img src="https://images.unsplash.com/photo-1630132104043-463231362085?auto=format&fit=crop&q=80&w=1200" alt="Contemporary Indian couple" class="relative z-10 w-full h-[500px] object-cover rounded-[2rem] shadow-2xl border-8 border-white">
+                        <div class="absolute bottom-8 -left-8 z-20 bg-white p-6 rounded-2xl shadow-xl max-w-xs hidden md:block border-l-4 border-[#6B8E7B]">
+                            <p class="text-sm italic text-gray-600 leading-relaxed font-medium">
+                                "We learned to hear each other again. The separate sessions helped us bring our best selves back to the relationship."
+                            </p>
+                            <span class="block mt-2 text-xs font-bold text-[#D35400]">— Priya & Sameer, Clients</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trust Numbers -->
+            <section class="py-16 bg-gradient-to-r from-slate-800 to-slate-900">
+                <div class="max-w-7xl mx-auto px-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12 serif">Trusted by thousands across India</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                        <div>
+                            <div class="text-5xl md:text-6xl font-bold text-[#E67E22] mb-2">50+</div>
+                            <div class="text-white/80">Expert Psychologists</div>
+                        </div>
+                        <div>
+                            <div class="text-5xl md:text-6xl font-bold text-[#E67E22] mb-2">1.5k</div>
+                            <div class="text-white/80">Happy Clients</div>
+                        </div>
+                        <div>
+                            <div class="text-5xl md:text-6xl font-bold text-[#E67E22] mb-2">8.1k</div>
+                            <div class="text-white/80">Sessions Completed</div>
+                        </div>
+                        <div>
+                            <div class="text-5xl md:text-6xl font-bold text-[#E67E22] mb-2">10k+</div>
+                            <div class="text-white/80">Community Strong</div>
+                        </div>
+                    </div>
+                    <p class="text-center text-white/60 mt-8 text-sm max-w-3xl mx-auto">Your privacy is sacred. Every session remains completely confidential between you and your therapist.</p>
+                </div>
+            </section>
+
+            <!-- Services Grid -->
+            <section id="services" class="py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-6 text-center mb-16">
+                    <h2 class="text-4xl lg:text-5xl mb-6 text-slate-900 serif">Focused Relationship Care</h2>
+                    <p class="text-gray-500 max-w-2xl mx-auto text-lg">We specialize in the complex dynamics that define modern partnerships.</p>
+                </div>
+                <div class="max-w-7xl mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="p-8 rounded-3xl bg-[#F8F5F0] hover:shadow-xl transition-shadow border border-transparent hover:border-[#D35400]/20">
+                        <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-[#D35400] text-3xl mb-6 shadow-sm">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl mb-4 font-bold serif">Communication Patterns</h3>
+                        <p class="text-gray-600 leading-relaxed">Identify and break the cycles of criticism, defensiveness, and stonewalling that stall your connection.</p>
+                    </div>
+                    <div class="p-8 rounded-3xl bg-[#F8F5F0] hover:shadow-xl transition-shadow border border-transparent hover:border-[#D35400]/20">
+                        <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-[#D35400] text-3xl mb-6 shadow-sm">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl mb-4 font-bold serif">Recurring Conflicts</h3>
+                        <p class="text-gray-600 leading-relaxed">Navigate those 'unsolvable' arguments by uncovering the underlying emotional needs beneath the surface.</p>
+                    </div>
+                    <div class="p-8 rounded-3xl bg-[#F8F5F0] hover:shadow-xl transition-shadow border border-transparent hover:border-[#D35400]/20">
+                        <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-[#D35400] text-3xl mb-6 shadow-sm">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl mb-4 font-bold serif">Trust & Connection</h3>
+                        <p class="text-gray-600 leading-relaxed">Heal from betrayal or long-term distance by rebuilding a secure emotional foundation and transparency.</p>
+                    </div>
+                    <div class="p-8 rounded-3xl bg-[#F8F5F0] hover:shadow-xl transition-shadow border border-transparent hover:border-[#D35400]/20">
+                        <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-[#D35400] text-3xl mb-6 shadow-sm">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl mb-4 font-bold serif">Life Transitions</h3>
+                        <p class="text-gray-600 leading-relaxed">Stay aligned while navigating parenthood, career shifts, relocation, or aging together as a unified team.</p>
+                    </div>
+                    <div class="p-8 rounded-3xl bg-[#F8F5F0] hover:shadow-xl transition-shadow border border-transparent hover:border-[#D35400]/20">
+                        <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-[#D35400] text-3xl mb-6 shadow-sm">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl mb-4 font-bold serif">Intimacy & Spark</h3>
+                        <p class="text-gray-600 leading-relaxed">Rediscover physical and emotional intimacy through trauma-informed and vulnerability-focused exploration.</p>
+                    </div>
+                    <div class="p-8 rounded-3xl bg-[#F8F5F0] hover:shadow-xl transition-shadow border border-transparent hover:border-[#D35400]/20">
+                        <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-[#D35400] text-3xl mb-6 shadow-sm">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl mb-4 font-bold serif">Balancing Expectations</h3>
+                        <p class="text-gray-600 leading-relaxed">Align on household labor, finances, and personal boundaries to ensure both partners feel valued.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Couples Process -->
+            <section id="process" class="py-24 bg-[#6B8E7B] text-white">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="grid lg:grid-cols-2 gap-20 items-center">
+                        <div>
+                            <h2 class="text-4xl lg:text-5xl mb-8 serif">The Relationship Roadmap</h2>
+                            <p class="text-white/80 text-lg mb-12">Our 4-step process ensures both partners are heard, respected, and empowered to grow.</p>
+                            <div class="space-y-8">
+                                <div class="flex gap-6">
+                                    <span class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center font-bold text-xl">1</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold mb-2">Joint Discovery</h4>
+                                        <p class="text-white/70">An initial session with both partners to identify common goals and the 'elephant in the room'.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-6">
+                                    <span class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center font-bold text-xl">2</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold mb-2">Individual Mapping</h4>
+                                        <p class="text-white/70">Optional solo sessions for each partner to explore personal history and attachment styles without pressure.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-6">
+                                    <span class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center font-bold text-xl">3</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold mb-2">Skill Implementation</h4>
+                                        <p class="text-white/70">Weekly sessions focusing on real-world tools for communication, conflict de-escalation, and bonding.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-6">
+                                    <span class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center font-bold text-xl">4</span>
+                                    <div>
+                                        <h4 class="text-xl font-bold mb-2">Sustainable Union</h4>
+                                        <p class="text-white/70">Building long-term rituals of connection to ensure your relationship continues to thrive independently.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <img src="https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&q=80&w=600" alt="Couple talking calmly" class="rounded-2xl shadow-2xl mt-12">
+                            <img src="https://images.unsplash.com/photo-1620932900741-236b28005856?auto=format&fit=crop&q=80&w=600" alt="Supportive gesture" class="rounded-2xl shadow-2xl">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Therapist Profiles -->
+            <section id="therapists" class="py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                        <div class="max-w-2xl">
+                            <h2 class="text-4xl lg:text-5xl mb-4 text-slate-900 serif">Meet Our Relationship Specialists</h2>
+                            <p class="text-gray-500 text-lg">Expert clinicians trained in Gottman Method, EFT, and trauma-informed couples care.</p>
+                        </div>
+                        <a href="#" id="all-therapists-link" class="text-[#D35400] font-bold flex items-center gap-2 hover:underline">
+                            Browse All Experts
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="group bg-[#F8F5F0] rounded-3xl overflow-hidden hover:shadow-xl transition-all">
+                            <div class="h-72 overflow-hidden">
+                                <img src="/images/therapist-pooja.webp" alt="Ms. Pooja" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-8">
+                                <span class="text-[#6B8E7B] font-bold text-xs uppercase tracking-widest mb-2 block">Relationship Expert</span>
+                                <h4 class="text-2xl font-bold mb-2 serif">Ms. Pooja</h4>
+                                <p class="text-sm text-gray-500 mb-4 italic">M.A. Counseling • 5+ years</p>
+                                <p class="text-gray-600 text-sm leading-relaxed">Specializes in relationship counseling and family therapy</p>
+                            </div>
+                        </div>
+                        <div class="group bg-[#F8F5F0] rounded-3xl overflow-hidden hover:shadow-xl transition-all">
+                            <div class="h-72 overflow-hidden">
+                                <img src="/images/therapist-lekha.webp" alt="Lekha Murali" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-8">
+                                <span class="text-[#6B8E7B] font-bold text-xs uppercase tracking-widest mb-2 block">Clinical Director</span>
+                                <h4 class="text-2xl font-bold mb-2 serif">Lekha Murali</h4>
+                                <p class="text-sm text-gray-500 mb-4 italic">PhD Psychology • 19+ years</p>
+                                <p class="text-gray-600 text-sm leading-relaxed">Clinical psychology, psychotherapy, and guidance counseling</p>
+                            </div>
+                        </div>
+                        <div class="group bg-[#F8F5F0] rounded-3xl overflow-hidden hover:shadow-xl transition-all">
+                            <div class="h-72 overflow-hidden">
+                                <img src="/images/therapist-jyotsna.jpg" alt="Dr. Jaismeen Kaur" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-8">
+                                <span class="text-[#6B8E7B] font-bold text-xs uppercase tracking-widest mb-2 block">Choice Theory Expert</span>
+                                <h4 class="text-2xl font-bold mb-2 serif">Dr. Jaismeen Kaur</h4>
+                                <p class="text-sm text-gray-500 mb-4 italic">PhD • William Glasser Institute (USA) • 6+ years</p>
+                                <p class="text-gray-600 text-sm leading-relaxed">Reality therapy and modern relationship dynamics</p>
+                            </div>
+                        </div>
+                        <div class="group bg-[#F8F5F0] rounded-3xl overflow-hidden hover:shadow-xl transition-all">
+                            <div class="h-72 overflow-hidden">
+                                <img src="/images/therapist-jaismeen.jpg" alt="Jyotsna Mohanta" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-8">
+                                <span class="text-[#6B8E7B] font-bold text-xs uppercase tracking-widest mb-2 block">NLP Expert</span>
+                                <h4 class="text-2xl font-bold mb-2 serif">Jyotsna Mohanta</h4>
+                                <p class="text-sm text-gray-500 mb-4 italic">PhD, MSc, PGDGC • 7+ years</p>
+                                <p class="text-gray-600 text-sm leading-relaxed">Mental wellness and personal growth specialist</p>
+                            </div>
+                        </div>
+                        <div class="group bg-[#F8F5F0] rounded-3xl overflow-hidden hover:shadow-xl transition-all">
+                            <div class="h-72 overflow-hidden">
+                                <img src="/images/therapist-sharmila.jpg" alt="Sharmila Masih" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-8">
+                                <span class="text-[#6B8E7B] font-bold text-xs uppercase tracking-widest mb-2 block">Clinical Psychologist</span>
+                                <h4 class="text-2xl font-bold mb-2 serif">Sharmila Masih</h4>
+                                <p class="text-sm text-gray-500 mb-4 italic">M.A. Clinical Psychology • 7+ years</p>
+                                <p class="text-gray-600 text-sm leading-relaxed">Child development counseling and mental health</p>
+                            </div>
+                        </div>
+                        <div class="group bg-[#F8F5F0] rounded-3xl overflow-hidden hover:shadow-xl transition-all">
+                            <div class="h-72 overflow-hidden">
+                                <img src="/images/therapist-sukriti.webp" alt="Ms. Sukriti" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-8">
+                                <span class="text-[#6B8E7B] font-bold text-xs uppercase tracking-widest mb-2 block">Clinical Psychologist</span>
+                                <h4 class="text-2xl font-bold mb-2 serif">Ms. Sukriti</h4>
+                                <p class="text-sm text-gray-500 mb-4 italic">M.A. Psychology • 7+ years</p>
+                                <p class="text-gray-600 text-sm leading-relaxed">Organizational psychology specialist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section class="py-24 bg-slate-800">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl lg:text-5xl font-bold text-white mb-4 serif">What Couples Say</h2>
+                        <p class="text-white/70">Real experiences from partners who strengthened their bond.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-slate-700/50 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                            <p class="text-white/90 italic mb-6 leading-relaxed">"Highly recommend. The resources and support have been incredibly helpful. One of the best experiences I've had."</p>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">AP</div>
+                                <div>
+                                    <p class="font-bold text-white">Aarav Patel</p>
+                                    <p class="text-sm text-white/60">Teacher</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-700/50 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                            <p class="text-white/90 italic mb-6 leading-relaxed">"Very nice experience. The sessions are interactive, well-structured, and extremely helpful. I felt heard and supported throughout my sessions."</p>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">PS</div>
+                                <div>
+                                    <p class="font-bold text-white">Priya Sharma</p>
+                                    <p class="text-sm text-white/60">Marketing Manager</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-700/50 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                            <p class="text-white/90 italic mb-6 leading-relaxed">"Great service! I was able to connect with a psychologist who understood my concerns and provided practical solutions."</p>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">SG</div>
+                                <div>
+                                    <p class="font-bold text-white">Sneha Gupta</p>
+                                    <p class="text-sm text-white/60">Business Owner</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-700/50 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                            <p class="text-white/90 italic mb-6 leading-relaxed">"The psychologists here are amazing. Very compassionate, knowledgeable, and professional. Highly recommended!"</p>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">SS</div>
+                                <div>
+                                    <p class="font-bold text-white">Siddharth Sharma</p>
+                                    <p class="text-sm text-white/60">Lawyer</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-700/50 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                            <p class="text-white/90 italic mb-6 leading-relaxed">"Life-changing experience. The support I received helped me navigate through tough times. Forever grateful."</p>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">HS</div>
+                                <div>
+                                    <p class="font-bold text-white">Harshdeep Singh</p>
+                                    <p class="text-sm text-white/60">Athlete</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-700/50 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                            <p class="text-white/90 italic mb-6 leading-relaxed">"Confidential, professional, and life-changing. If you're struggling, don't hesitate to reach out."</p>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">A</div>
+                                <div>
+                                    <p class="font-bold text-white">Anonymous</p>
+                                    <p class="text-sm text-white/60">Client</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Choose Section -->
+            <WhyChooseSection />
+
+            <!-- Pricing Section -->
+            <PricingSection pageType="couples" />
+
+            <!-- Booking Form -->
+            <BookingForm pageType="couples" />
+
+            <!-- FAQ Section -->
+            <section id="faq" class="py-24 bg-white">
+                <div class="max-w-4xl mx-auto px-6">
+                    <h2 class="text-4xl text-center mb-16 serif">Common Questions</h2>
+                    <div class="space-y-6">
+                        <details class="group bg-[#F8F5F0] rounded-2xl p-6">
+                            <summary class="list-none flex justify-between items-center cursor-pointer font-bold text-lg">
+                                Do both partners need to be present for every session?
+                                <svg class="w-6 h-6 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </summary>
+                            <div class="mt-4 text-gray-600 leading-relaxed">
+                                While primary progress happens together, your therapist may recommend individual check-ins to explore specific internal responses. However, for core relationship work, active participation from both partners is highly encouraged.
+                            </div>
+                        </details>
+                        <details class="group bg-[#F8F5F0] rounded-2xl p-6">
+                            <summary class="list-none flex justify-between items-center cursor-pointer font-bold text-lg">
+                                What if my partner is hesitant to join therapy?
+                                <svg class="w-6 h-6 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </summary>
+                            <div class="mt-4 text-gray-600 leading-relaxed">
+                                It's common for one partner to be more eager than the other. We recommend a low-pressure initial discovery session where your partner can voice their concerns and get to know the clinician's neutral, non-judgmental approach.
+                            </div>
+                        </details>
+                        <details class="group bg-[#F8F5F0] rounded-2xl p-6">
+                            <summary class="list-none flex justify-between items-center cursor-pointer font-bold text-lg">
+                                Why are couples sessions 60 minutes?
+                                <svg class="w-6 h-6 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </summary>
+                            <div class="mt-4 text-gray-600 leading-relaxed">
+                                Managing three voices in a room requires more time. We allocate 60 minutes to ensure both partners have dedicated space to share their perspectives without feeling rushed, allowing for deeper processing of complex dynamics.
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Emergency Footer -->
+            <section id="emergency" class="py-12 bg-red-50 border-t-2 border-red-100">
+                <div class="max-w-7xl mx-auto px-6 text-center">
+                    <h4 class="text-red-800 font-bold mb-4 uppercase tracking-widest text-sm flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                        Emergency Support
+                    </h4>
+                    <p class="text-red-700 max-w-2xl mx-auto text-sm">
+                        Psychology Zone is not a crisis service. If you or your partner are experiencing physical harm, domestic violence, or suicidal thoughts, please call <strong>988</strong> (Suicide & Crisis Lifeline) or your local emergency number immediately.
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-slate-900 text-slate-300 py-16 px-6">
+            <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
+                <div class="col-span-2">
+                    <a href="#" id="footer-logo" class="flex items-center gap-2 mb-6">
+                        <div class="flex items-center justify-center p-1.5 bg-orange-50 rounded-lg border border-orange-200">
+                            <div class="w-8 h-8 bg-orange-gradient rounded-md flex items-center justify-center shadow-inner transform rotate-3">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex flex-col leading-none">
+                            <span class="text-xl font-black text-[#D35400] tracking-tighter serif">PSYCHOLOGY</span>
+                            <span class="text-xs font-bold text-gray-400 tracking-[0.2em] uppercase -mt-0.5">ZONE</span>
+                        </div>
+                    </a>
+                    <p class="max-w-sm mb-8 leading-relaxed">
+                        Specialized online therapeutic services for couples seeking to heal, grow, and reconnect in a modern world.
+                    </p>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold mb-6 text-sm uppercase tracking-widest">Services</h5>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Conflict Resolution</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Infidelity Recovery</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Premarital Counseling</a></li>
+                        <li><a href="/privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold mb-6 text-sm uppercase tracking-widest">Contact</h5>
+                    <p class="text-sm mb-2"><a href="tel:+918968900002" class="text-[#D35400] font-semibold hover:underline">+91 89689 00002</a></p>
+                    <p class="text-sm"><a href="mailto:info@psychologyzone.in" class="text-[#D35400] font-semibold hover:underline">info@psychologyzone.in</a></p>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-slate-500">
+                <p>&copy; 2024 Psychology Zone. Therapeutic outcomes vary by participation.</p>
+                <div class="flex gap-8 mt-4 md:mt-0">
+                    <a href="/privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="/terms-and-conditions" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- WhatsApp Float -->
+        <a href="https://wa.me/918968900002?text=Hi%2C%20I%27d%20like%20to%20book%20couples%20therapy" class="fixed bottom-8 right-8 bg-[#25d366] w-16 h-16 rounded-full flex items-center justify-center shadow-xl shadow-green-500/40 z-50 hover:scale-110 transition-transform" target="_blank" aria-label="Chat on WhatsApp">
+            <svg viewBox="0 0 32 32" width="32" height="32" class="text-white">
+                <path fill="currentColor" d="M16 0C7.164 0 0 7.164 0 16c0 2.834.745 5.498 2.047 7.805L.08 31.92l8.355-2.047A15.934 15.934 0 0 0 16 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm9.484 22.574c-.398 1.12-1.98 2.046-3.234 2.314-.863.18-1.988.321-5.777-1.24-4.836-1.995-7.95-6.891-8.19-7.207-.24-.317-1.958-2.603-1.958-4.966s1.24-3.526 1.68-4.006c.44-.48.96-.6 1.28-.6.32 0 .64.002.92.016.295.014.691-.112 1.081.826.4.96 1.36 3.32 1.48 3.562.12.24.2.521.04.838-.16.317-.24.515-.48.797-.24.28-.504.627-.72.842-.24.24-.49.5-.21.98.28.48 1.243 2.048 2.668 3.318 1.835 1.635 3.38 2.143 3.86 2.383.48.24.76.2 1.04-.12.28-.32 1.2-1.4 1.52-1.88.32-.48.64-.4 1.08-.24.44.16 2.798 1.32 3.278 1.56.48.24.8.36.92.56.12.2.12 1.16-.28 2.28z"/>
+            </svg>
+        </a>
+    </div>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // GTM tracking for CTA clicks
+        document.querySelectorAll('[id*="cta"]').forEach(button => {
+            button.addEventListener('click', () => {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    event: 'cta_click',
+                    page: 'couples_therapy',
+                    button_id: button.id
+                });
+            });
+        });
+    </script>
+</Layout>

@@ -49,6 +49,10 @@ export interface Booking {
   updated_at?: string;
   cart_reminder_sent?: boolean;
   cart_reminder_sent_at?: string;
+  package_id?: string;
+  session_count?: number;
+  package_name?: string;
+  page_source?: string;
 }
 
 export interface BookingInput {
@@ -62,6 +66,10 @@ export interface BookingInput {
   appointment_time: string;
   razorpay_order_id: string;
   amount_paid: number;
+  package_id?: string;
+  session_count?: number;
+  package_name?: string;
+  page_source?: string;
 }
 
 // Create a new booking with pending status
@@ -80,6 +88,10 @@ export async function createBooking(input: BookingInput): Promise<{ data: Bookin
       payment_status: 'pending',
       razorpay_order_id: input.razorpay_order_id,
       amount_paid: input.amount_paid,
+      package_id: input.package_id,
+      session_count: input.session_count,
+      package_name: input.package_name,
+      page_source: input.page_source,
     };
 
     const { data, error } = await supabase
