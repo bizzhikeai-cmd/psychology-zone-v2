@@ -44,7 +44,6 @@ import Layout from '../layouts/Layout.astro';
 
         <!-- Price with Badge -->
         <div class="price-display">
-          <div class="price-badge">Limited Offer</div>
           <div class="price-main">
             <span class="price-currency">₹</span>
             <span class="price-amount">599</span>
@@ -664,6 +663,22 @@ import Layout from '../layouts/Layout.astro';
       tomorrow.setDate(tomorrow.getDate() + 1);
       const minDate = tomorrow.toISOString().split('T')[0];
       dateInput.min = minDate;
+
+      dateInput.addEventListener('change', function() {
+        const dateError = this.parentElement.querySelector('.date-error');
+        if (this.value < minDate) {
+          this.value = '';
+          if (!dateError) {
+            const msg = document.createElement('p');
+            msg.className = 'date-error';
+            msg.style.cssText = 'color:#dc2626;font-size:0.85rem;margin-top:4px;';
+            msg.textContent = 'That date has already passed. Please pick a date from tomorrow onwards.';
+            this.parentElement.appendChild(msg);
+          }
+        } else if (dateError) {
+          dateError.remove();
+        }
+      });
     }
 
     // Track form start (first field focus)

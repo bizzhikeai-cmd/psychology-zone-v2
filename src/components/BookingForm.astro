@@ -358,6 +358,22 @@ const timeLabels: Record<string, string> = {
       tomorrow.setDate(tomorrow.getDate() + 1);
       const minDate = tomorrow.toISOString().split('T')[0];
       dateInput.min = minDate;
+
+      dateInput.addEventListener('change', function() {
+        const dateError = this.parentElement.querySelector('.date-error');
+        if (this.value < minDate) {
+          this.value = '';
+          if (!dateError) {
+            const msg = document.createElement('p');
+            msg.className = 'date-error';
+            msg.style.cssText = 'color:#dc2626;font-size:0.85rem;margin-top:4px;';
+            msg.textContent = 'That date has already passed. Please pick a date from tomorrow onwards.';
+            this.parentElement.appendChild(msg);
+          }
+        } else if (dateError) {
+          dateError.remove();
+        }
+      });
     }
 
     // Track form start
