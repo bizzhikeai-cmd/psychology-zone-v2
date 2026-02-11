@@ -5,7 +5,6 @@
   "framework": "astro",
   "public": true,
   "cleanUrls": true,
-  "trailingSlash": true,
   "crons": [
     {
       "path": "/api/cron/abandoned-cart",
@@ -17,6 +16,27 @@
     }
   ],
   "headers": [
+    {
+      "source": "/admin",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate, private"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    },
     {
       "source": "/admin/(.*)",
       "headers": [

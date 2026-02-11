@@ -5,7 +5,7 @@ import { interaktService } from '../../../lib/interakt';
 export const GET: APIRoute = async ({ request }) => {
   // Verify cron secret to prevent unauthorized calls
   const authHeader = request.headers.get('authorization');
-  const cronSecret = import.meta.env.CRON_SECRET || process.env.CRON_SECRET;
+  const cronSecret = (import.meta.env.CRON_SECRET || process.env.CRON_SECRET || '').trim();
   
   // Allow calls from Vercel Cron
   const isVercelCron = request.headers.get('x-vercel-cron') === '1';

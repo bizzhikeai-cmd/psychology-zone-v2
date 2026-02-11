@@ -12,7 +12,9 @@ class EmailService {
   private from: string;
 
   constructor() {
-    this.apiKey = import.meta.env.RESEND_API_KEY || process.env.RESEND_API_KEY || '';
+    // Use both import.meta.env and process.env fallback for Vercel serverless compatibility
+    // Also trim to handle any newline corruption in environment variables
+    this.apiKey = (import.meta.env.RESEND_API_KEY || process.env.RESEND_API_KEY || '').trim();
     // Using verified domain
     this.from = 'Psychology Zone <noreply@psychologyzone.in>';
   }
@@ -21,7 +23,7 @@ class EmailService {
    * Send new booking notification to admin
    */
   async sendNewBookingAlert(booking: any): Promise<{ success: boolean; error?: string }> {
-    const adminEmailStr = import.meta.env.ADMIN_EMAIL || process.env.ADMIN_EMAIL || '';
+    const adminEmailStr = (import.meta.env.ADMIN_EMAIL || process.env.ADMIN_EMAIL || '').trim();
 
     if (!adminEmailStr) {
       console.warn('Admin email not configured');

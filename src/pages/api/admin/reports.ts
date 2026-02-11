@@ -1,5 +1,4 @@
 import type { APIRoute } from 'astro';
-import { getBookings, getBookingStats } from '../../../lib/supabase';
 import { verifySessionToken } from '../../../lib/auth';
 import { getAdminSession } from '../../../lib/cookies';
 
@@ -16,42 +15,35 @@ export const GET: APIRoute = async ({ request }) => {
       );
     }
 
-    // Parse query parameters
+    // Parse query parameters for report filtering
     const url = new URL(request.url);
-    const status = url.searchParams.get('status') as 'pending' | 'completed' | 'failed' | null;
-    const includeStats = url.searchParams.get('stats') === 'true';
+    const reportType = url.searchParams.get('type');
+    const startDate = url.searchParams.get('startDate');
+    const endDate = url.searchParams.get('endDate');
 
-    // Fetch bookings
-    const { data: bookings, error: bookingsError } = await getBookings(status || undefined);
-
-    if (bookingsError) {
-      return new Response(
-        JSON.stringify({ error: 'Failed to fetch bookings' }),
-        { status: 500, headers: { 'Content-Type': 'application/json' } }
-      );
-    }
-
-    // Optionally fetch stats
-    let stats = null;
-    if (includeStats) {
-      const { data: statsData } = await getBookingStats();
-      stats = statsData;
-    }
+    // TODO: Implement your report generation logic here
+    // This is a placeholder for the actual report data
+    const reportData = {
+      type: reportType || 'summary',
+      period: {
+        start: startDate,
+        end: endDate
+      },
+      generated_at: new Date().toISOString()
+    };
 
     return new Response(
       JSON.stringify({
         success: true,
-        bookings,
-        stats,
-        count: bookings?.length || 0
+        report: reportData
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Admin bookings API error:', error);
+    console.error('Admin reports API error:', error);
     return new Response(
-      JSON.stringify({ 
-        error: error instanceof Error ? error.message : 'Internal server error' 
+      JSON.stringify({
+        error: error instanceof Error ? error.message : 'Internal server error'
       }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );

@@ -1,17 +1,51 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { verifySessionToken } from '../../lib/auth';
+import { getAdminSession } from '../../lib/cookies';
 
-// Check if already logged in
-const adminSession = Astro.cookies.get('admin_session')?.value;
-const adminPassword = import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
+// Set response headers to prevent ANY caching
+Astro.response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate, private, max-age=0');
+Astro.response.headers.set('Pragma', 'no-cache');
+Astro.response.headers.set('Expires', '0');
 
-if (adminSession && adminPassword && verifySessionToken(adminSession, adminPassword)) {
-  return Astro.redirect('/admin');
+// Get admin password from environment
+const adminPassword = (import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || '').trim();
+
+// Read cookie from raw request header (more reliable in Vercel)
+const adminSession = getAdminSession(Astro.request);
+
+// Debug logging
+console.log('Login page auth check:', {
+  hasSession: !!adminSession,
+  hasPassword: !!adminPassword
+});
+
+// CRITICAL FIX: Always clear any existing cookie on login page
+// This breaks redirect loops caused by stale cookies
+// The Set-Cookie header must be processed BEFORE any redirect happens
+Astro.response.headers.set('Set-Cookie', 'admin_session=; Path=/; HttpOnly; Max-Age=0; SameSite=Lax');
+
+// Check if user has valid session (for client-side redirect only)
+let isAuthenticated = false;
+if (adminSession && adminPassword) {
+  isAuthenticated = verifySessionToken(adminSession, adminPassword);
+  console.log('Login page - session verification:', isAuthenticated);
 }
+
+// ALWAYS show login form on server side
+// Client-side JS will redirect if already authenticated
+// This prevents redirect loops in Vercel serverless
 ---
 
 <Layout title="Admin Login - Psychology Zone">
+  {/* Client-side redirect for already authenticated users */}
+  {isAuthenticated && (
+    <script is:inline>
+      // User is already authenticated - redirect to dashboard
+      // This happens client-side AFTER the Set-Cookie header clears any bad cookies
+      window.location.replace('/admin');
+    </script>
+  )}
   <main class="login-page">
     <div class="login-container">
       <div class="login-card">

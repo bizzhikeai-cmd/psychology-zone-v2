@@ -2,14 +2,16 @@ import { createClient } from '@supabase/supabase-js';
 import { customAlphabet } from 'nanoid';
 
 // Initialize Supabase client
-const supabaseUrl = import.meta.env.SUPABASE_URL;
-const supabaseServiceKey = import.meta.env.SUPABASE_SERVICE_KEY;
+// Use both import.meta.env and process.env fallback for Vercel serverless compatibility
+// Also trim to handle any newline corruption in environment variables
+const supabaseUrl = (import.meta.env.SUPABASE_URL || process.env.SUPABASE_URL || '').trim();
+const supabaseServiceKey = (import.meta.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_KEY || '').trim();
 
 if (!supabaseUrl || !supabaseServiceKey) {
   console.warn('Supabase credentials not configured');
 }
 
-export const supabase = createClient(supabaseUrl || '', supabaseServiceKey || '');
+export const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 // Generate booking reference number (PZ-2025-XXXX format)
 const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4);
@@ -37,6 +39,7 @@ export interface Booking {
   razorpay_order_id: string;
   razorpay_payment_id?: string;
   amount_paid: number;
+  payment_completed_at?: string;
   failure_reason?: string;
   session_status?: 'scheduled' | 'completed' | 'cancelled' | 'no-show';
   session_completed_at?: string;
@@ -116,6 +119,7 @@ export async function completeBooking(
       .update({
         payment_status: 'completed',
         razorpay_payment_id: razorpayPaymentId,
+        payment_completed_at: new Date().toISOString(),
       })
       .eq('razorpay_order_id', razorpayOrderId)
       .select()

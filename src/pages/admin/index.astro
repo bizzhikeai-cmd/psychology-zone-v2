@@ -2,15 +2,82 @@
 import Layout from '../../layouts/Layout.astro';
 import { getBookings, getBookingStats } from '../../lib/supabase';
 import { verifySessionToken } from '../../lib/auth';
+import { getAdminSession } from '../../lib/cookies';
 
-// Check authentication
-const adminSession = Astro.cookies.get('admin_session')?.value;
-const adminPassword = import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
+// Set response headers to prevent ANY caching
+Astro.response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate, private, max-age=0');
+Astro.response.headers.set('Pragma', 'no-cache');
+Astro.response.headers.set('Expires', '0');
 
-// Verify session token with HMAC signature
-if (!adminSession || !adminPassword || !verifySessionToken(adminSession, adminPassword)) {
-  return Astro.redirect('/admin/login');
+// Get admin password from environment
+const adminPassword = (import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || '').trim();
+
+// Read cookie from raw request header (more reliable in Vercel than Astro.cookies.get)
+const adminSession = getAdminSession(Astro.request);
+
+// Timestamp for debugging - proves this is a fresh render
+const renderTimestamp = new Date().toISOString();
+
+// Debug logging
+console.log('Admin page auth check:', {
+  hasSession: !!adminSession,
+  hasPassword: !!adminPassword
+});
+
+// Verify session - must have both cookie and password
+if (!adminSession || !adminPassword) {
+  console.log('Auth failed - no session or password');
+  // CRITICAL FIX: Use HTML meta-refresh instead of 302 redirect
+  // This allows the browser to process Set-Cookie BEFORE redirecting
+  // Prevents redirect loops in Vercel serverless
+  return new Response(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url=/admin/login">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Redirecting to login...</p>
+</body>
+</html>`, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/html',
+      'Set-Cookie': 'admin_session=; Path=/; HttpOnly; Max-Age=0; SameSite=Lax',
+      'Cache-Control': 'no-cache, no-store, must-revalidate, private, max-age=0'
+    }
+  });
 }
+
+// Verify the session token
+const isValid = verifySessionToken(adminSession, adminPassword);
+console.log('Admin page - session verification:', isValid);
+
+if (!isValid) {
+  // Invalid/stale cookie - clear it using HTML meta-refresh
+  console.log('Admin page - clearing invalid cookie and redirecting');
+  return new Response(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url=/admin/login">
+  <title>Session Expired</title>
+</head>
+<body>
+  <p>Session expired. Redirecting to login...</p>
+</body>
+</html>`, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/html',
+      'Set-Cookie': 'admin_session=; Path=/; HttpOnly; Max-Age=0; SameSite=Lax',
+      'Cache-Control': 'no-cache, no-store, must-revalidate, private, max-age=0'
+    }
+  });
+}
+
+console.log('Auth successful - loading dashboard');
 
 // Fetch initial data
 const statusFilter = Astro.url.searchParams.get('status') as 'pending' | 'completed' | 'failed' | null;
