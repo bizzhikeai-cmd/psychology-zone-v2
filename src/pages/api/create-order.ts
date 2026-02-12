@@ -28,9 +28,6 @@ export const POST: APIRoute = async ({ request }) => {
       'problem',
       'appointment_date',
       'appointment_time',
-      'package_id',
-      'session_count',
-      'package_name',
       'page_source'
     ];
 
@@ -43,27 +40,14 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    // Validate package_id and get pricing
-    const packageId = data.package_id as keyof typeof PACKAGES;
-    if (!PACKAGES[packageId]) {
-      const validPackages = ENABLE_BUNDLE_PRICING
-        ? 'single, starter, popular, or premium'
-        : 'single';
-      return new Response(
-        JSON.stringify({ error: `Invalid package_id. Must be: ${validPackages}` }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
-      );
-    }
-
-    const packageInfo = PACKAGES[packageId];
-
-    // Validate session count matches package
-    if (packageInfo.sessions !== data.session_count) {
-      return new Response(
-        JSON.stringify({ error: 'Session count does not match selected package' }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
-      );
-    }
+    // Normalize package data (always fallback to single package if client sends stale/invalid values)
+    const requestedPackageId = typeof data.package_id === 'string' ? data.package_id : 'single';
+    const normalizedPackageId = requestedPackageId in PACKAGES
+      ? (requestedPackageId as keyof typeof PACKAGES)
+      : 'single';
+    const packageInfo = PACKAGES[normalizedPackageId];
+    const normalizedSessionCount = packageInfo.sessions;
+    const normalizedPackageName = packageInfo.name;
 
     // Amount in paise
     const amount = packageInfo.price;
@@ -80,9 +64,9 @@ export const POST: APIRoute = async ({ request }) => {
         problem: data.problem,
         appointment_date: data.appointment_date,
         appointment_time: data.appointment_time,
-        package_id: data.package_id,
-        package_name: data.package_name,
-        session_count: data.session_count,
+        package_id: normalizedPackageId,
+        package_name: normalizedPackageName,
+        session_count: normalizedSessionCount,
         page_source: data.page_source
       }
     });
@@ -112,9 +96,9 @@ export const POST: APIRoute = async ({ request }) => {
       appointment_time: data.appointment_time,
       razorpay_order_id: order.id,
       amount_paid: amount,
-      package_id: data.package_id,
-      session_count: data.session_count,
-      package_name: data.package_name,
+      package_id: normalizedPackageId,
+      session_count: normalizedSessionCount,
+      package_name: normalizedPackageName,
       page_source: data.page_source
     });
 
