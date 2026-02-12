@@ -303,7 +303,14 @@ const timeLabels: Record<string, string> = {
 </style>
 
 <script define:vars={{ pageType, enableBundles, singlePrice }}>
-  const validBundlePackageIds = ['starter', 'popular', 'premium'];
+  const fixedSinglePackage = {
+    id: 'single',
+    name: 'SINGLE SESSION',
+    sessions: 1,
+    price: singlePrice / 100,
+    pricePaise: singlePrice,
+    perSession: singlePrice / 100
+  };
 
   // Lazy load Razorpay SDK
   let razorpayLoaded = false;
@@ -325,53 +332,25 @@ const timeLabels: Record<string, string> = {
 
   // Function to update package display
   function updatePackageDisplay() {
-    const packageData = sessionStorage.getItem('selectedPackage');
-    if (packageData) {
-      let pkg;
-      try {
-        pkg = JSON.parse(packageData);
-      } catch {
-        sessionStorage.removeItem('selectedPackage');
-        return;
-      }
+    const packageDisplay = document.getElementById('packageDisplay');
+    const packageName = document.getElementById('packageName');
+    const packageDetails = document.getElementById('packageDetails');
+    const packagePrice = document.getElementById('packagePrice');
+    const packagePerSession = document.getElementById('packagePerSession');
 
-      if (enableBundles && !validBundlePackageIds.includes(pkg.id)) {
-        sessionStorage.removeItem('selectedPackage');
-        const packageDisplay = document.getElementById('packageDisplay');
-        if (packageDisplay) {
-          packageDisplay.classList.add('hidden');
-        }
-        return;
-      }
-
-      const packageDisplay = document.getElementById('packageDisplay');
-      const packageName = document.getElementById('packageName');
-      const packageDetails = document.getElementById('packageDetails');
-      const packagePrice = document.getElementById('packagePrice');
-      const packagePerSession = document.getElementById('packagePerSession');
-
-      if (packageDisplay && packageName && packageDetails && packagePrice && packagePerSession) {
-        packageDisplay.classList.remove('hidden');
-        packageName.textContent = pkg.name;
-        packageDetails.textContent = `${pkg.sessions} ${pkg.sessions === 1 ? 'Session' : 'Sessions'}`;
-        packagePrice.textContent = `₹${pkg.price.toLocaleString('en-IN')}`;
-        if (pkg.perSession !== pkg.price) {
-          packagePerSession.textContent = `₹${pkg.perSession}/session`;
-        } else {
-          packagePerSession.textContent = '';
-        }
-      }
+    if (packageDisplay && packageName && packageDetails && packagePrice && packagePerSession) {
+      packageDisplay.classList.remove('hidden');
+      packageName.textContent = fixedSinglePackage.name;
+      packageDetails.textContent = `${fixedSinglePackage.sessions} Session`;
+      packagePrice.textContent = `₹${fixedSinglePackage.price.toLocaleString('en-IN')}`;
+      packagePerSession.textContent = '';
     }
   }
 
   // Display selected package on page load
   document.addEventListener('DOMContentLoaded', () => {
+    sessionStorage.removeItem('selectedPackage');
     updatePackageDisplay();
-
-    // In single-session mode, ignore any stale bundled package selection
-    if (!enableBundles) {
-      sessionStorage.removeItem('selectedPackage');
-    }
 
     // Listen for package selection changes
     window.addEventListener('packageSelected', () => {
@@ -460,45 +439,7 @@ const timeLabels: Record<string, string> = {
         const submitBtn = bookingForm.querySelector('button[type="submit"]');
         const errorDiv = document.getElementById('formError');
 
-        // Get selected package
-        const packageData = sessionStorage.getItem('selectedPackage');
-        let parsedPackage = null;
-        if (packageData) {
-          try {
-            parsedPackage = JSON.parse(packageData);
-          } catch {
-            sessionStorage.removeItem('selectedPackage');
-          }
-        }
-
-        // In bundle mode, only allow expected package IDs
-        if (enableBundles && parsedPackage && !validBundlePackageIds.includes(parsedPackage.id)) {
-          parsedPackage = null;
-          sessionStorage.removeItem('selectedPackage');
-        }
-
-        // Only require manual selection if bundles are enabled
-        if (!parsedPackage && enableBundles) {
-          errorDiv.textContent = 'Please select a package first';
-          errorDiv.classList.remove('hidden');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          return;
-        }
-
-        // In single-session mode, always force `single` package (ignore stale sessionStorage data)
-        let selectedPackage;
-        if (!enableBundles) {
-          selectedPackage = {
-            id: 'single',
-            name: 'SINGLE SESSION',
-            sessions: 1,
-            price: singlePrice / 100,
-            pricePaise: singlePrice,
-            perSession: singlePrice / 100
-          };
-        } else {
-          selectedPackage = parsedPackage;
-        }
+        const selectedPackage = fixedSinglePackage;
 
         // Get form data
         const formData = {

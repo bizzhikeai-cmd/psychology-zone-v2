@@ -2,11 +2,17 @@ import type { APIRoute } from 'astro';
 import { createOrder, getRazorpayKeyId } from '../../lib/razorpay';
 import { createBooking } from '../../lib/supabase';
 
-// Package pricing configuration
+// Package pricing configuration - conditional based on environment
+const ENABLE_BUNDLE_PRICING = import.meta.env.ENABLE_BUNDLE_PRICING === 'true';
+const SINGLE_SESSION_PRICE = parseInt(import.meta.env.SINGLE_SESSION_PRICE || '59900');
+
 const PACKAGES = {
-  starter: { sessions: 1, price: 79900, name: 'STARTER' },    // ₹799
-  popular: { sessions: 3, price: 164700, name: 'POPULAR' },   // ₹1,647
-  premium: { sessions: 5, price: 249500, name: 'PREMIUM' }    // ₹2,495
+  single: { sessions: 1, price: SINGLE_SESSION_PRICE, name: 'SINGLE SESSION' },  // ₹599
+  ...(ENABLE_BUNDLE_PRICING ? {
+    starter: { sessions: 1, price: 79900, name: 'STARTER' },    // ₹799
+    popular: { sessions: 3, price: 164700, name: 'POPULAR' },   // ₹1,647
+    premium: { sessions: 5, price: 249500, name: 'PREMIUM' }    // ₹2,495
+  } : {})
 } as const;
 
 export const POST: APIRoute = async ({ request }) => {
@@ -40,8 +46,11 @@ export const POST: APIRoute = async ({ request }) => {
     // Validate package_id and get pricing
     const packageId = data.package_id as keyof typeof PACKAGES;
     if (!PACKAGES[packageId]) {
+      const validPackages = ENABLE_BUNDLE_PRICING
+        ? 'single, starter, popular, or premium'
+        : 'single';
       return new Response(
-        JSON.stringify({ error: 'Invalid package_id. Must be: starter, popular, or premium' }),
+        JSON.stringify({ error: `Invalid package_id. Must be: ${validPackages}` }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
