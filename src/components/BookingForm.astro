@@ -1,10 +1,14 @@
 ---
 // BookingForm Component - Displays booking form with selected package and Razorpay integration
 interface Props {
-  pageType: 'psychologist' | 'therapy' | 'couples';
+  pageType: 'psychologist' | 'therapy' | 'couples' | 'homepage';
 }
 
 const { pageType } = Astro.props;
+
+// Check if bundle pricing is enabled
+const enableBundles = import.meta.env.ENABLE_BUNDLE_PRICING === 'true';
+const singlePrice = parseInt(import.meta.env.SINGLE_SESSION_PRICE || '59900');
 
 const problemOptions = [
   { value: 'feeling-low', label: 'Feeling Low' },
@@ -59,7 +63,7 @@ const timeLabels: Record<string, string> = {
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-12 items-start">
       {/* Booking Form */}
-      <div class="lg:col-span-2 order-2 lg:order-1">
+      <div id="booking-form" class="lg:col-span-2 order-2 lg:order-1">
         {/* Selected Package Display */}
         <div id="packageDisplay" class="bg-white p-6 rounded-2xl shadow-lg mb-6 hidden">
           <div class="flex items-center justify-between">
@@ -298,7 +302,7 @@ const timeLabels: Record<string, string> = {
   }
 </style>
 
-<script define:vars={{ pageType }}>
+<script define:vars={{ pageType, enableBundles, singlePrice }}>
   // Lazy load Razorpay SDK
   let razorpayLoaded = false;
   function loadRazorpay() {
@@ -435,14 +439,26 @@ const timeLabels: Record<string, string> = {
 
         // Get selected package
         const packageData = sessionStorage.getItem('selectedPackage');
-        if (!packageData) {
+
+        // Only require manual selection if bundles are enabled
+        if (!packageData && enableBundles) {
           errorDiv.textContent = 'Please select a package first';
           errorDiv.classList.remove('hidden');
           window.scrollTo({ top: 0, behavior: 'smooth' });
           return;
         }
 
-        const selectedPackage = JSON.parse(packageData);
+        // Auto-create single package if bundles disabled and no selection exists
+        const selectedPackage = packageData
+          ? JSON.parse(packageData)
+          : {
+              id: 'single',
+              name: 'SINGLE SESSION',
+              sessions: 1,
+              price: singlePrice / 100,
+              pricePaise: singlePrice,
+              perSession: singlePrice / 100
+            };
 
         // Get form data
         const formData = {
