@@ -9,7 +9,7 @@ import BookingForm from "../components/BookingForm.astro";
     title="Talk to a Therapist Online | Your Safe Space for Therapy | Psychology Zone"
 >
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'DM Sans', sans-serif; }
         .font-serif { font-family: 'Lora', serif; }
         .bg-orange-gradient { background: linear-gradient(135deg, #D35400 0%, #E67E22 100%); }
         .text-sage { color: #6B8E7B; }
@@ -21,19 +21,9 @@ import BookingForm from "../components/BookingForm.astro";
         <!-- Navigation -->
         <nav class="fixed w-full z-50 bg-[#F8F5F0]/90 backdrop-blur-md border-b border-stone-200/60 top-0">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <div class="flex items-center justify-center p-1.5 bg-orange-50 rounded-lg border border-orange-200">
-                        <div class="w-9 h-9 bg-orange-gradient rounded-md flex items-center justify-center shadow-inner transform rotate-3">
-                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="flex flex-col leading-none">
-                        <span class="text-xl sm:text-2xl font-black text-[#D35400] tracking-tighter" style="font-family: 'Lora', serif;">PSYCHOLOGY</span>
-                        <span class="text-xs sm:text-sm font-bold text-gray-400 tracking-[0.2em] uppercase -mt-0.5 ml-0.5">ZONE</span>
-                    </div>
-                </div>
+                <a href="/" class="flex items-center">
+                    <img src="/logo.png" alt="Psychology Zone" class="h-10 sm:h-12 w-auto" />
+                </a>
                 <div class="hidden lg:flex items-center gap-10 text-sm font-medium text-stone-600">
                     <a href="#approach" id="nav-approach-link" class="hover:text-[#D35400] transition-colors">Our Philosophy</a>
                     <a href="#services" id="nav-services-link" class="hover:text-[#D35400] transition-colors">Support Areas</a>
@@ -343,7 +333,7 @@ import BookingForm from "../components/BookingForm.astro";
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="group cursor-pointer">
                         <div class="rounded-2xl sm:rounded-[3rem] overflow-hidden mb-6 aspect-square opacity-90 group-hover:opacity-100 transition-all duration-500">
-                            <img src="/images/therapist-pooja.webp" alt="Ms. Pooja - Relationship Expert" class="w-full h-full object-cover">
+                            <img src="/images/therapist-pooja.webp" alt="Ms. Pooja - Relationship Expert" class="w-full h-full object-cover object-top" width="400" height="399" loading="lazy">
                         </div>
                         <h3 class="text-xl font-bold text-stone-900">Ms. Pooja</h3>
                         <p class="text-[#6B8E7B] font-medium mb-3 italic">Relationship & Mental Health Expert</p>
@@ -351,7 +341,7 @@ import BookingForm from "../components/BookingForm.astro";
                     </div>
                     <div class="group cursor-pointer">
                         <div class="rounded-2xl sm:rounded-[3rem] overflow-hidden mb-6 aspect-square opacity-90 group-hover:opacity-100 transition-all duration-500">
-                            <img src="/images/therapist-sukriti.webp" alt="Ms. Sukriti - Clinical Psychologist" class="w-full h-full object-cover">
+                            <img src="/images/therapist-sukriti.webp" alt="Ms. Sukriti - Clinical Psychologist" class="w-full h-full object-cover object-top" width="300" height="300" loading="lazy">
                         </div>
                         <h3 class="text-xl font-bold text-stone-900">Ms. Sukriti</h3>
                         <p class="text-[#6B8E7B] font-medium mb-3 italic">Clinical & Counseling Psychologist</p>
@@ -359,7 +349,7 @@ import BookingForm from "../components/BookingForm.astro";
                     </div>
                     <div class="group cursor-pointer">
                         <div class="rounded-2xl sm:rounded-[3rem] overflow-hidden mb-6 aspect-square opacity-90 group-hover:opacity-100 transition-all duration-500">
-                            <img src="/images/therapist-jaismeen.jpg" alt="Jyotsna Mohanta" class="w-full h-full object-cover">
+                            <img src="/images/therapist-jaismeen.webp" alt="Jyotsna Mohanta" class="w-full h-full object-cover object-top" width="800" height="600" loading="lazy">
                         </div>
                         <h3 class="text-xl font-bold text-stone-900">Jyotsna Mohanta</h3>
                         <p class="text-[#6B8E7B] font-medium mb-3 italic">NLP Expert & Life Coach</p>
@@ -367,7 +357,7 @@ import BookingForm from "../components/BookingForm.astro";
                     </div>
                     <div class="group cursor-pointer">
                         <div class="rounded-2xl sm:rounded-[3rem] overflow-hidden mb-6 aspect-square opacity-90 group-hover:opacity-100 transition-all duration-500">
-                            <img src="/images/therapist-sharmila.jpg" alt="Sharmila Masih" class="w-full h-full object-cover">
+                            <img src="/images/therapist-sharmila.webp" alt="Sharmila Masih" class="w-full h-full object-cover object-top" width="424" height="453" loading="lazy">
                         </div>
                         <h3 class="text-xl font-bold text-stone-900">Sharmila Masih</h3>
                         <p class="text-[#6B8E7B] font-medium mb-3 italic">Clinical Psychologist</p>
@@ -375,7 +365,7 @@ import BookingForm from "../components/BookingForm.astro";
                     </div>
                     <div class="group cursor-pointer">
                         <div class="rounded-2xl sm:rounded-[3rem] overflow-hidden mb-6 aspect-square opacity-90 group-hover:opacity-100 transition-all duration-500">
-                            <img src="/images/therapist-lekha.webp" alt="Lekha Murali" class="w-full h-full object-cover">
+                            <img src="/images/therapist-lekha.webp" alt="Lekha Murali" class="w-full h-full object-cover object-top" width="593" height="949" loading="lazy">
                         </div>
                         <h3 class="text-xl font-bold text-stone-900">Lekha Murali</h3>
                         <p class="text-[#6B8E7B] font-medium mb-3 italic">PhD Psychology</p>
@@ -383,7 +373,7 @@ import BookingForm from "../components/BookingForm.astro";
                     </div>
                     <div class="group cursor-pointer">
                         <div class="rounded-2xl sm:rounded-[3rem] overflow-hidden mb-6 aspect-square opacity-90 group-hover:opacity-100 transition-all duration-500">
-                            <img src="/images/therapist-jyotsna.jpg" alt="Dr. Jaismeen Kaur" class="w-full h-full object-cover">
+                            <img src="/images/therapist-jyotsna.webp" alt="Dr. Jaismeen Kaur" class="w-full h-full object-cover object-top" width="601" height="800" loading="lazy">
                         </div>
                         <h3 class="text-xl font-bold text-stone-900">Dr. Jaismeen Kaur</h3>
                         <p class="text-[#6B8E7B] font-medium mb-3 italic">Choice Theory & Reality Therapy</p>
@@ -450,19 +440,9 @@ import BookingForm from "../components/BookingForm.astro";
         <footer class="bg-white pt-12 sm:pt-20 pb-10 border-t border-stone-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-12 sm:mb-20">
                 <div class="col-span-1 lg:col-span-1">
-                    <div class="flex items-center gap-2 mb-6">
-                        <div class="flex items-center justify-center p-1.5 bg-orange-50 rounded-lg border border-orange-200">
-                            <div class="w-8 h-8 bg-orange-gradient rounded-md flex items-center justify-center shadow-inner transform rotate-3">
-                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="flex flex-col leading-none">
-                            <span class="text-xl font-black text-[#D35400] tracking-tighter" style="font-family: 'Lora', serif;">PSYCHOLOGY</span>
-                            <span class="text-xs font-bold text-gray-400 tracking-[0.2em] uppercase -mt-0.5">ZONE</span>
-                        </div>
-                    </div>
+                    <a href="/" class="mb-6 inline-block">
+                        <img src="/logo.png" alt="Psychology Zone" class="h-10 w-auto" />
+                    </a>
                     <p class="text-stone-500 text-sm leading-relaxed mb-6">Supportive therapy for real life. We focus on your growth and healing in a warm, accessible online environment.</p>
                 </div>
                 <div>
@@ -499,12 +479,6 @@ import BookingForm from "../components/BookingForm.astro";
             </div>
         </footer>
 
-        <!-- WhatsApp Float -->
-        <a href="https://wa.me/918968900002?text=Hi%2C%20I%27d%20like%20to%20talk%20to%20a%20therapist" class="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 bg-[#25d366] w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-xl shadow-green-500/40 z-50 hover:scale-110 transition-transform" target="_blank" aria-label="Chat on WhatsApp">
-            <svg viewBox="0 0 32 32" width="32" height="32" class="text-white">
-                <path fill="currentColor" d="M16 0C7.164 0 0 7.164 0 16c0 2.834.745 5.498 2.047 7.805L.08 31.92l8.355-2.047A15.934 15.934 0 0 0 16 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm9.484 22.574c-.398 1.12-1.98 2.046-3.234 2.314-.863.18-1.988.321-5.777-1.24-4.836-1.995-7.95-6.891-8.19-7.207-.24-.317-1.958-2.603-1.958-4.966s1.24-3.526 1.68-4.006c.44-.48.96-.6 1.28-.6.32 0 .64.002.92.016.295.014.691-.112 1.081.826.4.96 1.36 3.32 1.48 3.562.12.24.2.521.04.838-.16.317-.24.515-.48.797-.24.28-.504.627-.72.842-.24.24-.49.5-.21.98.28.48 1.243 2.048 2.668 3.318 1.835 1.635 3.38 2.143 3.86 2.383.48.24.76.2 1.04-.12.28-.32 1.2-1.4 1.52-1.88.32-.48.64-.4 1.08-.24.44.16 2.798 1.32 3.278 1.56.48.24.8.36.92.56.12.2.12 1.16-.28 2.28z"/>
-            </svg>
-        </a>
     </div>
 
     <script>
