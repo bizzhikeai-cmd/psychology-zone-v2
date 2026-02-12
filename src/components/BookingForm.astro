@@ -350,6 +350,11 @@ const timeLabels: Record<string, string> = {
   document.addEventListener('DOMContentLoaded', () => {
     updatePackageDisplay();
 
+    // In single-session mode, ignore any stale bundled package selection
+    if (!enableBundles) {
+      sessionStorage.removeItem('selectedPackage');
+    }
+
     // Listen for package selection changes
     window.addEventListener('packageSelected', () => {
       updatePackageDisplay();
@@ -448,17 +453,29 @@ const timeLabels: Record<string, string> = {
           return;
         }
 
-        // Auto-create single package if bundles disabled and no selection exists
-        const selectedPackage = packageData
-          ? JSON.parse(packageData)
-          : {
-              id: 'single',
-              name: 'SINGLE SESSION',
-              sessions: 1,
-              price: singlePrice / 100,
-              pricePaise: singlePrice,
-              perSession: singlePrice / 100
-            };
+        // In single-session mode, always force `single` package (ignore stale sessionStorage data)
+        let selectedPackage;
+        if (!enableBundles) {
+          selectedPackage = {
+            id: 'single',
+            name: 'SINGLE SESSION',
+            sessions: 1,
+            price: singlePrice / 100,
+            pricePaise: singlePrice,
+            perSession: singlePrice / 100
+          };
+        } else {
+          selectedPackage = packageData
+            ? JSON.parse(packageData)
+            : {
+                id: 'single',
+                name: 'SINGLE SESSION',
+                sessions: 1,
+                price: singlePrice / 100,
+                pricePaise: singlePrice,
+                perSession: singlePrice / 100
+              };
+        }
 
         // Get form data
         const formData = {
