@@ -303,6 +303,8 @@ const timeLabels: Record<string, string> = {
 </style>
 
 <script define:vars={{ pageType, enableBundles, singlePrice }}>
+  const validBundlePackageIds = ['starter', 'popular', 'premium'];
+
   // Lazy load Razorpay SDK
   let razorpayLoaded = false;
   function loadRazorpay() {
@@ -325,7 +327,23 @@ const timeLabels: Record<string, string> = {
   function updatePackageDisplay() {
     const packageData = sessionStorage.getItem('selectedPackage');
     if (packageData) {
-      const pkg = JSON.parse(packageData);
+      let pkg;
+      try {
+        pkg = JSON.parse(packageData);
+      } catch {
+        sessionStorage.removeItem('selectedPackage');
+        return;
+      }
+
+      if (enableBundles && !validBundlePackageIds.includes(pkg.id)) {
+        sessionStorage.removeItem('selectedPackage');
+        const packageDisplay = document.getElementById('packageDisplay');
+        if (packageDisplay) {
+          packageDisplay.classList.add('hidden');
+        }
+        return;
+      }
+
       const packageDisplay = document.getElementById('packageDisplay');
       const packageName = document.getElementById('packageName');
       const packageDetails = document.getElementById('packageDetails');
@@ -444,9 +462,23 @@ const timeLabels: Record<string, string> = {
 
         // Get selected package
         const packageData = sessionStorage.getItem('selectedPackage');
+        let parsedPackage = null;
+        if (packageData) {
+          try {
+            parsedPackage = JSON.parse(packageData);
+          } catch {
+            sessionStorage.removeItem('selectedPackage');
+          }
+        }
+
+        // In bundle mode, only allow expected package IDs
+        if (enableBundles && parsedPackage && !validBundlePackageIds.includes(parsedPackage.id)) {
+          parsedPackage = null;
+          sessionStorage.removeItem('selectedPackage');
+        }
 
         // Only require manual selection if bundles are enabled
-        if (!packageData && enableBundles) {
+        if (!parsedPackage && enableBundles) {
           errorDiv.textContent = 'Please select a package first';
           errorDiv.classList.remove('hidden');
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -465,16 +497,7 @@ const timeLabels: Record<string, string> = {
             perSession: singlePrice / 100
           };
         } else {
-          selectedPackage = packageData
-            ? JSON.parse(packageData)
-            : {
-                id: 'single',
-                name: 'SINGLE SESSION',
-                sessions: 1,
-                price: singlePrice / 100,
-                pricePaise: singlePrice,
-                perSession: singlePrice / 100
-              };
+          selectedPackage = parsedPackage;
         }
 
         // Get form data
