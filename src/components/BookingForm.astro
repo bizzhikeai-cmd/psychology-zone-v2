@@ -634,8 +634,11 @@ const timeLabels: Record<string, string> = {
                   console.error('Failed to update booking status:', e);
                 }
 
-                errorDiv.textContent = 'Payment was cancelled. You can try again whenever you\'re ready.';
-                errorDiv.classList.remove('hidden');
+                if (!paymentFailed) {
+                  errorDiv.textContent = 'Payment was cancelled. You can try again whenever you\'re ready.';
+                  errorDiv.classList.remove('hidden');
+                }
+                paymentFailed = false;
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
               }
@@ -643,7 +646,9 @@ const timeLabels: Record<string, string> = {
           };
 
           const rzp = new Razorpay(razorpayOptions);
+          let paymentFailed = false;
           rzp.on('payment.failed', function(response) {
+            paymentFailed = true;
             window.dataLayer.push({
               event: 'payment_failed',
               error_code: response.error.code,
@@ -651,7 +656,7 @@ const timeLabels: Record<string, string> = {
               page_type: pageType
             });
 
-            errorDiv.textContent = `Payment failed: ${response.error.description}`;
+            errorDiv.textContent = `Payment failed: ${response.error.description}. Please try again or use a different payment method.`;
             errorDiv.classList.remove('hidden');
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
