@@ -6,10 +6,6 @@ interface Props {
 
 const { pageType } = Astro.props;
 
-// Check if bundle pricing is enabled
-const enableBundles = import.meta.env.ENABLE_BUNDLE_PRICING === 'true';
-const singlePrice = parseInt(import.meta.env.SINGLE_SESSION_PRICE || '59900');
-
 const problemOptions = [
   { value: 'feeling-low', label: 'Feeling Low' },
   { value: 'stress-worry', label: 'Stress & Worry' },
@@ -307,18 +303,9 @@ const timeLabels: Record<string, string> = {
   }
 </style>
 
-<script define:vars={{ pageType, enableBundles, singlePrice }}>
-  const fixedSinglePackage = {
-    id: 'single',
-    name: 'SINGLE SESSION',
-    sessions: 1,
-    price: singlePrice / 100,
-    pricePaise: singlePrice,
-    perSession: singlePrice / 100
-  };
-
+<script define:vars={{ pageType }}>
   // Active package — updated when user selects from pricing section
-  let currentPackage = fixedSinglePackage;
+  let currentPackage = null;
   let packageActuallySelected = false;
 
   // Lazy load Razorpay SDK
@@ -348,7 +335,7 @@ const timeLabels: Record<string, string> = {
     const packagePrice = document.getElementById('packagePrice');
     const packagePerSession = document.getElementById('packagePerSession');
 
-    if (enableBundles && !packageActuallySelected) {
+    if (!packageActuallySelected) {
       // Show prompt, hide package card
       noPackageNotice?.classList.remove('hidden');
       packageDisplay?.classList.add('hidden');
@@ -367,19 +354,13 @@ const timeLabels: Record<string, string> = {
 
   // Display selected package on page load
   document.addEventListener('DOMContentLoaded', () => {
-    if (enableBundles) {
-      // In bundle mode: read any pre-selected package from sessionStorage (set by PricingSection click)
-      const stored = sessionStorage.getItem('selectedPackage');
-      if (stored) {
-        try {
-          currentPackage = JSON.parse(stored);
-          packageActuallySelected = true;
-        } catch (_) {}
-      }
-    } else {
-      // In single-session mode: always clear and use fixed package
-      sessionStorage.removeItem('selectedPackage');
-      packageActuallySelected = true;
+    // Read any pre-selected package from sessionStorage (set by PricingSection click)
+    const stored = sessionStorage.getItem('selectedPackage');
+    if (stored) {
+      try {
+        currentPackage = JSON.parse(stored);
+        packageActuallySelected = true;
+      } catch (_) {}
     }
     updatePackageDisplay();
 
@@ -472,7 +453,7 @@ const timeLabels: Record<string, string> = {
         const submitBtn = bookingForm.querySelector('button[type="submit"]');
         const errorDiv = document.getElementById('formError');
 
-        const selectedPackage = enableBundles ? currentPackage : fixedSinglePackage;
+        const selectedPackage = currentPackage;
 
         // Get form data
         const formData = {

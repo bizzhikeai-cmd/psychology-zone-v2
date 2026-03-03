@@ -1,32 +1,11 @@
 ---
-// PricingSection Component - Displays pricing with conditional bundle/single mode
+// PricingSection Component - Displays pricing packages
 interface Props {
   pageType: 'psychologist' | 'therapy' | 'couples' | 'homepage';
 }
 
 const { pageType } = Astro.props;
 
-// Check if bundle pricing is enabled
-const enableBundles = import.meta.env.ENABLE_BUNDLE_PRICING === 'true';
-const singlePrice = parseInt(import.meta.env.SINGLE_SESSION_PRICE || '59900');
-
-// Single package configuration (when bundles disabled)
-const singlePackage = {
-  id: 'single',
-  name: 'SINGLE SESSION',
-  sessions: 1,
-  price: singlePrice / 100, // Convert paise to rupees for display
-  priceInPaise: singlePrice,
-  perSession: singlePrice / 100,
-  features: [
-    'Single 60-minute session',
-    'Expert RCI-licensed psychologist',
-    'Confidential video session',
-    'Flexible scheduling'
-  ]
-};
-
-// Bundle packages configuration (when bundles enabled)
 const packages = [
   {
     id: 'starter',
@@ -81,131 +60,83 @@ const packages = [
 ];
 ---
 
-<section id="pricing" class="py-12 sm:py-24 bg-white" data-enable-bundles={enableBundles}>
+<section id="pricing" class="py-12 sm:py-24 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="text-center mb-16">
       <h2 class="text-3xl sm:text-4xl lg:text-5xl mb-6 text-slate-900" style="font-family: 'Lora', serif;">
-        {enableBundles ? 'Choose Your Package' : 'Book Your Session'}
+        Choose Your Package
       </h2>
       <p class="text-gray-500 text-lg max-w-2xl mx-auto">
-        {enableBundles
-          ? 'Flexible pricing options to support your mental wellness journey'
-          : '₹599 per session - Simple, transparent pricing'}
+        Flexible pricing options to support your mental wellness journey
       </p>
     </div>
 
-    {enableBundles ? (
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {packages.map((pkg) => (
-        <div class={`relative bg-white rounded-3xl shadow-lg border-2 transition-all hover:shadow-xl ${
-          pkg.recommended ? 'border-[#D35400] transform lg:-translate-y-4' : 'border-slate-100'
-        }`}>
-          {pkg.recommended && (
-            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#D35400] text-white text-xs font-bold uppercase tracking-widest px-6 py-2 rounded-full shadow-lg">
-              Most Popular
-            </div>
-          )}
-
-          <div class="p-8">
-            {/* Header */}
-            <div class="mb-8">
-              <h4 class="text-2xl font-bold mb-1 text-slate-900" style="font-family: 'Lora', serif;">
-                {pkg.sessions} {pkg.sessions === 1 ? 'Session' : 'Sessions'}
-              </h4>
-            </div>
-
-            {/* Pricing */}
-            <div class="mb-8">
-              <div class="flex items-baseline gap-2">
-                <span class="text-4xl sm:text-5xl font-bold text-[#D35400]" style="font-family: 'Lora', serif;">
-                  ₹{pkg.price.toLocaleString('en-IN')}
-                </span>
-                {pkg.discount && (
-                  <span class="text-sm text-gray-400 line-through">
-                    ₹{(pkg.sessions * 1499).toLocaleString('en-IN')}
-                  </span>
-                )}
-              </div>
-
-              {pkg.perSession !== pkg.price && (
-                <p class="text-base font-semibold text-slate-700 mt-2">
-                  ₹{pkg.perSession}<span class="text-sm font-normal text-gray-500">/session</span>
-                </p>
-              )}
-
-              {pkg.savings && (
-                <div class="mt-3 inline-block bg-green-50 text-green-700 text-sm font-bold px-3 py-1 rounded-full">
-                  {pkg.discount}% OFF — Save ₹{pkg.savings.toLocaleString('en-IN')}!
-                </div>
-              )}
-            </div>
-
-            {/* CTA Button */}
-            <button
-              class={`w-full py-4 rounded-xl font-bold transition-all transform hover:scale-105 select-package-btn min-h-[44px] mt-8 ${
-                pkg.recommended
-                  ? 'bg-orange-gradient text-white shadow-lg shadow-orange-500/20'
-                  : 'border-2 border-[#D35400] text-[#D35400] hover:bg-[#D35400] hover:text-white'
-              }`}
-              data-package-id={pkg.id}
-              data-package-name={pkg.name}
-              data-sessions={pkg.sessions}
-              data-price={pkg.price}
-              data-price-paise={pkg.priceInPaise}
-              data-per-session={pkg.perSession}
-              data-page-type={pageType}
-            >
-              {pageType === 'psychologist' ? 'Start My Sessions' : pageType === 'therapy' ? 'Begin My Journey' : pageType === 'couples' ? 'Strengthen Our Bond' : 'Get Started'}{' '}— ₹{pkg.price.toLocaleString('en-IN')}
-            </button>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {packages.map((pkg) => (
+      <div class={`relative bg-white rounded-3xl shadow-lg border-2 transition-all hover:shadow-xl ${
+        pkg.recommended ? 'border-[#D35400] transform lg:-translate-y-4' : 'border-slate-100'
+      }`}>
+        {pkg.recommended && (
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#D35400] text-white text-xs font-bold uppercase tracking-widest px-6 py-2 rounded-full shadow-lg">
+            Most Popular
           </div>
-        </div>
-        ))}
-      </div>
-    ) : (
-      <div class="max-w-md mx-auto">
-        <div class="relative bg-white rounded-3xl shadow-lg border-2 border-[#D35400]">
-          <div class="p-8">
-            {/* Header */}
-            <div class="mb-8 text-center">
-              <h4 class="text-2xl font-bold mb-1 text-slate-900" style="font-family: 'Lora', serif;">
-                1 Session
-              </h4>
+        )}
+
+        <div class="p-8">
+          <div class="mb-8">
+            <h4 class="text-2xl font-bold mb-1 text-slate-900" style="font-family: 'Lora', serif;">
+              {pkg.sessions} {pkg.sessions === 1 ? 'Session' : 'Sessions'}
+            </h4>
+          </div>
+
+          <div class="mb-8">
+            <div class="flex items-baseline gap-2">
+              <span class="text-4xl sm:text-5xl font-bold text-[#D35400]" style="font-family: 'Lora', serif;">
+                ₹{pkg.price.toLocaleString('en-IN')}
+              </span>
+              {pkg.discount && (
+                <span class="text-sm text-gray-400 line-through">
+                  ₹{(pkg.sessions * 1499).toLocaleString('en-IN')}
+                </span>
+              )}
             </div>
 
-            {/* Pricing */}
-            <div class="mb-8 text-center">
-              <div class="flex items-baseline justify-center gap-2">
-                <span class="text-5xl font-bold text-[#D35400]" style="font-family: 'Lora', serif;">
-                  ₹{singlePackage.price.toLocaleString('en-IN')}
-                </span>
-              </div>
-              <p class="text-sm text-gray-600 mt-2">
-                per session
+            {pkg.perSession !== pkg.price && (
+              <p class="text-base font-semibold text-slate-700 mt-2">
+                ₹{pkg.perSession}<span class="text-sm font-normal text-gray-500">/session</span>
               </p>
-            </div>
+            )}
 
-            {/* CTA Button */}
-            <button
-              class="w-full py-4 rounded-xl font-bold transition-all transform hover:scale-105 bg-orange-gradient text-white shadow-lg shadow-orange-500/20 select-package-btn min-h-[44px] mt-8"
-              data-package-id={singlePackage.id}
-              data-package-name={singlePackage.name}
-              data-sessions={singlePackage.sessions}
-              data-price={singlePackage.price}
-              data-price-paise={singlePackage.priceInPaise}
-              data-per-session={singlePackage.perSession}
-              data-page-type={pageType}
-            >
-              {pageType === 'psychologist' ? 'Start My Session' : pageType === 'therapy' ? 'Begin My Journey' : pageType === 'couples' ? 'Book Our Session' : 'Book Now'}{' '}— ₹{singlePackage.price.toLocaleString('en-IN')}
-            </button>
+            {pkg.savings && (
+              <div class="mt-3 inline-block bg-green-50 text-green-700 text-sm font-bold px-3 py-1 rounded-full">
+                {pkg.discount}% OFF — Save ₹{pkg.savings.toLocaleString('en-IN')}!
+              </div>
+            )}
           </div>
+
+          <button
+            class={`w-full py-4 rounded-xl font-bold transition-all transform hover:scale-105 select-package-btn min-h-[44px] mt-8 ${
+              pkg.recommended
+                ? 'bg-orange-gradient text-white shadow-lg shadow-orange-500/20'
+                : 'border-2 border-[#D35400] text-[#D35400] hover:bg-[#D35400] hover:text-white'
+            }`}
+            data-package-id={pkg.id}
+            data-package-name={pkg.name}
+            data-sessions={pkg.sessions}
+            data-price={pkg.price}
+            data-price-paise={pkg.priceInPaise}
+            data-per-session={pkg.perSession}
+            data-page-type={pageType}
+          >
+            {pageType === 'psychologist' ? 'Start My Sessions' : pageType === 'therapy' ? 'Begin My Journey' : pageType === 'couples' ? 'Strengthen Our Bond' : 'Get Started'}{' '}— ₹{pkg.price.toLocaleString('en-IN')}
+          </button>
         </div>
       </div>
-    )}
+      ))}
+    </div>
 
     <p class="mt-12 text-center text-gray-400 text-sm italic">
-      {enableBundles
-        ? 'All packages include confidential video sessions with RCI-licensed psychologists'
-        : 'Confidential video session with RCI-licensed psychologist'}
+      All packages include confidential video sessions with RCI-licensed psychologists
     </p>
   </div>
 </section>
@@ -219,36 +150,6 @@ const packages = [
 <script>
   // Package selection handler
   document.addEventListener('DOMContentLoaded', () => {
-    const pricingSection = document.querySelector('#pricing');
-    const enableBundles = pricingSection?.getAttribute('data-enable-bundles') === 'true';
-
-    // Auto-select single package if bundles are disabled
-    if (!enableBundles) {
-      const singleButton = document.querySelector('.select-package-btn');
-      if (singleButton) {
-        const packageId = singleButton.getAttribute('data-package-id');
-        const packageName = singleButton.getAttribute('data-package-name');
-        const sessions = singleButton.getAttribute('data-sessions');
-        const price = singleButton.getAttribute('data-price');
-        const pricePaise = singleButton.getAttribute('data-price-paise');
-        const perSession = singleButton.getAttribute('data-per-session');
-
-        // Auto-populate sessionStorage
-        const selectedPackage = {
-          id: packageId,
-          name: packageName,
-          sessions: parseInt(sessions),
-          price: parseFloat(price),
-          pricePaise: parseInt(pricePaise),
-          perSession: parseFloat(perSession)
-        };
-        sessionStorage.setItem('selectedPackage', JSON.stringify(selectedPackage));
-
-        // Dispatch event so BookingForm knows package is selected
-        window.dispatchEvent(new CustomEvent('packageSelected', { detail: selectedPackage }));
-      }
-    }
-
     const selectButtons = document.querySelectorAll('.select-package-btn');
 
     selectButtons.forEach(button => {
