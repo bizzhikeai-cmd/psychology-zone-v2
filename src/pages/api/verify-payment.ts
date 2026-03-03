@@ -137,6 +137,14 @@ export const PUT: APIRoute = async ({ request }) => {
       );
     }
 
+    // Update Notion CRM entry to Failed (fire-and-forget)
+    if (booking) {
+      notionService.updatePaymentStatus(
+        data.razorpay_order_id,
+        'Failed',
+      ).catch(err => console.error('[Notion] updatePaymentStatus error:', err));
+    }
+
     // Send payment failed notification via WhatsApp (don't fail the request if this fails)
     if (booking) {
       try {
