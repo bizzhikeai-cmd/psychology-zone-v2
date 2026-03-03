@@ -7,7 +7,7 @@ interface Props {
 const { pageType } = Astro.props;
 
 // Check if bundle pricing is enabled
-const enableBundles = import.meta.env.ENABLE_BUNDLE_PRICING === 'true';
+const enableBundles = (import.meta.env.ENABLE_BUNDLE_PRICING || '').trim() === 'true';
 const singlePrice = parseInt(import.meta.env.SINGLE_SESSION_PRICE || '59900');
 
 // Single package configuration (when bundles disabled)
