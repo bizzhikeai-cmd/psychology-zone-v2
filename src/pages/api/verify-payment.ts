@@ -3,6 +3,7 @@ import { verifyPaymentSignature } from '../../lib/razorpay';
 import { completeBooking, failBooking, getBookingByOrderId } from '../../lib/supabase';
 import { interaktService } from '../../lib/interakt';
 import { emailService } from '../../lib/email';
+import { notionService } from '../../lib/notion';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -72,6 +73,13 @@ export const POST: APIRoute = async ({ request }) => {
       if (!emailResult.success) {
         console.error('Failed to send admin email:', emailResult.error);
       }
+
+      // Update Notion CRM entry to Confirmed (fire-and-forget)
+      notionService.updatePaymentStatus(
+        razorpay_order_id,
+        'Confirmed',
+        razorpay_payment_id,
+      ).catch(err => console.error('[Notion] updatePaymentStatus error:', err));
     } catch (notificationError) {
       console.error('Notification error:', notificationError);
       // Continue - don't fail the booking confirmation
