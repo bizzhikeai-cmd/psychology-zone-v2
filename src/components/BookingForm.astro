@@ -634,6 +634,8 @@ const timeLabels: Record<string, string> = {
                   console.error('Failed to update booking status:', e);
                 }
 
+                errorDiv.textContent = 'Payment was cancelled. You can try again whenever you\'re ready.';
+                errorDiv.classList.remove('hidden');
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
               }
