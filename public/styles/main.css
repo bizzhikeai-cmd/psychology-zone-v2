@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&display=swap');
 
 :root {
   --primary-color: #D35400;
@@ -29,7 +29,7 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-weight: 400;
   line-height: 1.7;
   letter-spacing: -0.01em;
@@ -123,7 +123,7 @@ h1, h2, h3, h4, h5, h6 {
   border: none;
   font-size: 0.95rem;
   letter-spacing: 0.01em;
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .btn-primary {
@@ -509,7 +509,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.15em;
   font-size: 0.8rem;
   margin-bottom: 20px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .section-header-centered h2 {
