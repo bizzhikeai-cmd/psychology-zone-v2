@@ -41,16 +41,16 @@ import PricingSection from '../components/PricingSection.astro';
           <div class="bg-white border border-stone-200 rounded-3xl w-60 sm:w-72 px-5 py-4 sm:px-6 sm:py-5 mx-auto lg:mx-0 shadow-sm">
             <div class="flex items-end justify-center lg:justify-start gap-1.5">
               <span class="text-2xl text-[#D35400] font-semibold">₹</span>
-              <span class="text-5xl sm:text-6xl leading-none text-[#D35400] font-serif font-semibold">599</span>
+              <span class="text-5xl sm:text-6xl leading-none text-[#D35400] font-serif font-semibold">499</span>
               <span class="text-stone-500 text-base font-medium mb-1">/ session</span>
             </div>
             <div class="flex items-center justify-center lg:justify-start gap-2 mt-2">
               <span class="text-stone-400 text-sm line-through">₹1,499</span>
-              <span class="text-xs font-semibold text-[#6B8E7B] bg-[#6B8E7B]/10 px-3 py-1 rounded-full">Save 60%</span>
+              <span class="text-xs font-semibold text-[#6B8E7B] bg-[#6B8E7B]/10 px-3 py-1 rounded-full">Save 67%</span>
             </div>
           </div>
           <div class="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 justify-center lg:justify-start">
-            <a href="#booking-form" class="w-72 sm:w-auto bg-orange-gradient text-white px-6 py-3 sm:px-10 sm:py-5 rounded-3xl text-sm sm:text-lg font-semibold shadow-xl shadow-orange-100 flex items-center justify-center gap-2 group transition-all min-h-[44px] mx-auto lg:mx-0">
+            <a href="#pricing" id="hero-cta" class="w-72 sm:w-auto bg-orange-gradient text-white px-6 py-3 sm:px-10 sm:py-5 rounded-3xl text-sm sm:text-lg font-semibold shadow-xl shadow-orange-100 flex items-center justify-center gap-2 group transition-all min-h-[44px] mx-auto lg:mx-0">
               Begin Your Journey
               <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -522,6 +522,13 @@ import PricingSection from '../components/PricingSection.astro';
           target.scrollIntoView({ behavior: 'smooth' });
         }
       });
+    });
+
+    // Pre-select Premium package when hero CTA is clicked
+    document.getElementById('hero-cta')?.addEventListener('click', () => {
+      const premiumPackage = { id: 'premium', name: 'PREMIUM', sessions: 5, price: 2495, pricePaise: 249500, perSession: 499 };
+      sessionStorage.setItem('selectedPackage', JSON.stringify(premiumPackage));
+      window.dispatchEvent(new CustomEvent('packageSelected', { detail: premiumPackage }));
     });
 
     // GTM tracking for CTA clicks
