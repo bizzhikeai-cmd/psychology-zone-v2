@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import BookingForm from '../components/BookingForm.astro';
+import PricingSection from '../components/PricingSection.astro';
 ---
 
 <Layout title="Psychology Zone - Talk to Licensed Psychologists Online | Confidential Sessions">
@@ -71,13 +72,6 @@ import BookingForm from '../components/BookingForm.astro';
           <div class="relative rounded-2xl sm:rounded-[3rem] overflow-hidden border-8 sm:border-[16px] border-white shadow-2xl transition-transform hover:scale-[1.01] duration-500">
             <img src="/images/hero-image.png" alt="Online Therapy" class="w-full aspect-[3/4] sm:aspect-[4/5] object-cover" width="350" height="500" fetchpriority="high" decoding="async">
           </div>
-          <div class="absolute top-10 right-2 sm:-right-8 bg-white/90 backdrop-blur p-4 sm:p-6 rounded-3xl shadow-xl border border-stone-100 max-w-[180px] sm:max-w-[200px] hidden sm:block">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-              <span class="text-xs font-bold text-stone-400 uppercase tracking-widest">Now Available</span>
-            </div>
-            <p class="text-sm font-serif text-stone-800 leading-tight">Book a chat for as early as today</p>
-          </div>
         </div>
       </section>
 
@@ -108,10 +102,10 @@ import BookingForm from '../components/BookingForm.astro';
       </section>
 
       <!-- Services Grid -->
-      <section id="services" class="bg-white py-24">
-        <div class="max-w-7xl mx-auto px-6">
+      <section id="services" class="bg-white py-12 sm:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
           <div class="text-center mb-16 space-y-4">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif text-stone-900">Support for Life's Challenges</h2>
+            <h2 class="text-3xl sm:text-4xl md:text-3xl sm:text-5xl font-serif text-stone-900">Support for Life's Challenges</h2>
             <p class="text-stone-500 max-w-2xl mx-auto text-lg">Whatever you're going through, our specialists offer personalized guidance tailored to your unique situation.</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -174,11 +168,11 @@ import BookingForm from '../components/BookingForm.astro';
       </section>
 
       <!-- Our Approach -->
-      <section class="py-24 bg-[#F8F5F0] border-y border-stone-200/60">
-        <div class="max-w-7xl mx-auto px-6">
+      <section class="py-12 sm:py-24 bg-[#F8F5F0] border-y border-stone-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
           <div class="text-center mb-14 space-y-3">
             <span class="text-xs font-semibold tracking-[0.22em] text-[#6B8E7B] uppercase">Our Approach</span>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif text-stone-900">Professional Support Tailored to You</h2>
+            <h2 class="text-3xl sm:text-4xl md:text-3xl sm:text-5xl font-serif text-stone-900">Professional Support Tailored to You</h2>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -210,10 +204,10 @@ import BookingForm from '../components/BookingForm.astro';
       </section>
 
       <!-- What Our Sessions Can Look Like -->
-      <section class="py-24 bg-[#F8F5F0]">
-        <div class="max-w-7xl mx-auto px-6">
+      <section class="py-12 sm:py-24 bg-[#F8F5F0]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
           <div class="text-center mb-14 space-y-4">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif text-stone-900">What Our Sessions Can Look Like</h2>
+            <h2 class="text-3xl sm:text-4xl md:text-3xl sm:text-5xl font-serif text-stone-900">What Our Sessions Can Look Like</h2>
             <p class="text-stone-500 text-lg">Explore different ways we support you on your journey.</p>
           </div>
 
@@ -221,7 +215,7 @@ import BookingForm from '../components/BookingForm.astro';
             <article class="bg-white rounded-2xl sm:rounded-[2rem] border border-stone-200/70 shadow-sm overflow-hidden">
               <div class="p-8 pb-4">
                 <h3 class="text-3xl text-stone-500 mb-3">Individual Sessions</h3>
-                <h4 class="text-5xl font-serif text-stone-900">Clarity & Self-Understanding</h4>
+                <h4 class="text-3xl sm:text-5xl font-serif text-stone-900">Clarity & Self-Understanding</h4>
               </div>
               <img src="/images/transform-individual.webp" alt="Individual Sessions" class="w-full h-72 object-contain object-bottom" loading="lazy" />
             </article>
@@ -229,7 +223,7 @@ import BookingForm from '../components/BookingForm.astro';
             <article class="bg-white rounded-2xl sm:rounded-[2rem] border border-stone-200/70 shadow-sm overflow-hidden">
               <div class="p-8 pb-4">
                 <h3 class="text-3xl text-stone-500 mb-3">Couples Sessions</h3>
-                <h4 class="text-5xl font-serif text-stone-900">Better Communication</h4>
+                <h4 class="text-3xl sm:text-5xl font-serif text-stone-900">Better Communication</h4>
               </div>
               <img src="/images/transform-couple.webp" alt="Couples Sessions" class="w-full h-72 object-contain object-bottom" loading="lazy" />
             </article>
@@ -237,7 +231,7 @@ import BookingForm from '../components/BookingForm.astro';
             <article class="bg-white rounded-2xl sm:rounded-[2rem] border border-stone-200/70 shadow-sm overflow-hidden">
               <div class="p-8 pb-4">
                 <h3 class="text-3xl text-stone-500 mb-3">Personal Growth</h3>
-                <h4 class="text-5xl font-serif text-stone-900">Motivation & Direction</h4>
+                <h4 class="text-3xl sm:text-5xl font-serif text-stone-900">Motivation & Direction</h4>
               </div>
               <img src="/images/transform-teen.webp" alt="Personal Growth" class="w-full h-72 object-contain object-bottom" loading="lazy" />
             </article>
@@ -245,7 +239,7 @@ import BookingForm from '../components/BookingForm.astro';
             <article class="bg-white rounded-2xl sm:rounded-[2rem] border border-stone-200/70 shadow-sm overflow-hidden">
               <div class="p-8 pb-4">
                 <h3 class="text-3xl text-stone-500 mb-3">Mindfulness Support</h3>
-                <h4 class="text-5xl font-serif text-stone-900">Inner Peace & Balance</h4>
+                <h4 class="text-3xl sm:text-5xl font-serif text-stone-900">Inner Peace & Balance</h4>
               </div>
               <img src="/images/transform-meditation.webp" alt="Mindfulness" class="w-full h-72 object-contain object-bottom" loading="lazy" />
             </article>
@@ -258,7 +252,7 @@ import BookingForm from '../components/BookingForm.astro';
         <div class="max-w-7xl mx-auto px-6">
           <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
             <div class="max-w-xl">
-              <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif text-stone-900 mb-6">What Our Clients <span class="text-[#6B8E7B] italic">Say</span></h2>
+              <h2 class="text-3xl sm:text-4xl md:text-3xl sm:text-5xl font-serif text-stone-900 mb-6">What Our Clients <span class="text-[#6B8E7B] italic">Say</span></h2>
               <p class="text-stone-600">Real experiences from real people who took the first step.</p>
             </div>
           </div>
@@ -400,9 +394,9 @@ import BookingForm from '../components/BookingForm.astro';
       </section>
 
       <!-- Therapists Section -->
-      <section id="therapists" class="py-24 max-w-7xl mx-auto px-6">
+      <section id="therapists" class="py-12 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-16">
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif text-stone-900 mb-6">Meet Your Support Team</h2>
+          <h2 class="text-3xl sm:text-4xl md:text-3xl sm:text-5xl font-serif text-stone-900 mb-6">Meet Your Support Team</h2>
           <p class="text-stone-500 max-w-2xl mx-auto">50+ compassionate professionals, each bringing years of expertise and a deep commitment to your wellbeing.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -457,6 +451,9 @@ import BookingForm from '../components/BookingForm.astro';
         </div>
       </section>
 
+      <!-- Pricing -->
+      <PricingSection pageType="homepage" />
+
       <!-- Booking Form -->
       <BookingForm pageType="homepage" />
 
@@ -503,10 +500,10 @@ import BookingForm from '../components/BookingForm.astro';
           </div>
         </div>
       </div>
-      <div class="max-w-7xl mx-auto px-6 pt-10 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-6 text-stone-400 text-xs">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-6 text-stone-400 text-xs">
         <p>&copy; 2024 Psychology Zone CHD. All Rights Reserved.</p>
       </div>
-      <div class="max-w-7xl mx-auto px-6 mt-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 mt-10">
         <p class="text-[10px] text-stone-400 leading-relaxed text-center">
           Disclaimer: Psychology Zone provides online counseling and life guidance. Our services are not intended for medical emergencies or clinical psychiatric diagnoses. If you are experiencing suicidal thoughts or self-harm, please contact emergency services immediately.
         </p>

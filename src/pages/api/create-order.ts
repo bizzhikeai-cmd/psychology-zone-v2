@@ -1,18 +1,13 @@
 import type { APIRoute } from 'astro';
 import { createOrder, getRazorpayKeyId } from '../../lib/razorpay';
 import { createBooking } from '../../lib/supabase';
+import { notionService } from '../../lib/notion';
 
-// Package pricing configuration - conditional based on environment
-const ENABLE_BUNDLE_PRICING = import.meta.env.ENABLE_BUNDLE_PRICING === 'true';
-const SINGLE_SESSION_PRICE = parseInt(import.meta.env.SINGLE_SESSION_PRICE || '59900');
-
+// Package pricing configuration (in paise)
 const PACKAGES = {
-  single: { sessions: 1, price: SINGLE_SESSION_PRICE, name: 'SINGLE SESSION' },  // ₹599
-  ...(ENABLE_BUNDLE_PRICING ? {
-    starter: { sessions: 1, price: 79900, name: 'STARTER' },    // ₹799
-    popular: { sessions: 3, price: 164700, name: 'POPULAR' },   // ₹1,647
-    premium: { sessions: 5, price: 249500, name: 'PREMIUM' }    // ₹2,495
-  } : {})
+  starter: { sessions: 1, price: 79900, name: 'STARTER' },    // ₹799
+  popular: { sessions: 3, price: 164700, name: 'POPULAR' },   // ₹1,647
+  premium: { sessions: 5, price: 249500, name: 'PREMIUM' }    // ₹2,495
 } as const;
 
 export const POST: APIRoute = async ({ request }) => {
@@ -41,10 +36,10 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Normalize package data (always fallback to single package if client sends stale/invalid values)
-    const requestedPackageId = typeof data.package_id === 'string' ? data.package_id : 'single';
+    const requestedPackageId = typeof data.package_id === 'string' ? data.package_id : 'starter';
     const normalizedPackageId = requestedPackageId in PACKAGES
       ? (requestedPackageId as keyof typeof PACKAGES)
-      : 'single';
+      : 'starter';
     const packageInfo = PACKAGES[normalizedPackageId];
     const normalizedSessionCount = packageInfo.sessions;
     const normalizedPackageName = packageInfo.name;
@@ -109,6 +104,24 @@ export const POST: APIRoute = async ({ request }) => {
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
+
+    // Push lead to Notion CRM (fire-and-forget — never blocks the booking response)
+    notionService.createEntry({
+      customer_name: data.customer_name,
+      customer_email: data.customer_email,
+      customer_phone: data.customer_phone,
+      city: data.city,
+      problem: data.problem,
+      circumstances: data.circumstances,
+      appointment_date: data.appointment_date,
+      appointment_time: data.appointment_time,
+      package_name: normalizedPackageName,
+      session_count: normalizedSessionCount,
+      amount_paid: amount / 100,
+      razorpay_order_id: order.id,
+      booking_ref: booking.booking_ref,
+      page_source: data.page_source,
+    }).catch(err => console.error('[Notion] createEntry error:', err));
 
     // Return order details for frontend
     return new Response(

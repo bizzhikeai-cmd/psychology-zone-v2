@@ -6,10 +6,6 @@ interface Props {
 
 const { pageType } = Astro.props;
 
-// Check if bundle pricing is enabled
-const enableBundles = import.meta.env.ENABLE_BUNDLE_PRICING === 'true';
-const singlePrice = parseInt(import.meta.env.SINGLE_SESSION_PRICE || '59900');
-
 const problemOptions = [
   { value: 'feeling-low', label: 'Feeling Low' },
   { value: 'stress-worry', label: 'Stress & Worry' },
@@ -64,6 +60,11 @@ const timeLabels: Record<string, string> = {
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-12 items-start">
       {/* Booking Form */}
       <div id="booking-form" class="lg:col-span-2 order-2 lg:order-1">
+        {/* No-package notice (bundle mode only, before selection) */}
+        <div id="noPackageNotice" class="bg-orange-50 border border-orange-200 text-[#D35400] p-4 rounded-2xl mb-6 text-sm font-medium hidden">
+          ↑ Please select a package above to continue
+        </div>
+
         {/* Selected Package Display */}
         <div id="packageDisplay" class="bg-white p-6 rounded-2xl shadow-lg mb-6 hidden">
           <div class="flex items-center justify-between">
@@ -302,15 +303,10 @@ const timeLabels: Record<string, string> = {
   }
 </style>
 
-<script define:vars={{ pageType, enableBundles, singlePrice }}>
-  const fixedSinglePackage = {
-    id: 'single',
-    name: 'SINGLE SESSION',
-    sessions: 1,
-    price: singlePrice / 100,
-    pricePaise: singlePrice,
-    perSession: singlePrice / 100
-  };
+<script define:vars={{ pageType }}>
+  // Active package — updated when user selects from pricing section
+  let currentPackage = null;
+  let packageActuallySelected = false;
 
   // Lazy load Razorpay SDK
   let razorpayLoaded = false;
@@ -333,27 +329,45 @@ const timeLabels: Record<string, string> = {
   // Function to update package display
   function updatePackageDisplay() {
     const packageDisplay = document.getElementById('packageDisplay');
+    const noPackageNotice = document.getElementById('noPackageNotice');
     const packageName = document.getElementById('packageName');
     const packageDetails = document.getElementById('packageDetails');
     const packagePrice = document.getElementById('packagePrice');
     const packagePerSession = document.getElementById('packagePerSession');
 
+    if (!packageActuallySelected) {
+      // Show prompt, hide package card
+      noPackageNotice?.classList.remove('hidden');
+      packageDisplay?.classList.add('hidden');
+      return;
+    }
+
     if (packageDisplay && packageName && packageDetails && packagePrice && packagePerSession) {
+      noPackageNotice?.classList.add('hidden');
       packageDisplay.classList.remove('hidden');
-      packageName.textContent = fixedSinglePackage.name;
-      packageDetails.textContent = `${fixedSinglePackage.sessions} Session`;
-      packagePrice.textContent = `₹${fixedSinglePackage.price.toLocaleString('en-IN')}`;
-      packagePerSession.textContent = '';
+      packageName.textContent = currentPackage.name;
+      packageDetails.textContent = `${currentPackage.sessions} ${currentPackage.sessions === 1 ? 'Session' : 'Sessions'}`;
+      packagePrice.textContent = `₹${currentPackage.price.toLocaleString('en-IN')}`;
+      packagePerSession.textContent = currentPackage.sessions > 1 ? `₹${currentPackage.perSession}/session` : '';
     }
   }
 
   // Display selected package on page load
   document.addEventListener('DOMContentLoaded', () => {
-    sessionStorage.removeItem('selectedPackage');
+    // Read any pre-selected package from sessionStorage (set by PricingSection click)
+    const stored = sessionStorage.getItem('selectedPackage');
+    if (stored) {
+      try {
+        currentPackage = JSON.parse(stored);
+        packageActuallySelected = true;
+      } catch (_) {}
+    }
     updatePackageDisplay();
 
-    // Listen for package selection changes
-    window.addEventListener('packageSelected', () => {
+    // Listen for package selection changes (fired by PricingSection CTA buttons)
+    window.addEventListener('packageSelected', (e) => {
+      currentPackage = e.detail;
+      packageActuallySelected = true;
       updatePackageDisplay();
     });
 
@@ -439,7 +453,7 @@ const timeLabels: Record<string, string> = {
         const submitBtn = bookingForm.querySelector('button[type="submit"]');
         const errorDiv = document.getElementById('formError');
 
-        const selectedPackage = fixedSinglePackage;
+        const selectedPackage = currentPackage;
 
         // Get form data
         const formData = {
@@ -601,6 +615,11 @@ const timeLabels: Record<string, string> = {
                   console.error('Failed to update booking status:', e);
                 }
 
+                if (!paymentFailed) {
+                  errorDiv.textContent = 'Payment was cancelled. You can try again whenever you\'re ready.';
+                  errorDiv.classList.remove('hidden');
+                }
+                paymentFailed = false;
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
               }
@@ -608,7 +627,9 @@ const timeLabels: Record<string, string> = {
           };
 
           const rzp = new Razorpay(razorpayOptions);
+          let paymentFailed = false;
           rzp.on('payment.failed', function(response) {
+            paymentFailed = true;
             window.dataLayer.push({
               event: 'payment_failed',
               error_code: response.error.code,
@@ -616,7 +637,7 @@ const timeLabels: Record<string, string> = {
               page_type: pageType
             });
 
-            errorDiv.textContent = `Payment failed: ${response.error.description}`;
+            errorDiv.textContent = `Payment failed: ${response.error.description}. Please try again or use a different payment method.`;
             errorDiv.classList.remove('hidden');
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
